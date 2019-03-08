@@ -2,6 +2,9 @@
 	"name": "remody-dashboard",
 	"version": "0.1.0",
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.15",
+		"@fortawesome/free-solid-svg-icons": "^5.7.2",
+		"@fortawesome/react-fontawesome": "^0.1.4",
 		"apollo-boost": "^0.3.1",
 		"bootstrap": "^4.3.1",
 		"graphql": "^14.1.1",
