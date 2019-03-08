@@ -7,13 +7,17 @@ const Home = () => (
 			if (loading) return <p>Loading...</p>;
 			if (error) return <p>Error :(</p>;
 
-			return data.users.map(({ name, email, id }) => (
-				<div key={id}>
-					<p>
-						{name}: {email}
-					</p>
+			return (
+				<div className="container">
+					{data.users.map(({ name, email, id }) => (
+						<div key={id}>
+							<p>
+								{name}: {email}
+							</p>
+						</div>
+					))}
 				</div>
-			));
+			);
 		}}
 	</Query>
 );

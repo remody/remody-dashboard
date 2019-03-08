@@ -37,7 +37,15 @@ const SideBar = props => {
 		},
 		{
 			url: "/data",
-			name: "Datas"
+			name: "Data"
+		},
+		{
+			url: "/analyze",
+			name: "Analyze"
+		},
+		{
+			url: "/interprete",
+			name: "Interprete"
 		}
 	];
 	return (

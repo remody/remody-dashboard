@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import SideBar from "../SideBar";
+import UserDropdown from "../UserDropdown";
 
 const LayoutNoBar = styled.div`
 	display: flex;
@@ -14,7 +15,6 @@ const LeftBar = styled.div`
 `;
 
 const Body = styled.div`
-	background-color: blue;
 	height: 100vh;
 `;
 
@@ -28,7 +28,10 @@ const Layout = props => {
 				<LeftBar className="col-3 d-none d-md-block">
 					<SideBar />
 				</LeftBar>
-				<Body className="col-12 col-md-9">{props.children}</Body>
+				<Body className="col-12 col-md-9">
+					<UserDropdown />
+					<div>{props.children}</div>
+				</Body>
 			</LayoutNoBar>
 		</div>
 	);
