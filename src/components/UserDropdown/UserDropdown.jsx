@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { DropdownItem } from "reactstrap";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UserDropdownLeftAlign = styled.div`
@@ -27,25 +27,33 @@ class UserDropdown extends React.Component {
 		};
 	}
 
+	//TODO: 로그인 정보를 쿼리(me)로 받고 그에따른 처리
+
 	render() {
 		const { isOpen } = this.state;
 		return (
 			<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
 				UserName
 				<FontAwesomeIcon
-					icon={faChevronDown}
+					icon={isOpen ? faChevronUp : faChevronDown}
 					className="ml-3 mr-3"
-					style={{ position: "relative", top: "5px" }}
+					style={{
+						position: "relative",
+						top: "5px",
+						cursor: "pointer"
+					}}
 					onClick={() => {
 						this.setState({ isOpen: !isOpen });
 					}}
 				/>
 				<Dropdown isOpen={isOpen}>
-					<DropdownItem header>Header</DropdownItem>
-					<DropdownItem disabled>Action</DropdownItem>
-					<DropdownItem>Another Action</DropdownItem>
+					<DropdownItem>로그인</DropdownItem>
+					<DropdownItem>회원가입</DropdownItem>
+					{/* 위가 비로그인 밑이 로그인 */}
+					<DropdownItem>내 정보 수정</DropdownItem>
+					<DropdownItem>내가 등록한 파일</DropdownItem>
 					<DropdownItem divider />
-					<DropdownItem>Another Action</DropdownItem>
+					<DropdownItem>로그아웃</DropdownItem>
 				</Dropdown>
 			</UserDropdownLeftAlign>
 		);
