@@ -1,6 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { Modal, ModalBody, Button, ModalHeader, ModalFooter } from "reactstrap";
+import { faMailBulk, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
+
+const ModalFooter = styled.div`
+	padding: 10px 35px;
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+	background-color: rgba(255, 192, 203, 0.7);
+	transition: background-color 0.5s ease-in-out;
+	&:hover {
+		background-color: rgba(255, 192, 203, 1);
+	}
+`;
 
 class LoginModal extends React.Component {
 	constructor(props) {
@@ -17,34 +29,43 @@ class LoginModal extends React.Component {
 			<Modal
 				isOpen={this.props.isOpen}
 				toggle={this.props.handleLoginModal}
-				className={this.props.className}
+				style={{ position: "relative", top: "125px" }}
 			>
 				<ModalHeader toggle={this.props.handleLoginModal}>
-					Modal title
+					로그인
 				</ModalHeader>
-				<ModalBody>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-					sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					Duis aute irure dolor in reprehenderit in voluptate velit
-					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-					occaecat cupidatat non proident, sunt in culpa qui officia
-					deserunt mollit anim id est laborum.
+				<ModalBody
+					style={{ padding: "20px 35px", textAlign: "center" }}
+				>
+					<div style={{ textAlign: "left" }}>
+						<label>
+							<FontAwesomeIcon
+								icon={faMailBulk}
+								className="mr-1"
+							/>
+							E-mail
+						</label>
+						<br />
+						<Input type="email" />
+					</div>
+					<br />
+					<div style={{ textAlign: "left" }}>
+						<label>
+							<FontAwesomeIcon icon={faKey} className="mr-1" />
+							Password
+						</label>
+						<br />
+						<Input type="password" />
+					</div>
+					<br />
+					<Button>Login</Button>
 				</ModalBody>
-				<ModalFooter>
-					<Button
-						color="primary"
-						onClick={this.props.handleLoginModal}
-					>
-						Do Something
-					</Button>{" "}
-					<Button
-						color="secondary"
-						onClick={this.props.handleLoginModal}
-					>
-						Cancel
-					</Button>
+				<ModalFooter style={{ textAlign: "center" }}>
+					Forgot your password?
+					<br />
+					or
+					<br />
+					Create new Email?
 				</ModalFooter>
 			</Modal>
 		);
