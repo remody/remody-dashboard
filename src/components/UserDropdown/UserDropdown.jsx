@@ -66,7 +66,12 @@ class UserDropdown extends React.Component {
 	//TODO: 로그인 정보를 쿼리(me)로 받고 그에따른 처리
 
 	handleLoginModal = () => {
-		console.log(this.state.modalOpen);
+		if (!this.state.modalOpen) {
+			this.setState({
+				isOpen: !this.state.isOpen,
+				modalOpen: !this.state.modalOpen
+			});
+		}
 		this.setState({
 			modalOpen: !this.state.modalOpen
 		});
