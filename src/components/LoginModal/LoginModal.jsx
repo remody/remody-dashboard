@@ -56,39 +56,32 @@ class LoginModal extends React.Component {
 
 	render() {
 		return (
-			<Modal
-				isOpen={this.props.isOpen}
-				toggle={this.props.handleLoginModal}
-				style={{ position: "relative", top: "10%" }}
-			>
-				<ModalHeader toggle={this.props.handleLoginModal}>
-					Login
-				</ModalHeader>
-				<ModalBody
-					style={{ padding: "20px 35px", textAlign: "center" }}
-				>
-					<Mutation mutation={LOGIN}>
-						{(login, { loading, error, data }) => {
-							if (loading) {
-								return (
-									<LoadingCenterDiv>
-										<ReactLoading
-											type="bubbles"
-											color="pink"
-										/>
-									</LoadingCenterDiv>
-								);
-							}
-
-							if (data && data.login && data.login.token) {
-								console.log(data.login.token);
-								//TODO: login인 후 토큰을 캐쉬에 넣고 새로운 페이지를 요청할때 마다 request 헤더에 authorize berear 에 추가하여 함
-								//TODO: data를 받아오면 모달을 끈다 -> setstate() 하지만 렌더 함수에 setState가 있음...
-								return null;
-							}
-
-							return (
-								<>
+			<Mutation mutation={LOGIN}>
+				{(login, { loading, error, data }) => {
+					if (data && data.login && data.login.token) {
+						console.log(data.login.token);
+						return null;
+					}
+					return (
+						<Modal
+							isOpen={this.props.isOpen}
+							toggle={this.props.handleLoginModal}
+							style={{ position: "relative", top: "10%" }}
+						>
+							<ModalHeader toggle={this.props.handleLoginModal}>
+								Login
+							</ModalHeader>
+							{loading ? (
+								<LoadingCenterDiv>
+									<ReactLoading type="bubbles" color="pink" />
+								</LoadingCenterDiv>
+							) : (
+								<ModalBody
+									style={{
+										padding: "20px 35px",
+										textAlign: "center"
+									}}
+								>
 									<div style={{ textAlign: "left" }}>
 										{error ? (
 											<ErrorHeader>error</ErrorHeader>
@@ -140,19 +133,19 @@ class LoginModal extends React.Component {
 									>
 										Login
 									</Button>
-								</>
-							);
-						}}
-					</Mutation>
-				</ModalBody>
-				<ModalFooter style={{ textAlign: "center" }}>
-					Forgot your password?
-					<br />
-					or
-					<br />
-					Create new Email?
-				</ModalFooter>
-			</Modal>
+								</ModalBody>
+							)}
+							<ModalFooter style={{ textAlign: "center" }}>
+								Forgot your password?
+								<br />
+								or
+								<br />
+								Create new Email?
+							</ModalFooter>
+						</Modal>
+					);
+				}}
+			</Mutation>
 		);
 	}
 }
