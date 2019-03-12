@@ -12,7 +12,7 @@ const ModalFooter = styled.div`
 	padding: 10px 35px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	background-color: rgba(255, 192, 203, 0.7);
-	transition: background-color 0.5s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
 	&:hover {
 		background-color: rgba(255, 192, 203, 1);
 	}
@@ -59,7 +59,7 @@ class LoginModal extends React.Component {
 			<Mutation mutation={LOGIN}>
 				{(login, { loading, error, data }) => {
 					if (data && data.login && data.login.token) {
-						console.log(data.login.token);
+						localStorage.setItem("token", data.login.token);
 						return null;
 					}
 					return (
