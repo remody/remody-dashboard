@@ -82,6 +82,8 @@ class LoginModal extends React.Component {
 
 							if (data && data.login && data.login.token) {
 								console.log(data.login.token);
+								//TODO: login인 후 토큰을 캐쉬에 넣고 새로운 페이지를 요청할때 마다 request 헤더에 authorize berear 에 추가하여 함
+								//TODO: data를 받아오면 모달을 끈다 -> setstate() 하지만 렌더 함수에 setState가 있음...
 								return null;
 							}
 
