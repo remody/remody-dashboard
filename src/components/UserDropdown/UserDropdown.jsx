@@ -67,6 +67,13 @@ class UserDropdown extends React.Component {
 
 	//TODO: LoginModal에 상태 변환 함수를 주고 그에따른 처리를 함
 
+	handleLogin = (name, logined) => {
+		this.setState({
+			name,
+			logined
+		});
+	};
+
 	handleLoginModal = () => {
 		if (!this.state.modalOpen) {
 			this.setState({
@@ -92,6 +99,7 @@ class UserDropdown extends React.Component {
 				<LoginModal
 					isOpen={this.state.modalOpen}
 					handleLoginModal={this.handleLoginModal}
+					handleLogin={this.handleLogin}
 				/>
 				{this.state.name ? this.state.name : "로그인을 해주세요"}
 				<FontAwesomeIcon
