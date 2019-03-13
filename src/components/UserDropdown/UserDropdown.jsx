@@ -65,8 +65,6 @@ class UserDropdown extends React.Component {
 		};
 	}
 
-	//TODO: LoginModal에 상태 변환 함수를 주고 그에따른 처리를 함
-
 	handleLogin = (name, logined) => {
 		this.setState({
 			name,
@@ -138,8 +136,6 @@ class UserDropdown extends React.Component {
 							</DropdownItem>
 						</>
 					)}
-
-					{/* 위가 비로그인 밑이 로그인 */}
 				</Dropdown>
 			</UserDropdownLeftAlign>
 		);
