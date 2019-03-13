@@ -6,7 +6,7 @@ import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { LOGIN } from "../../queries";
+import { LOGIN } from "../../graphql";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
@@ -42,6 +42,16 @@ class LoginModal extends React.Component {
 		};
 	}
 
+	shouldComponentUpdate(nextProps, nextStates) {
+		if (nextProps.isOpen !== this.props.isOpen) {
+			return true;
+		} else if (nextStates !== this.state) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	handleEmailInput = event => {
 		this.setState({
 			emailInput: event.target.value
@@ -60,6 +70,7 @@ class LoginModal extends React.Component {
 				{(login, { loading, error, data }) => {
 					if (data && data.login && data.login.token) {
 						localStorage.setItem("token", data.login.token);
+						this.props.handleLogin(data.login.user.name, true);
 						return null;
 					}
 					return (
