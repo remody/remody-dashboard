@@ -1,6 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { ALL_USER } from "../../queries";
+import { ALL_USER } from "../../graphql";
 const Home = () => (
 	<Query query={ALL_USER}>
 		{({ loading, error, data }) => {

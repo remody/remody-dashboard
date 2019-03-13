@@ -6,7 +6,7 @@ import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { LOGIN } from "../../queries";
+import { LOGIN } from "../../graphql";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
