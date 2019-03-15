@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import client from "./Apollo";
 
 import Home from "./pages/home";
 import Data from "./pages/data";
+import Interprete from "./pages/interprete";
+import NoMatch from "./pages/nomatch";
 
 import Layout from "./components/Layout";
 
@@ -15,8 +17,13 @@ class App extends Component {
 			<ApolloProvider client={client}>
 				<Router>
 					<Layout>
-						<Route exact path="/" component={Home} />
-						<Route path="/data" component={Data} />
+						<Switch>
+							<Route exact path="/" component={Home} />
+							<Route path="/data" component={Data} />
+							<Route path="/interprete" component={Interprete} />
+							
+							<Route component={NoMatch} />
+						</Switch>
 					</Layout>
 				</Router>
 			</ApolloProvider>
