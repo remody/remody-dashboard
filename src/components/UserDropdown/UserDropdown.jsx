@@ -59,11 +59,18 @@ class UserDropdown extends React.Component {
 		super(props);
 		this.state = {
 			isOpen: false,
-			modalOpen: false
+			modalOpen: false,
+			name: "",
+			logined: false
 		};
 	}
 
-	//TODO: 로그인 정보를 쿼리(me)로 받고 그에따른 처리
+	handleLogin = (name, logined) => {
+		this.setState({
+			name,
+			logined
+		});
+	};
 
 	handleLoginModal = () => {
 		if (!this.state.modalOpen) {
@@ -90,8 +97,9 @@ class UserDropdown extends React.Component {
 				<LoginModal
 					isOpen={this.state.modalOpen}
 					handleLoginModal={this.handleLoginModal}
+					handleLogin={this.handleLogin}
 				/>
-				UserName
+				{this.state.name ? this.state.name : "로그인을 해주세요"}
 				<FontAwesomeIcon
 					icon={isOpen ? faChevronUp : faChevronDown}
 					className="ml-3 mr-3"
@@ -105,23 +113,29 @@ class UserDropdown extends React.Component {
 					}}
 				/>
 				<Dropdown isOpen={isOpen} toggle={this.handleDropDown}>
-					<DropdownItem onClick={this.handleLoginModal}>
-						로그인
-					</DropdownItem>
-					<DropdownItem onClick={this.handleDropDown}>
-						회원가입
-					</DropdownItem>
-					{/* 위가 비로그인 밑이 로그인 */}
-					<DropdownItem onClick={this.handleDropDown}>
-						내 정보 수정
-					</DropdownItem>
-					<DropdownItem onClick={this.handleDropDown}>
-						내가 등록한 파일
-					</DropdownItem>
-					<Devider />
-					<DropdownItem onClick={this.handleDropDown}>
-						로그아웃
-					</DropdownItem>
+					{!this.state.logined ? (
+						<>
+							<DropdownItem onClick={this.handleLoginModal}>
+								로그인
+							</DropdownItem>
+							<DropdownItem onClick={this.handleDropDown}>
+								회원가입
+							</DropdownItem>
+						</>
+					) : (
+						<>
+							<DropdownItem onClick={this.handleDropDown}>
+								내 정보 수정
+							</DropdownItem>
+							<DropdownItem onClick={this.handleDropDown}>
+								내가 등록한 파일
+							</DropdownItem>
+							<Devider />
+							<DropdownItem onClick={this.handleDropDown}>
+								로그아웃
+							</DropdownItem>
+						</>
+					)}
 				</Dropdown>
 			</UserDropdownLeftAlign>
 		);
