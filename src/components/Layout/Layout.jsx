@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import SideBar from "../SideBar";
 import UserDropdown from "../UserDropdown";
+import LoginModal from "../LoginModal";
 
 const LayoutNoBar = styled.div`
 	display: flex;
@@ -19,6 +20,8 @@ const Body = styled.div`
 `;
 
 const Layout = props => {
+	const [modalOpen, handleModal] = useState(false);
+	const [token, handleToken] = useState("");
 	return (
 		<div>
 			<div className="col-12 d-md-none">
@@ -29,7 +32,15 @@ const Layout = props => {
 					<SideBar />
 				</LeftBar>
 				<Body className="col-12 col-md-9">
-					<UserDropdown />
+					<UserDropdown
+						handleLoginModal={state => handleModal(state)}
+						token={token}
+					/>
+					<LoginModal
+						isOpen={modalOpen}
+						handleLoginModal={state => handleModal(state)}
+						handleToken={handleToken}
+					/>
 					<div>{props.children}</div>
 				</Body>
 			</LayoutNoBar>
