@@ -24,8 +24,8 @@ export const LOGIN = gql`
 `;
 
 export const ME = gql`
-	query me($token: String!) {
-		me(token: $token) {
+	query me {
+		me {
 			name
 			email
 		}

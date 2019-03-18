@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Query } from "react-apollo";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { ME } from "../../graphql";
 import LoginModal from "../LoginModal";
 
 const UserDropdownLeftAlign = styled.div`
@@ -92,6 +94,8 @@ class UserDropdown extends React.Component {
 
 	render() {
 		const { isOpen } = this.state;
+		console.log("render");
+		const token = localStorage.getItem("token");
 		return (
 			<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
 				<LoginModal
@@ -99,7 +103,20 @@ class UserDropdown extends React.Component {
 					handleLoginModal={this.handleLoginModal}
 					handleLogin={this.handleLogin}
 				/>
-				{this.state.name ? this.state.name : "로그인을 해주세요"}
+				<Query query={ME}>
+					{({ loading, error, data }) => {
+						console.log("query");
+						if (loading) return "loading";
+
+						if (error) {
+							console.log(error);
+							if (!token) return "Please login our Site!";
+							return "Error";
+						}
+						return data.me.name;
+					}}
+				</Query>
+
 				<FontAwesomeIcon
 					icon={isOpen ? faChevronUp : faChevronDown}
 					className="ml-3 mr-3"
@@ -113,7 +130,7 @@ class UserDropdown extends React.Component {
 					}}
 				/>
 				<Dropdown isOpen={isOpen} toggle={this.handleDropDown}>
-					{!this.state.logined ? (
+					{!token ? (
 						<>
 							<DropdownItem onClick={this.handleLoginModal}>
 								로그인
