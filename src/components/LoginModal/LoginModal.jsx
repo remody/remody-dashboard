@@ -19,7 +19,6 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
-	/* padding: 10px 35px; */
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	background-color: red;
 `;
@@ -30,6 +29,11 @@ const LoadingCenterDiv = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+
+const ClickableSentence = styled.div`
+	cursor: pointer;
+	font-weight: bold;
 `;
 
 const LoginModal = props => {
@@ -121,11 +125,18 @@ const LoginModal = props => {
 							</ModalBody>
 						)}
 						<ModalFooter style={{ textAlign: "center" }}>
-							Forgot your password?
-							<br />
+							<ClickableSentence>
+								Forgot your password?
+							</ClickableSentence>
 							or
-							<br />
-							Create new Email?
+							<ClickableSentence
+								onClick={() => {
+									props.handleLoginModal(false);
+									props.handleSignInModal(true);
+								}}
+							>
+								Sign Up?
+							</ClickableSentence>
 						</ModalFooter>
 					</Modal>
 				);

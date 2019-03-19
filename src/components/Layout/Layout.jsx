@@ -37,6 +37,7 @@ const Layout = props => {
 					<LoginModal
 						isOpen={loginOpen}
 						handleLoginModal={state => handleLoginModal(state)}
+						handleSignInModal={handleSignInModal}
 						handleLogin={handleLogin}
 					/>
 					<SigninModal
