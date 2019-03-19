@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { Query } from "react-apollo";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import LoginModal from "../LoginModal";
+import { ME } from "../../graphql";
 
 const UserDropdownLeftAlign = styled.div`
 	justify-content: flex-end;
@@ -54,92 +55,64 @@ const DropdownItem = styled.div`
 	}
 `;
 
-class UserDropdown extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isOpen: false,
-			modalOpen: false,
-			name: "",
-			logined: false
-		};
-	}
+const UserDropdown = props => {
+	const [isOpen, handleDropDown] = useState(false);
+	const token = props.token ? props.token : localStorage.getItem("token");
+	return (
+		<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
+			{token ? (
+				<Query query={ME} variables={{ token: props.token }}>
+					{({ loading, error, data }) => {
+						if (loading) return "";
 
-	handleLogin = (name, logined) => {
-		this.setState({
-			name,
-			logined
-		});
-	};
-
-	handleLoginModal = () => {
-		if (!this.state.modalOpen) {
-			this.setState({
-				isOpen: !this.state.isOpen,
-				modalOpen: !this.state.modalOpen
-			});
-		}
-		this.setState({
-			modalOpen: !this.state.modalOpen
-		});
-	};
-
-	handleDropDown = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		});
-	};
-
-	render() {
-		const { isOpen } = this.state;
-		return (
-			<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
-				<LoginModal
-					isOpen={this.state.modalOpen}
-					handleLoginModal={this.handleLoginModal}
-					handleLogin={this.handleLogin}
-				/>
-				{this.state.name ? this.state.name : "로그인을 해주세요"}
-				<FontAwesomeIcon
-					icon={isOpen ? faChevronUp : faChevronDown}
-					className="ml-3 mr-3"
-					style={{
-						position: "relative",
-						top: "5px",
-						cursor: "pointer"
+						if (error) {
+							return "Please reload page!";
+						}
+						return data.me.name;
 					}}
-					onClick={() => {
-						this.setState({ isOpen: !isOpen });
-					}}
-				/>
-				<Dropdown isOpen={isOpen} toggle={this.handleDropDown}>
-					{!this.state.logined ? (
-						<>
-							<DropdownItem onClick={this.handleLoginModal}>
-								로그인
-							</DropdownItem>
-							<DropdownItem onClick={this.handleDropDown}>
-								회원가입
-							</DropdownItem>
-						</>
-					) : (
-						<>
-							<DropdownItem onClick={this.handleDropDown}>
-								내 정보 수정
-							</DropdownItem>
-							<DropdownItem onClick={this.handleDropDown}>
-								내가 등록한 파일
-							</DropdownItem>
-							<Devider />
-							<DropdownItem onClick={this.handleDropDown}>
-								로그아웃
-							</DropdownItem>
-						</>
-					)}
-				</Dropdown>
-			</UserDropdownLeftAlign>
-		);
-	}
-}
+				</Query>
+			) : (
+				"Please login our Site!"
+			)}
+			<FontAwesomeIcon
+				icon={isOpen ? faChevronUp : faChevronDown}
+				className="ml-3 mr-3"
+				style={{
+					position: "relative",
+					top: "5px",
+					cursor: "pointer"
+				}}
+				onClick={() => handleDropDown(!isOpen)}
+			/>
+			<Dropdown isOpen={isOpen} toggle={() => handleDropDown(!isOpen)}>
+				{!token ? (
+					<>
+						<DropdownItem
+							onClick={() => props.handleLoginModal(true)}
+						>
+							로그인
+						</DropdownItem>
+						<DropdownItem onClick={() => handleDropDown(false)}>
+							회원가입
+						</DropdownItem>
+					</>
+				) : (
+					<>
+						<DropdownItem onClick={() => handleDropDown(false)}>
+							내 정보 수정
+						</DropdownItem>
+						<DropdownItem onClick={() => handleDropDown(false)}>
+							내가 등록한 파일
+						</DropdownItem>
+						<Devider />
+						<DropdownItem onClick={() => handleDropDown(false)}>
+							로그아웃
+						</DropdownItem>
+					</>
+				)}
+			</Dropdown>
+		</UserDropdownLeftAlign>
+	);
+};
 
 export default UserDropdown;

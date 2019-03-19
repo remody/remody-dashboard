@@ -24,7 +24,6 @@ const uploadOneFile = () => {
 							files: [file]
 						}
 					}) => {
-						console.log(file);
 						validity.valid &&
 							uploadFile({
 								variables: {

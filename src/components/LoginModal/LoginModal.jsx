@@ -70,16 +70,20 @@ class LoginModal extends React.Component {
 				{(login, { loading, error, data }) => {
 					if (data && data.login && data.login.token) {
 						localStorage.setItem("token", data.login.token);
-						this.props.handleLogin(data.login.user.name, true);
+						this.props.handleToken(data.login.token);
 						return null;
 					}
 					return (
 						<Modal
 							isOpen={this.props.isOpen}
-							toggle={this.props.handleLoginModal}
+							toggle={() => this.props.handleLoginModal(false)}
 							style={{ position: "relative", top: "10%" }}
 						>
-							<ModalHeader toggle={this.props.handleLoginModal}>
+							<ModalHeader
+								toggle={() =>
+									this.props.handleLoginModal(false)
+								}
+							>
 								Login
 							</ModalHeader>
 							{loading ? (
