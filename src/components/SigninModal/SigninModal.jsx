@@ -84,6 +84,7 @@ class SigninModal extends React.Component {
 				{(login, { loading, error, data }) => {
 					if (data && data.login && data.login.token) {
 						localStorage.setItem("token", data.login.token);
+						this.props.handleLogin(true);
 						return null;
 					}
 					return (

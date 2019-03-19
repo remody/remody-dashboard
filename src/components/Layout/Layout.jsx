@@ -23,6 +23,7 @@ const Body = styled.div`
 const Layout = props => {
 	const [loginOpen, handleLoginModal] = useState(false);
 	const [signInOpen, handleSignInModal] = useState(false);
+	const [login, handleLogin] = useState(false); //localStorage를 기반으로 re-render을 하기 위해
 	return (
 		<div>
 			<div className="col-12 d-md-none">
@@ -33,17 +34,21 @@ const Layout = props => {
 					<SideBar />
 				</LeftBar>
 				<Body className="col-12 col-md-9">
-					<UserDropdown
-						handleLoginModal={state => handleLoginModal(state)}
-						handleSignInModal={state => handleSignInModal(state)}
-					/>
 					<LoginModal
 						isOpen={loginOpen}
 						handleLoginModal={state => handleLoginModal(state)}
+						handleLogin={handleLogin}
 					/>
 					<SigninModal
 						isOpen={signInOpen}
 						handleSignInModal={state => handleSignInModal(state)}
+						handleLogin={handleLogin}
+					/>
+					<UserDropdown
+						handleLoginModal={state => handleLoginModal(state)}
+						handleSignInModal={state => handleSignInModal(state)}
+						handleLogin={handleLogin}
+						login={login}
 					/>
 					<div>{props.children}</div>
 				</Body>

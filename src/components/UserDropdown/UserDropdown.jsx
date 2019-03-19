@@ -5,6 +5,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { ME } from "../../graphql";
+import client from "../../Apollo";
 
 const UserDropdownLeftAlign = styled.div`
 	justify-content: flex-end;
@@ -57,7 +58,7 @@ const DropdownItem = styled.div`
 
 const UserDropdown = props => {
 	const [isOpen, handleDropDown] = useState(false);
-	const token = props.token ? props.token : localStorage.getItem("token");
+	const token = localStorage.getItem("token");
 	return (
 		<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
 			{token ? (
@@ -107,7 +108,13 @@ const UserDropdown = props => {
 							내가 등록한 파일
 						</DropdownItem>
 						<Devider />
-						<DropdownItem onClick={() => handleDropDown(false)}>
+						<DropdownItem
+							onClick={() => {
+								localStorage.removeItem("token");
+								client.resetStore();
+								handleDropDown(false);
+							}}
+						>
 							로그아웃
 						</DropdownItem>
 					</>
