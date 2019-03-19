@@ -5,7 +5,6 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { ME } from "../../graphql";
-import client from "../../Apollo";
 
 const UserDropdownLeftAlign = styled.div`
 	justify-content: flex-end;
@@ -111,8 +110,8 @@ const UserDropdown = props => {
 						<DropdownItem
 							onClick={() => {
 								localStorage.removeItem("token");
-								client.resetStore();
 								handleDropDown(false);
+								window.location.reload();
 							}}
 						>
 							로그아웃
