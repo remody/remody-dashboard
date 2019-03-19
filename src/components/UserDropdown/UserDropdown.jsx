@@ -57,7 +57,7 @@ const DropdownItem = styled.div`
 
 const UserDropdown = props => {
 	const [isOpen, handleDropDown] = useState(false);
-	const token = props.token ? props.token : localStorage.getItem("token");
+	const token = localStorage.getItem("token");
 	return (
 		<UserDropdownLeftAlign className="mt-4 d-none d-md-flex">
 			{token ? (
@@ -92,7 +92,9 @@ const UserDropdown = props => {
 						>
 							로그인
 						</DropdownItem>
-						<DropdownItem onClick={() => handleDropDown(false)}>
+						<DropdownItem
+							onClick={() => props.handleSignInModal(true)}
+						>
 							회원가입
 						</DropdownItem>
 					</>
@@ -105,7 +107,13 @@ const UserDropdown = props => {
 							내가 등록한 파일
 						</DropdownItem>
 						<Devider />
-						<DropdownItem onClick={() => handleDropDown(false)}>
+						<DropdownItem
+							onClick={() => {
+								localStorage.removeItem("token");
+								handleDropDown(false);
+								window.location.reload();
+							}}
+						>
 							로그아웃
 						</DropdownItem>
 					</>

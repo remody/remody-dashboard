@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { faMailBulk, faKey } from "@fortawesome/free-solid-svg-icons";
+import {
+	faMailBulk,
+	faKey,
+	faAddressCard
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { LOGIN } from "../../graphql";
+import { CREATE_USER } from "../../graphql";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
@@ -19,6 +23,7 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
+	/* padding: 10px 35px; */
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	background-color: red;
 `;
@@ -31,32 +36,29 @@ const LoadingCenterDiv = styled.div`
 	align-items: center;
 `;
 
-const ClickableSentence = styled.div`
-	cursor: pointer;
-	font-weight: bold;
-`;
-
-const LoginModal = props => {
-	const [emailInput, handleEmailInput] = useState("");
-	const [passwordInput, handlePasswordInput] = useState("");
+const SigninModal = props => {
+	const [email, handleEmail] = useState("");
+	const [password, handlePassword] = useState("");
+	const [confirmPassword, handleConfirmpassword] = useState("");
+	const [name, handleName] = useState("");
 
 	return (
-		<Mutation mutation={LOGIN}>
-			{(login, { loading, error, data }) => {
-				if (data && data.login && data.login.token) {
-					localStorage.setItem("token", data.login.token);
+		<Mutation mutation={CREATE_USER}>
+			{(signin, { loading, error, data }) => {
+				if (data && data.createUser && data.createUser.token) {
+					localStorage.setItem("token", data.createUser.token);
 					props.handleLogin(true);
 				}
 				return (
 					<Modal
 						isOpen={data ? false : props.isOpen}
-						toggle={() => props.handleLoginModal(false)}
+						toggle={() => props.handleSignInModal(false)}
 						style={{ position: "relative", top: "10%" }}
 					>
 						<ModalHeader
-							toggle={() => props.handleLoginModal(false)}
+							toggle={() => props.handleSignInModal(false)}
 						>
-							Login
+							Signin
 						</ModalHeader>
 						{loading ? (
 							<LoadingCenterDiv>
@@ -86,9 +88,26 @@ const LoginModal = props => {
 									<Input
 										type="email"
 										onChange={e =>
-											handleEmailInput(e.target.value)
+											handleEmail(e.target.value)
 										}
-										value={emailInput}
+										value={email}
+									/>
+								</div>
+								<br />
+								<div style={{ textAlign: "left" }}>
+									<label>
+										<FontAwesomeIcon
+											icon={faAddressCard}
+											className="mr-1"
+										/>
+										Name
+									</label>
+									<br />
+									<Input
+										onChange={e =>
+											handleName(e.target.value)
+										}
+										value={name}
 									/>
 								</div>
 								<br />
@@ -104,20 +123,43 @@ const LoginModal = props => {
 									<Input
 										type="password"
 										onChange={e =>
-											handlePasswordInput(e.target.value)
+											handlePassword(e.target.value)
 										}
-										value={passwordInput}
+										value={password}
+									/>
+								</div>
+								<br />
+								<div style={{ textAlign: "left" }}>
+									<label>
+										<FontAwesomeIcon
+											icon={faKey}
+											className="mr-1"
+										/>
+										Password Confirm
+									</label>
+									<br />
+									<Input
+										type="password"
+										onChange={e =>
+											handleConfirmpassword(
+												e.target.value
+											)
+										}
+										value={confirmPassword}
 									/>
 								</div>
 								<br />
 								<Button
 									onClick={() => {
-										login({
-											variables: {
-												email: emailInput,
-												password: passwordInput
-											}
-										});
+										if (password === confirmPassword) {
+											signin({
+												variables: {
+													email,
+													password,
+													name
+												}
+											});
+										}
 									}}
 								>
 									Login
@@ -125,18 +167,7 @@ const LoginModal = props => {
 							</ModalBody>
 						)}
 						<ModalFooter style={{ textAlign: "center" }}>
-							<ClickableSentence>
-								Forgot your password?
-							</ClickableSentence>
-							or
-							<ClickableSentence
-								onClick={() => {
-									props.handleLoginModal(false);
-									props.handleSignInModal(true);
-								}}
-							>
-								Sign Up?
-							</ClickableSentence>
+							Welcome Remody!
 						</ModalFooter>
 					</Modal>
 				);
@@ -145,4 +176,4 @@ const LoginModal = props => {
 	);
 };
 
-export default LoginModal;
+export default SigninModal;

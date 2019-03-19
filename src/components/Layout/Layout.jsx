@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SideBar from "../SideBar";
 import UserDropdown from "../UserDropdown";
 import LoginModal from "../LoginModal";
+import SigninModal from "../SigninModal";
 
 const LayoutNoBar = styled.div`
 	display: flex;
@@ -20,8 +21,9 @@ const Body = styled.div`
 `;
 
 const Layout = props => {
-	const [modalOpen, handleModal] = useState(false);
-	const [token, handleToken] = useState("");
+	const [loginOpen, handleLoginModal] = useState(false);
+	const [signInOpen, handleSignInModal] = useState(false);
+	const [login, handleLogin] = useState(false); //localStorage를 기반으로 re-render을 하기 위해
 	return (
 		<div>
 			<div className="col-12 d-md-none">
@@ -32,14 +34,22 @@ const Layout = props => {
 					<SideBar />
 				</LeftBar>
 				<Body className="col-12 col-md-9">
-					<UserDropdown
-						handleLoginModal={state => handleModal(state)}
-						token={token}
-					/>
 					<LoginModal
-						isOpen={modalOpen}
-						handleLoginModal={state => handleModal(state)}
-						handleToken={handleToken}
+						isOpen={loginOpen}
+						handleLoginModal={state => handleLoginModal(state)}
+						handleSignInModal={handleSignInModal}
+						handleLogin={handleLogin}
+					/>
+					<SigninModal
+						isOpen={signInOpen}
+						handleSignInModal={state => handleSignInModal(state)}
+						handleLogin={handleLogin}
+					/>
+					<UserDropdown
+						handleLoginModal={state => handleLoginModal(state)}
+						handleSignInModal={state => handleSignInModal(state)}
+						handleLogin={handleLogin}
+						login={login}
 					/>
 					<div>{props.children}</div>
 				</Body>
