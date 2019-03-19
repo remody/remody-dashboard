@@ -23,7 +23,7 @@ class App extends Component {
 							<Route path="/data" component={Data} />
 							<Route path="/interprete" component={Interprete} />
 							<Route path="/analyze" component={Analyze} />
-							<Route component={NoMatch} />
+							<Route path="*" component={NoMatch} />
 						</Switch>
 					</Layout>
 				</Router>
