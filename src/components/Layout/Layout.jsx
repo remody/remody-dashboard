@@ -35,6 +35,7 @@ const Layout = props => {
 				<Body className="col-12 col-md-9">
 					<UserDropdown
 						handleLoginModal={state => handleLoginModal(state)}
+						handleSignInModal={state => handleSignInModal(state)}
 					/>
 					<LoginModal
 						isOpen={loginOpen}

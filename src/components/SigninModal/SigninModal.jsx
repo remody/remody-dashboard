@@ -89,10 +89,14 @@ class SigninModal extends React.Component {
 					return (
 						<Modal
 							isOpen={this.props.isOpen}
-							toggle={this.props.handleSigninModal}
+							toggle={() => this.props.handleSignInModal(false)}
 							style={{ position: "relative", top: "10%" }}
 						>
-							<ModalHeader toggle={this.props.handleSigninModal}>
+							<ModalHeader
+								toggle={() =>
+									this.props.handleSignInModal(false)
+								}
+							>
 								Signin
 							</ModalHeader>
 							{loading ? (
