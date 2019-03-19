@@ -10,7 +10,7 @@ import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { LOGIN } from "../../graphql";
+import { CREATE_USER } from "../../graphql";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
@@ -43,16 +43,15 @@ const SigninModal = props => {
 	const [name, handleName] = useState("");
 
 	return (
-		<Mutation mutation={LOGIN}>
-			{(login, { loading, error, data }) => {
-				if (data && data.login && data.login.token) {
-					localStorage.setItem("token", data.login.token);
+		<Mutation mutation={CREATE_USER}>
+			{(signin, { loading, error, data }) => {
+				if (data && data.createUser && data.createUser.token) {
+					localStorage.setItem("token", data.createUser.token);
 					props.handleLogin(true);
-					return null;
 				}
 				return (
 					<Modal
-						isOpen={props.isOpen}
+						isOpen={data ? false : props.isOpen}
 						toggle={() => props.handleSignInModal(false)}
 						style={{ position: "relative", top: "10%" }}
 					>
@@ -150,7 +149,21 @@ const SigninModal = props => {
 									/>
 								</div>
 								<br />
-								<Button onClick={() => {}}>Login</Button>
+								<Button
+									onClick={() => {
+										if (password === confirmPassword) {
+											signin({
+												variables: {
+													email,
+													password,
+													name
+												}
+											});
+										}
+									}}
+								>
+									Login
+								</Button>
 							</ModalBody>
 						)}
 						<ModalFooter style={{ textAlign: "center" }}>
