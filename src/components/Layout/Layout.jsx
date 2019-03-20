@@ -13,6 +13,7 @@ const LayoutNoBar = styled.div`
 const Body = styled.div`
 	height: 100vh;
 	background-color: ${props => props.theme.backgroundColor};
+	padding: 0 !important;
 `;
 
 const Layout = props => {
