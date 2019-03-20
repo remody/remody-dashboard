@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SideBar from "../SideBar";
 import UserDropdown from "../UserDropdown";
 import LoginModal from "../LoginModal";
-import SigninModal from "../SigninModal";
+import SignupModal from "../SignupModal";
 
 const LayoutNoBar = styled.div`
 	display: flex;
@@ -22,7 +22,7 @@ const Body = styled.div`
 
 const Layout = props => {
 	const [loginOpen, handleLoginModal] = useState(false);
-	const [signInOpen, handleSignInModal] = useState(false);
+	const [signUpOpen, handleSignUpModal] = useState(false);
 	const [login, handleLogin] = useState(false); //localStorage를 기반으로 re-render을 하기 위해
 	return (
 		<div>
@@ -37,17 +37,17 @@ const Layout = props => {
 					<LoginModal
 						isOpen={loginOpen}
 						handleLoginModal={state => handleLoginModal(state)}
-						handleSignInModal={handleSignInModal}
+						handleSignUpModal={handleSignUpModal}
 						handleLogin={handleLogin}
 					/>
-					<SigninModal
-						isOpen={signInOpen}
-						handleSignInModal={state => handleSignInModal(state)}
+					<SignupModal
+						isOpen={signUpOpen}
+						handleSignUpModal={state => handleSignUpModal(state)}
 						handleLogin={handleLogin}
 					/>
 					<UserDropdown
 						handleLoginModal={state => handleLoginModal(state)}
-						handleSignInModal={state => handleSignInModal(state)}
+						handleSignUpModal={state => handleSignUpModal(state)}
 						handleLogin={handleLogin}
 						login={login}
 					/>

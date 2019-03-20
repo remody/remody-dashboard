@@ -38,7 +38,7 @@ const LoadingCenterDiv = styled.div`
 	align-items: center;
 `;
 
-const SigninModal = props => {
+const SignupModal = props => {
 	const [email, handleEmail] = useState("");
 	const [password, handlePassword] = useState("");
 	const [confirmPassword, handleConfirmpassword] = useState("");
@@ -46,7 +46,7 @@ const SigninModal = props => {
 
 	return (
 		<Mutation mutation={CREATE_USER}>
-			{(signin, { loading, error, data }) => {
+			{(signup, { loading, error, data }) => {
 				if (data && data.createUser && data.createUser.token) {
 					localStorage.setItem("token", data.createUser.token);
 					props.handleLogin(true);
@@ -54,13 +54,13 @@ const SigninModal = props => {
 				return (
 					<Modal
 						isOpen={data ? false : props.isOpen}
-						toggle={() => props.handleSignInModal(false)}
+						toggle={() => props.handleSignUpModal(false)}
 						style={{ position: "relative", top: "10%" }}
 					>
 						<ModalHeader
-							toggle={() => props.handleSignInModal(false)}
+							toggle={() => props.handleSignUpModal(false)}
 						>
-							Signin
+							Sign Up
 						</ModalHeader>
 						{loading ? (
 							<LoadingCenterDiv>
@@ -157,7 +157,7 @@ const SigninModal = props => {
 								<Button
 									onClick={() => {
 										if (password === confirmPassword) {
-											signin({
+											signup({
 												variables: {
 													email,
 													password,
@@ -167,7 +167,7 @@ const SigninModal = props => {
 										}
 									}}
 								>
-									Login
+									Sign up
 								</Button>
 							</ModalBody>
 						)}
@@ -181,4 +181,4 @@ const SigninModal = props => {
 	);
 };
 
-export default SigninModal;
+export default SignupModal;

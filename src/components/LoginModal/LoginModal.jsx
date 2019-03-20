@@ -137,7 +137,7 @@ const LoginModal = props => {
 							<ClickableSentence
 								onClick={() => {
 									props.handleLoginModal(false);
-									props.handleSignInModal(true);
+									props.handleSignUpModal(true);
 								}}
 							>
 								Sign Up?
