@@ -6,7 +6,7 @@ import { Form, FormGroup, Button, Input } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 const NotFound = styled.div`
-    position: relative;
+    
     height: 85vh;
 `;
 
@@ -61,9 +61,36 @@ const Search = styled.div`
 
 
 class ErrorLink extends React.Component{
-    /*constructor(props) {
+    constructor(props) {
         super(props);
-    }*/
+        this.state = {
+            keyword:'',
+            addressData:[{
+                id:1,
+                address:'/'
+            },{
+                id:2,
+                address:'data'
+            },{
+                id:3,
+                address:'analyze'
+            },{
+                id:4,
+                address:'interprete'
+            }
+        ]
+        };
+    }
+
+    eventClick = () =>{ 
+
+    };
+    handleChange = (e) =>{
+        this.setState({
+            keyword: e.target.value
+        })
+    };
+
     render(){
         return(
             <NotFound>
@@ -74,20 +101,26 @@ class ErrorLink extends React.Component{
                     <ErrorMessage2>
                         Oops, The Page you are looking for can't be found!
                     </ErrorMessage2>
+
                     <Search>
                         <Form inline>
                             <FormGroup>
                                 <Input style={{ 
                                     margin: "10px"
                                 }}
-                                placeholder="Search.." />
-                                <Button color="danger">Search</Button>
+                                placeholder="Search.." 
+                                value={this.state.keyword}
+                                onChange={this.handleChange}
+                                />
+                                <Button onClick={this.eventClick} color="danger">Search</Button>
                             </FormGroup>
                         </Form>
+
                         <ErrorPage>              
                             <Link to="/">{'<'} Return To Homepage</Link>
                         </ErrorPage>  
                     </Search>
+
                 </Wrap>
             </NotFound>
         );
