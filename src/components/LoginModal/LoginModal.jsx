@@ -13,6 +13,7 @@ const ModalFooter = styled.div`
 	padding: 10px 35px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	background-color: ${props => props.theme.primaryColor};
+	color: ${props => props.theme.primaryFontColor};
 	opacity: 0.9;
 	transition: opacity 0.5s ease-in-out;
 	&:hover {
@@ -57,6 +58,10 @@ const LoginModal = props => {
 					>
 						<ModalHeader
 							toggle={() => props.handleLoginModal(false)}
+							style={{
+								backgroundColor: Theme.primaryColor,
+								color: Theme.primaryFontColor
+							}}
 						>
 							Login
 						</ModalHeader>
