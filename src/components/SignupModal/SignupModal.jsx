@@ -17,6 +17,7 @@ const ModalFooter = styled.div`
 	padding: 10px 35px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	background-color: ${props => props.theme.primaryColor};
+	color: ${props => props.theme.primaryFontColor};
 	opacity: 0.9;
 	transition: opacity 0.5s ease-in-out;
 	&:hover {
@@ -25,9 +26,8 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
-	/* padding: 10px 35px; */
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
-	background-color: red;
+	color: ${props => props.theme.dangerColor};
 `;
 
 const LoadingCenterDiv = styled.div`
@@ -59,6 +59,10 @@ const SignupModal = props => {
 					>
 						<ModalHeader
 							toggle={() => props.handleSignUpModal(false)}
+							style={{
+								backgroundColor: Theme.primaryColor,
+								color: Theme.primaryFontColor
+							}}
 						>
 							Sign Up
 						</ModalHeader>
