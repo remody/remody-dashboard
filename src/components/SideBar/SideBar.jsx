@@ -15,7 +15,7 @@ const SideBarWrapper = styled.div`
 	background-color: ${props => props.theme.secondaryBackgroundColor};
 	height: 100vh;
 	padding: 0 !important;
-	box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 const SideBarHead = styled.div`
@@ -24,14 +24,11 @@ const SideBarHead = styled.div`
 	height: 90px;
 	justify-content: center;
 	padding: 0 15px;
-	color: ${props => props.theme.primaryFontColor};
 `;
 
 const SideBarLink = styled(NavLink)`
 	padding: 15px 35px 15px 20px;
 	font-size: ${props => props.theme.secondaryFontSize};
-	border-left: ${props =>
-		props.active ? "3px solid " + props.theme.activeColor : ""};
 	color: #000;
 	text-decoration: none;
 	display: block;
