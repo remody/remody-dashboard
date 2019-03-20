@@ -10,14 +10,9 @@ const LayoutNoBar = styled.div`
 	display: flex;
 `;
 
-const LeftBar = styled.div`
-	background-color: ${props => props.theme.primaryColor};
-	height: 100vh;
-	padding: 0 !important;
-`;
-
 const Body = styled.div`
 	height: 100vh;
+	background-color: ${props => props.theme.backgroundColor};
 `;
 
 const Layout = props => {
@@ -30,9 +25,7 @@ const Layout = props => {
 				blah blah something in the wood
 			</div>
 			<LayoutNoBar>
-				<LeftBar className="col-3 d-none d-md-block">
-					<SideBar />
-				</LeftBar>
+				<SideBar />
 				<Body className="col-12 col-md-9">
 					<LoginModal
 						isOpen={loginOpen}
