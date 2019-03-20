@@ -5,7 +5,8 @@ const Theme = {
 	secondaryBackgroundColor: "#ffffff",
 	activeColor: "#41b3f9",
 	primaryFontSize: "16px",
-	secondaryFontSize: "14px"
+	secondaryFontSize: "14px",
+	primaryFontColor: "#e9ecef"
 };
 
 export default Theme;

@@ -93,7 +93,7 @@ const UserDropdown = props => {
 							로그인
 						</DropdownItem>
 						<DropdownItem
-							onClick={() => props.handleSignInModal(true)}
+							onClick={() => props.handleSignUpModal(true)}
 						>
 							회원가입
 						</DropdownItem>

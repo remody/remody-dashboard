@@ -24,6 +24,7 @@ const SideBarHead = styled.div`
 	height: 90px;
 	justify-content: center;
 	padding: 0 15px;
+	color: ${props => props.theme.primaryFontColor};
 `;
 
 const SideBarLink = styled(NavLink)`
