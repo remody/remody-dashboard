@@ -11,14 +11,16 @@ import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
 import { CREATE_USER } from "../../graphql";
+import Theme from "../../Theme";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
-	background-color: rgba(255, 192, 203, 0.7);
-	transition: background-color 0.2s ease-in-out;
+	background-color: ${props => props.theme.primaryColor};
+	opacity: 0.9;
+	transition: opacity 0.5s ease-in-out;
 	&:hover {
-		background-color: rgba(255, 192, 203, 1);
+		opacity: 1;
 	}
 `;
 
@@ -62,7 +64,10 @@ const SigninModal = props => {
 						</ModalHeader>
 						{loading ? (
 							<LoadingCenterDiv>
-								<ReactLoading type="bubbles" color="pink" />
+								<ReactLoading
+									type="bubbles"
+									color={Theme.primaryColor}
+								/>
 							</LoadingCenterDiv>
 						) : (
 							<ModalBody

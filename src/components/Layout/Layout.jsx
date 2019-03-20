@@ -11,7 +11,7 @@ const LayoutNoBar = styled.div`
 `;
 
 const LeftBar = styled.div`
-	background-color: pink;
+	background-color: ${props => props.theme.primaryColor};
 	height: 100vh;
 	padding: 0 !important;
 `;
