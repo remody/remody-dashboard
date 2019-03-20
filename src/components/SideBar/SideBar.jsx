@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import Theme from "../../Theme";
+
 const SideBarHead = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -9,6 +11,7 @@ const SideBarHead = styled.div`
 	border-bottom: 1px solid #fff;
 	justify-content: center;
 	padding: 0 15px;
+	color: ${props => props.theme.primaryFontColor};
 `;
 
 const SideBarItemContainer = styled.div``;
@@ -23,7 +26,7 @@ const SideBarItemDiv = styled.div`
 
 const SideBarItem = ({ url, name }) => (
 	<SideBarItemDiv>
-		<Link style={{ color: "#000" }} to={url}>
+		<Link style={{ color: Theme.primaryFontColor }} to={url}>
 			{name}
 		</Link>
 	</SideBarItemDiv>
