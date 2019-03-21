@@ -71,7 +71,7 @@ const UserDropdown = props => {
 	const token = localStorage.getItem("token");
 	return (
 		<UserDropdownLeftAlign className="d-flex justify-content-between justify-content-md-end">
-			<MobileHeading>Remody</MobileHeading>
+			<MobileHeading className="d-block d-md-none">Remody</MobileHeading>
 			<div className="d-flex">
 				{token ? (
 					<Query query={ME} variables={{ token: props.token }}>
