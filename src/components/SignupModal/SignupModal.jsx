@@ -11,21 +11,23 @@ import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
 import { CREATE_USER } from "../../graphql";
+import Theme from "../../Theme";
 
 const ModalFooter = styled.div`
 	padding: 10px 35px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
-	background-color: rgba(255, 192, 203, 0.7);
-	transition: background-color 0.2s ease-in-out;
+	background-color: ${props => props.theme.primaryColor};
+	color: ${props => props.theme.primaryFontColor};
+	opacity: 0.9;
+	transition: opacity 0.5s ease-in-out;
 	&:hover {
-		background-color: rgba(255, 192, 203, 1);
+		opacity: 1;
 	}
 `;
 
 const ErrorHeader = styled.div`
-	/* padding: 10px 35px; */
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
-	background-color: red;
+	color: ${props => props.theme.dangerColor};
 `;
 
 const LoadingCenterDiv = styled.div`
@@ -36,7 +38,7 @@ const LoadingCenterDiv = styled.div`
 	align-items: center;
 `;
 
-const SigninModal = props => {
+const SignupModal = props => {
 	const [email, handleEmail] = useState("");
 	const [password, handlePassword] = useState("");
 	const [confirmPassword, handleConfirmpassword] = useState("");
@@ -44,7 +46,7 @@ const SigninModal = props => {
 
 	return (
 		<Mutation mutation={CREATE_USER}>
-			{(signin, { loading, error, data }) => {
+			{(signup, { loading, error, data }) => {
 				if (data && data.createUser && data.createUser.token) {
 					localStorage.setItem("token", data.createUser.token);
 					props.handleLogin(true);
@@ -52,17 +54,24 @@ const SigninModal = props => {
 				return (
 					<Modal
 						isOpen={data ? false : props.isOpen}
-						toggle={() => props.handleSignInModal(false)}
+						toggle={() => props.handleSignUpModal(false)}
 						style={{ position: "relative", top: "10%" }}
 					>
 						<ModalHeader
-							toggle={() => props.handleSignInModal(false)}
+							toggle={() => props.handleSignUpModal(false)}
+							style={{
+								backgroundColor: Theme.primaryColor,
+								color: Theme.primaryFontColor
+							}}
 						>
-							Signin
+							Sign Up
 						</ModalHeader>
 						{loading ? (
 							<LoadingCenterDiv>
-								<ReactLoading type="bubbles" color="pink" />
+								<ReactLoading
+									type="bubbles"
+									color={Theme.primaryColor}
+								/>
 							</LoadingCenterDiv>
 						) : (
 							<ModalBody
@@ -152,7 +161,7 @@ const SigninModal = props => {
 								<Button
 									onClick={() => {
 										if (password === confirmPassword) {
-											signin({
+											signup({
 												variables: {
 													email,
 													password,
@@ -162,7 +171,7 @@ const SigninModal = props => {
 										}
 									}}
 								>
-									Login
+									Sign up
 								</Button>
 							</ModalBody>
 						)}
@@ -176,4 +185,4 @@ const SigninModal = props => {
 	);
 };
 
-export default SigninModal;
+export default SignupModal;

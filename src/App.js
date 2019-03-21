@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import client from "./Apollo";
+import theme from "./Theme";
 
 import Home from "./pages/home";
 import Data from "./pages/data";
@@ -16,17 +18,17 @@ class App extends Component {
 	render() {
 		return (
 			<ApolloProvider client={client}>
-				<Router>
-					<Layout>
-						<Switch>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<Layout>
 							<Route exact path="/" component={Home} />
 							<Route path="/data" component={Data} />
 							<Route path="/interprete" component={Interprete} />
 							<Route path="/analyze" component={Analyze} />
-							<Route path="*" component={NoMatch} />
-						</Switch>
-					</Layout>
-				</Router>
+							<Route path="*" component={NoMach} />
+						</Layout>
+					</Router>
+				</ThemeProvider>
 			</ApolloProvider>
 		);
 	}

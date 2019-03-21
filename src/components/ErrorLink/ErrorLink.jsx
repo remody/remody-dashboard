@@ -82,9 +82,7 @@ class ErrorLink extends React.Component{
         };
     }
 
-    eventClick = () =>{ 
-
-    };
+    eventClick = () =>{};
     handleChange = (e) =>{
         this.setState({
             keyword: e.target.value
