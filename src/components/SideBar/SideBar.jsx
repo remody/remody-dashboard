@@ -72,7 +72,7 @@ const SideBar = () => {
 		}
 	];
 	return (
-		<SideBarWrapper className="col-3 d-none d-md-block">
+		<SideBarWrapper className="col-2 d-none d-md-block">
 			<SideBarHead>
 				<h5>Remody : </h5>
 				<div>Remodify your pages!</div>

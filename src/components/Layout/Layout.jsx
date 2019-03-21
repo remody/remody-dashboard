@@ -27,7 +27,7 @@ const Layout = props => {
 			</div>
 			<LayoutNoBar>
 				<SideBar />
-				<Body className="col-12 col-md-9">
+				<Body className="col-12 col-md-10">
 					<LoginModal
 						isOpen={loginOpen}
 						handleLoginModal={state => handleLoginModal(state)}
