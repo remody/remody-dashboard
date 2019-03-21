@@ -24,6 +24,7 @@ const Dropdown = styled.div`
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 0.25rem;
 	background-color: ${props => props.theme.secondaryBackgroundColor};
+	z-index: 100;
 `;
 
 const Devider = styled.div`
