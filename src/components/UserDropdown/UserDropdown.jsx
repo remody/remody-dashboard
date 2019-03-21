@@ -13,6 +13,7 @@ const UserDropdownLeftAlign = styled.div`
 	background-color: ${props => props.theme.primaryColor};
 	height: 45px;
 	color: ${props => props.theme.primaryFontColor};
+	padding-left: 20px;
 `;
 
 const Dropdown = styled.div`
@@ -60,69 +61,104 @@ const DropdownItem = styled.div`
 		background-color: #f8f9fa;
 	}
 `;
+
+const MobileHeading = styled.div`
+	padding-right: 20px;
+	border-right: 2px solid #fff;
+`;
 const UserDropdown = props => {
 	const [isOpen, handleDropDown] = useState(false);
 	const token = localStorage.getItem("token");
 	return (
-		<UserDropdownLeftAlign className="d-none d-md-flex">
-			{token ? (
-				<Query query={ME} variables={{ token: props.token }}>
-					{({ loading, error, data }) => {
-						if (loading) return "";
+		<UserDropdownLeftAlign className="d-flex justify-content-between justify-content-md-end">
+			<MobileHeading>Remody</MobileHeading>
+			<div className="d-flex">
+				{token ? (
+					<Query query={ME} variables={{ token: props.token }}>
+						{({ loading, error, data }) => {
+							if (loading) return "";
 
-						if (error) {
-							return "Please reload page!";
-						}
-						return data.me.name;
+							if (error) {
+								return "Please reload page!";
+							}
+							return data.me.name;
+						}}
+					</Query>
+				) : (
+					"Please login our Site!"
+				)}
+				<FontAwesomeIcon
+					icon={isOpen ? faChevronUp : faChevronDown}
+					className="ml-3 mr-3"
+					style={{
+						position: "relative",
+						top: "5px",
+						cursor: "pointer"
 					}}
-				</Query>
-			) : (
-				"Please login our Site!"
-			)}
-			<FontAwesomeIcon
-				icon={isOpen ? faChevronUp : faChevronDown}
-				className="ml-3 mr-3"
-				style={{
-					position: "relative",
-					cursor: "pointer"
-				}}
-				onClick={() => handleDropDown(!isOpen)}
-			/>
-			<Dropdown isOpen={isOpen} toggle={() => handleDropDown(!isOpen)}>
-				{!token ? (
-					<>
+					onClick={() => handleDropDown(!isOpen)}
+				/>
+				<Dropdown
+					isOpen={isOpen}
+					toggle={() => handleDropDown(!isOpen)}
+				>
+					<div className="d-block d-md-none">
 						<DropdownItem
 							onClick={() => props.handleLoginModal(true)}
 						>
-							로그인
+							Home
 						</DropdownItem>
 						<DropdownItem
-							onClick={() => props.handleSignUpModal(true)}
+							onClick={() => props.handleLoginModal(true)}
 						>
-							회원가입
+							Data
 						</DropdownItem>
-					</>
-				) : (
-					<>
-						<DropdownItem onClick={() => handleDropDown(false)}>
-							내 정보 수정
+						<DropdownItem
+							onClick={() => props.handleLoginModal(true)}
+						>
+							Analyze
 						</DropdownItem>
-						<DropdownItem onClick={() => handleDropDown(false)}>
-							내가 등록한 파일
+						<DropdownItem
+							onClick={() => props.handleLoginModal(true)}
+						>
+							Interprete
 						</DropdownItem>
 						<Devider />
-						<DropdownItem
-							onClick={() => {
-								localStorage.removeItem("token");
-								handleDropDown(false);
-								window.location.reload();
-							}}
-						>
-							로그아웃
-						</DropdownItem>
-					</>
-				)}
-			</Dropdown>
+					</div>
+					{!token ? (
+						<>
+							<DropdownItem
+								onClick={() => props.handleLoginModal(true)}
+							>
+								로그인
+							</DropdownItem>
+							<DropdownItem
+								onClick={() => props.handleSignUpModal(true)}
+							>
+								회원가입
+							</DropdownItem>
+						</>
+					) : (
+						<>
+							<DropdownItem onClick={() => handleDropDown(false)}>
+								내 정보 수정
+							</DropdownItem>
+							<DropdownItem onClick={() => handleDropDown(false)}>
+								내가 등록한 파일
+							</DropdownItem>
+							<Devider />
+							<DropdownItem
+								onClick={() => {
+									localStorage.removeItem("token");
+									handleDropDown(false);
+									window.location.reload();
+								}}
+							>
+								로그아웃
+							</DropdownItem>
+						</>
+					)}
+				</Dropdown>
+			</div>
 		</UserDropdownLeftAlign>
 	);
 };
