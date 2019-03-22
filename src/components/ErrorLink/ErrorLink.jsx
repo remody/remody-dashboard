@@ -23,6 +23,7 @@ const Wrap = styled.div`
 `;
 
 const ErrorMessage = styled.div`
+	/* TODO: 여기에서 color 가능하다면 ThemeProvider에게 받아서 해주세요! 혼자만 색깔이 튀는거 같아요 ㅠㅠ  */
 	height: 200px;
 	line-height: 200px;
 	${props =>
@@ -35,6 +36,7 @@ const ErrorMessage = styled.div`
     `};
 `;
 const ErrorMessage2 = styled.div`
+	/* TOOD: 애두...! */
 	font-family: "Raleway", sans-serif;
 	font-size: 22px;
 	font-weight: 400;
