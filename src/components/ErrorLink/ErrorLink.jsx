@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, FormGroup, Button, Input } from 'reactstrap';
-
+//import Fredoka from '../../public/fonts/Fredoka-One.ttf';
 import { Link } from "react-router-dom";
 
 const NotFound = styled.div`
-    
     height: 85vh;
 `;
 
@@ -26,9 +25,7 @@ const Wrap = styled.div`
 const ErrorMessage = styled.div`
     height: 200px;
     line-height: 200px;
-    @import url('https://fonts.googleapis.com/css?family=Fredoka+One');
     ${props => props.h1 &&`
-        font-family: 'Fredoka One', cursive;
         font-size: 168px;
         margin: 0px;
         color: #ff508e;
@@ -36,7 +33,6 @@ const ErrorMessage = styled.div`
     `};
 `
 const ErrorMessage2 = styled.div`
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
     font-family: 'Raleway', sans-serif;
     font-size: 22px;
     font-weight: 400;
@@ -45,7 +41,6 @@ const ErrorMessage2 = styled.div`
 `;
 
 const ErrorPage = styled.div`
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
     font-family: 'Raleway', sans-serif;
     display: inline-block;
     font-weight: 700;
@@ -59,30 +54,40 @@ const Search = styled.div`
     margin: 30px auto 22px;
 `;
 
-
 class ErrorLink extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            keyword:'',
-            addressData:[{
-                id:1,
-                address:'/'
-            },{
-                id:2,
-                address:'data'
-            },{
-                id:3,
-                address:'analyze'
-            },{
-                id:4,
-                address:'interprete'
-            }
-        ]
+            keyword:''
         };
     }
 
-    eventClick = () =>{};
+    addressArray = [
+        {
+            url: "/",
+            name: "Home",
+        },
+        {
+            url: "/data",
+            name: "Data",
+        },
+        {
+            url: "/analyze",
+            name: "Analyze",
+        },
+        {
+            url: "/interprete",
+            name: "Interprete"
+        }
+    ];
+
+    eventClick = () =>{
+        const address = this.addressArray.filter((item)=>{
+            return item.name === this.state.keyword; 
+        });
+
+    };
+
     handleChange = (e) =>{
         this.setState({
             keyword: e.target.value
@@ -123,7 +128,6 @@ class ErrorLink extends React.Component{
             </NotFound>
         );
     }
-
 
 }
 

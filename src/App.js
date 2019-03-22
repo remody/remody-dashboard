@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import client from "./Apollo";
 import theme from "./Theme";
@@ -21,11 +21,13 @@ class App extends Component {
 				<ThemeProvider theme={theme}>
 					<Router>
 						<Layout>
-							<Route exact path="/" component={Home} />
-							<Route path="/data" component={Data} />
-							<Route path="/interprete" component={Interprete} />
-							<Route path="/analyze" component={Analyze} />
-							<Route path="*" component={NoMach} />
+							<Switch>
+								<Route exact path="/" component={Home} />
+								<Route path="/data" component={Data} />
+								<Route path="/interprete" component={Interprete} />
+								<Route path="/analyze" component={Analyze} />
+								<Route path="*" component={NoMatch} />
+							</Switch>
 						</Layout>
 					</Router>
 				</ThemeProvider>
