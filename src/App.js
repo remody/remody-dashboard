@@ -14,22 +14,22 @@ import Analyze from "./pages/analyze";
 import Layout from "./components/Layout";
 
 class App extends Component {
-	render() {
-		return (
-			<ApolloProvider client={client}>
-				<ThemeProvider theme={theme}>
-					<Router>
-						<Layout>
-							<Route exact path="/" component={Home} />
-							<Route path="/data" component={Data} />
-							<Route path="/interprete" component={Interprete} />
-							<Route path="/analyze" component={Analyze} />
-						</Layout>
-					</Router>
-				</ThemeProvider>
-			</ApolloProvider>
-		);
-	}
+    render() {
+        return (
+            <ApolloProvider client={client}>
+                <ThemeProvider theme={theme}>
+                    <Router>
+                        <Layout>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/data" component={Data} />
+                            <Route path="/interprete" component={Interprete} />
+                            <Route path="/analyze" component={Analyze} />
+                        </Layout>
+                    </Router>
+                </ThemeProvider>
+            </ApolloProvider>
+        );
+    }
 }
 
 export default App;
