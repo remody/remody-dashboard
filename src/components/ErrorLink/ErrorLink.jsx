@@ -23,7 +23,6 @@ const Wrap = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-	/* TODO: 여기에서 color 가능하다면 ThemeProvider에게 받아서 해주세요! 혼자만 색깔이 튀는거 같아요 ㅠㅠ  */
 	height: 200px;
 	line-height: 200px;
 	${props =>
@@ -31,25 +30,15 @@ const ErrorMessage = styled.div`
 		`
         font-size: 168px;
         margin: 0px;
-        color: #ff508e;
+        color: ${props => props.theme.primaryFontColor};
         text-transform: uppercase;
     `};
 `;
 const ErrorMessage2 = styled.div`
-	/* TOOD: 애두...! */
-	font-family: "Raleway", sans-serif;
 	font-size: 22px;
 	font-weight: 400;
-	color: #222;
+	color: ${props => props.theme.primaryColor};
 	margin: 0;
-`;
-
-const ErrorPage = styled.div`
-	font-family: "Raleway", sans-serif;
-	display: inline-block;
-	font-weight: 700;
-	border-radius: 15px;
-	text-decoration: none;
 `;
 
 const Search = styled.div`
@@ -57,6 +46,15 @@ const Search = styled.div`
 	position: relative;
 	margin: 30px auto 22px;
 `;
+
+const ErrorPage = styled.div`
+	display: block;
+	font-weight: 700;
+	border-radius: 15px;
+	text-decoration: none;
+`;
+
+
 
 class ErrorLink extends React.Component {
 	constructor(props) {
@@ -69,27 +67,32 @@ class ErrorLink extends React.Component {
 	addressArray = [
 		{
 			url: "/",
-			name: "Home"
+			name: "HOME"
 		},
 		{
 			url: "/data",
-			name: "Data"
+			name: "DATA"
 		},
 		{
 			url: "/analyze",
-			name: "Analyze"
+			name: "ANALYZE"
 		},
 		{
 			url: "/interprete",
-			name: "Interprete"
+			name: "INTERPRETE"
 		}
 	];
 
 	eventClick = () => {
 		const [address] = this.addressArray.filter(
-			item => item.name === this.state.keyword
-		);
-		window.location.href = `http://${window.location.host}${address.url}`;
+			item => item.name === (this.state.keyword).toUpperCase()
+        );
+        //console.log([address]);
+        if(address===undefined){
+            window.location.reload(true);
+        }else{
+            window.location.href = `http://${window.location.host}${address.url}`;
+        }
 	};
 
 	handleChange = e => {
@@ -117,15 +120,16 @@ class ErrorLink extends React.Component {
 								value={this.state.keyword}
 								onChange={this.handleChange}
 							/>
-							<Button onClick={this.eventClick} color="danger">
+                        </FormGroup>
+                        <FormGroup>
+							<Button onClick={this.eventClick} color="secondary">
 								Search
 							</Button>
-						</FormGroup>
-
-						<ErrorPage>
-							<Link to="/">{"<"} Return To Homepage</Link>
-						</ErrorPage>
+                        </FormGroup>
 					</Search>
+                    <ErrorPage>
+							<Link to="/">{"<"} Return To Homepage</Link>
+					</ErrorPage>
 				</Wrap>
 			</NotFound>
 		);
