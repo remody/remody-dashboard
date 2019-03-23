@@ -29,3 +29,17 @@
 		url("../fonts/SpoqaHanSansThin.ttf") format("woff"),
 		url("../fonts/SpoqaHanSansThin.ttf") format("truetype");
 }
+
+@font-face{
+	font-family: "Fredoka One";
+	src: url("../fonts/Fredoka-One.tff") format("woff2"),
+	url("../fonts/Fredoka-One.tff") format("woff"),
+	url("../fonts/Fredoka-One.tff") format("truetype");
+}
+
+@font-face{
+	font-family: 'Raleway';
+	src: url("../fonts/Raleway-Light.tff") format("woff2"),
+	url("../fonts/Raleway-Light.tff") format("woff"),
+	url("../fonts/Raleway-Light.tff") format("truetype");
+}
