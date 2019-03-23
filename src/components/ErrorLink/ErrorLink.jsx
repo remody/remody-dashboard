@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormGroup, Button, Input } from "reactstrap";
-//import Fredoka from '../../public/fonts/Fredoka-One.ttf';
 import { Link } from "react-router-dom";
 
 const NotFound = styled.div`
@@ -42,7 +41,9 @@ const ErrorMessage2 = styled.div`
 `;
 
 const Search = styled.div`
-	display: inline-block;
+	display: flex;
+	justify-content: center;
+    align-items: center;
 	position: relative;
 	margin: 30px auto 22px;
 `;
@@ -87,8 +88,8 @@ class ErrorLink extends React.Component {
 		const [address] = this.addressArray.filter(
 			item => item.name === (this.state.keyword).toUpperCase()
         );
-        //console.log([address]);
-        if(address===undefined){
+
+        if(!address){
             window.location.reload(true);
         }else{
             window.location.href = `http://${window.location.host}${address.url}`;
@@ -111,7 +112,9 @@ class ErrorLink extends React.Component {
 					</ErrorMessage2>
 
 					<Search>
-						<FormGroup>
+						<FormGroup style={{
+							marginRight: "1rem"
+						}}>
 							<Input
 								style={{
 									margin: "10px"
@@ -127,6 +130,7 @@ class ErrorLink extends React.Component {
 							</Button>
                         </FormGroup>
 					</Search>
+
                     <ErrorPage>
 							<Link to="/">{"<"} Return To Homepage</Link>
 					</ErrorPage>
