@@ -1,29 +1,11 @@
 import React from "react";
-import { Query } from "react-apollo";
-import { ALL_USER } from "../../graphql";
 import Topbar from "../../components/Topbar";
-const Interprete = ({ match: { path } }) => (
-    <>
-        <Topbar name={path} />
-        <Query query={ALL_USER}>
-            {({ loading, error, data }) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error :(</p>;
+import DropZone from "../../components/DropZone";
 
-                return (
-                    <div className="container">
-                        Interprete
-                        {data.users.map(({ name, email, id }) => (
-                            <div key={id}>
-                                <p>
-                                    {name}: {email}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                );
-            }}
-        </Query>
-    </>
+const Interprete = ({ match: { path } }) => (
+    <div>
+        <Topbar name={path} />
+        <DropZone />
+    </div>
 );
 export default Interprete;
