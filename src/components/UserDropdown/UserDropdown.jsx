@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 import { ME } from "../../graphql";
 
@@ -66,6 +67,37 @@ const MobileHeading = styled.div`
     padding-right: 20px;
     border-right: 2px solid #fff;
 `;
+
+const sideItemArray = [
+    {
+        url: "/",
+        name: "Home"
+    },
+    {
+        url: "/data",
+        name: "Data"
+    },
+    {
+        url: "/analyze",
+        name: "Analyze"
+    },
+    {
+        url: "/interprete",
+        name: "Interprete"
+    }
+];
+
+const LinkDropDown = props => {
+    const hrefFunction = () => {
+        props.handleDropDown(false);
+    };
+    return (
+        <Link to={props.url}>
+            <DropdownItem onClick={hrefFunction}>{props.name}</DropdownItem>
+        </Link>
+    );
+};
+
 const UserDropdown = props => {
     const [isOpen, handleDropDown] = useState(false);
     const token = localStorage.getItem("token");
@@ -102,26 +134,14 @@ const UserDropdown = props => {
                     toggle={() => handleDropDown(!isOpen)}
                 >
                     <div className="d-block d-md-none">
-                        <DropdownItem
-                            onClick={() => props.handleLoginModal(true)}
-                        >
-                            Home
-                        </DropdownItem>
-                        <DropdownItem
-                            onClick={() => props.handleLoginModal(true)}
-                        >
-                            Data
-                        </DropdownItem>
-                        <DropdownItem
-                            onClick={() => props.handleLoginModal(true)}
-                        >
-                            Analyze
-                        </DropdownItem>
-                        <DropdownItem
-                            onClick={() => props.handleLoginModal(true)}
-                        >
-                            Interprete
-                        </DropdownItem>
+                        {sideItemArray.map(item => (
+                            <LinkDropDown
+                                key={item.name}
+                                name={item.name}
+                                url={item.url}
+                                handleDropDown={handleDropDown}
+                            />
+                        ))}
                         <Devider />
                     </div>
                     {!token ? (
