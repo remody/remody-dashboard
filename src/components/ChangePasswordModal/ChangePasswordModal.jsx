@@ -42,7 +42,8 @@ const ChangePasswordModal = props => {
     const [email, handleEmail] = useState("");
     const [password, handlePassword] = useState("");
     const [confirmPassword, handleConfirmpassword] = useState("");
-    const [name, handleName] = useState("");
+    const [accessCode, handleAccessCode] = useState(""); //accesscode를 받아들일 수 있는 상태
+    const [step, handleStep] = useState("1"); //Step을 나눠서 사용자에게 보여주는 UI와 이벤트를 다르게 한다
 
     return (
         <Mutation mutation={CREATE_USER}>
@@ -66,7 +67,7 @@ const ChangePasswordModal = props => {
                                 color: Theme.primaryFontColor
                             }}
                         >
-                            Sign Up
+                            Forgot Your Password?
                         </ModalHeader>
                         {loading ? (
                             <LoadingCenterDiv>
@@ -104,81 +105,91 @@ const ChangePasswordModal = props => {
                                         value={email}
                                     />
                                 </div>
-                                <br />
-                                <div style={{ textAlign: "left" }}>
-                                    <label>
-                                        <FontAwesomeIcon
-                                            icon={faAddressCard}
-                                            className="mr-1"
-                                        />
-                                        Name
-                                    </label>
-                                    <br />
-                                    <Input
-                                        onChange={e =>
-                                            handleName(e.target.value)
-                                        }
-                                        value={name}
-                                    />
-                                </div>
-                                <br />
-                                <div style={{ textAlign: "left" }}>
-                                    <label>
-                                        <FontAwesomeIcon
-                                            icon={faKey}
-                                            className="mr-1"
-                                        />
-                                        Password
-                                    </label>
-                                    <br />
-                                    <Input
-                                        type="password"
-                                        onChange={e =>
-                                            handlePassword(e.target.value)
-                                        }
-                                        value={password}
-                                    />
-                                </div>
-                                <br />
-                                <div style={{ textAlign: "left" }}>
-                                    <label>
-                                        <FontAwesomeIcon
-                                            icon={faKey}
-                                            className="mr-1"
-                                        />
-                                        Password Confirm
-                                    </label>
-                                    <br />
-                                    <Input
-                                        type="password"
-                                        onChange={e =>
-                                            handleConfirmpassword(
-                                                e.target.value
-                                            )
-                                        }
-                                        value={confirmPassword}
-                                    />
-                                </div>
+                                {step === "2" ? (
+                                    <>
+                                        <br />
+                                        <div>
+                                            <div style={{ textAlign: "left" }}>
+                                                <label>
+                                                    <FontAwesomeIcon
+                                                        icon={faAddressCard}
+                                                        className="mr-1"
+                                                    />
+                                                    Access Code
+                                                </label>
+                                                <br />
+                                                <Input
+                                                    onChange={e =>
+                                                        handleAccessCode(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={accessCode}
+                                                />
+                                            </div>
+                                            <br />
+                                            <div style={{ textAlign: "left" }}>
+                                                <label>
+                                                    <FontAwesomeIcon
+                                                        icon={faKey}
+                                                        className="mr-1"
+                                                    />
+                                                    Password
+                                                </label>
+                                                <br />
+                                                <Input
+                                                    type="password"
+                                                    onChange={e =>
+                                                        handlePassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={password}
+                                                />
+                                            </div>
+                                            <br />
+                                            <div style={{ textAlign: "left" }}>
+                                                <label>
+                                                    <FontAwesomeIcon
+                                                        icon={faKey}
+                                                        className="mr-1"
+                                                    />
+                                                    Password Confirm
+                                                </label>
+                                                <br />
+                                                <Input
+                                                    type="password"
+                                                    onChange={e =>
+                                                        handleConfirmpassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={confirmPassword}
+                                                />
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : null}
                                 <br />
                                 <Button
                                     onClick={() => {
                                         if (password === confirmPassword) {
                                             signup({
                                                 variables: {
-                                                    email,
-                                                    password,
-                                                    name
+                                                    email
                                                 }
                                             });
                                         }
                                     }}
                                 >
-                                    Sign up
+                                    {step === "1"
+                                        ? "Send Mail"
+                                        : "Change Password"}
                                 </Button>
                             </ModalBody>
                         )}
                         <ModalFooter style={{ textAlign: "center" }}>
-                            Welcome Remody!
+                            @2019 Remody Corp.
                         </ModalFooter>
                     </Modal>
                 );
