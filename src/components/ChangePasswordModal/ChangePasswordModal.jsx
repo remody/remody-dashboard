@@ -54,11 +54,13 @@ const ChangePasswordModal = props => {
                 return (
                     <Modal
                         isOpen={data ? false : props.isOpen}
-                        toggle={() => props.handleSignUpModal(false)}
+                        toggle={() => props.handleChangePassowordModal(false)}
                         style={{ position: "relative", top: "10%" }}
                     >
                         <ModalHeader
-                            toggle={() => props.handleSignUpModal(false)}
+                            toggle={() =>
+                                props.handleChangePassowordModal(false)
+                            }
                             style={{
                                 backgroundColor: Theme.primaryColor,
                                 color: Theme.primaryFontColor
