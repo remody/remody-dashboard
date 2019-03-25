@@ -10,7 +10,7 @@ import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { CREATE_AUTH_ACCESS_CODE } from "../../graphql";
+import { CREATE_AUTH_ACCESS_CODE, CHANGE_USER_PASSWORD } from "../../graphql";
 import Theme from "../../Theme";
 
 const ModalFooter = styled.div`
@@ -161,19 +161,7 @@ const ChangePasswordModal = props => {
                                 </>
                             ) : null}
                             <br />
-                            {data ? (
-                                <Button
-                                    onClick={() => {
-                                        createAuthAccessCode({
-                                            variables: {
-                                                email
-                                            }
-                                        });
-                                    }}
-                                >
-                                    Change Password
-                                </Button>
-                            ) : (
+                            {!data ? (
                                 <Button
                                     onClick={() => {
                                         createAuthAccessCode({
@@ -185,6 +173,48 @@ const ChangePasswordModal = props => {
                                 >
                                     Send Mail
                                 </Button>
+                            ) : (
+                                <Mutation mutation={CHANGE_USER_PASSWORD}>
+                                    {(
+                                        changeUserPassword,
+                                        {
+                                            secondLoading,
+                                            secondError,
+                                            secondData
+                                        }
+                                    ) => {
+                                        if (secondData) {
+                                            return "Done!";
+                                        }
+                                        if (secondError) {
+                                            return "Error!";
+                                        }
+                                        if (secondLoading) {
+                                            return "Loading!";
+                                        }
+                                        return (
+                                            <Button
+                                                onClick={() => {
+                                                    changeUserPassword({
+                                                        variables: {
+                                                            email,
+                                                            password,
+                                                            accessCode
+                                                        }
+                                                    });
+                                                    props.handleChangePassowordModal(
+                                                        false
+                                                    );
+                                                    props.handleLoginModal(
+                                                        true
+                                                    );
+                                                }}
+                                            >
+                                                Change Password
+                                            </Button>
+                                        );
+                                    }}
+                                </Mutation>
                             )}
                         </ModalBody>
                     )}

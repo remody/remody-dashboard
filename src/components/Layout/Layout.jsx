@@ -43,6 +43,7 @@ const Layout = props => {
                     handleChangePassowordModal={state =>
                         handleChangePassowordModal(state)
                     }
+                    handleLoginModal={state => handleLoginModal(state)}
                 />
                 <UserDropdown
                     handleLoginModal={state => handleLoginModal(state)}
