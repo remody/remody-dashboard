@@ -135,7 +135,12 @@ const LoginModal = props => {
                             </ModalBody>
                         )}
                         <ModalFooter style={{ textAlign: "center" }}>
-                            <ClickableSentence>
+                            <ClickableSentence
+                                onClick={() => {
+                                    props.handleLoginModal(false);
+                                    props.handleChangePassowordModal(true);
+                                }}
+                            >
                                 Forgot your password?
                             </ClickableSentence>
                             or
