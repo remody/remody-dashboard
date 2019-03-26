@@ -4,48 +4,57 @@ import styled from "styled-components";
 import SideBar from "../SideBar";
 import UserDropdown from "../UserDropdown";
 import LoginModal from "../LoginModal";
+import SignupModal from "../SignupModal";
+import ChangePasswordModal from "../ChangePasswordModal";
 
 const LayoutNoBar = styled.div`
-	display: flex;
-`;
-
-const LeftBar = styled.div`
-	background-color: pink;
-	height: 100vh;
-	padding: 0 !important;
+    display: flex;
 `;
 
 const Body = styled.div`
-	height: 100vh;
+    height: 100vh;
+    background-color: ${props => props.theme.backgroundColor};
+    padding: 0 !important;
 `;
 
 const Layout = props => {
-	const [modalOpen, handleModal] = useState(false);
-	const [token, handleToken] = useState("");
-	return (
-		<div>
-			<div className="col-12 d-md-none">
-				blah blah something in the wood
-			</div>
-			<LayoutNoBar>
-				<LeftBar className="col-3 d-none d-md-block">
-					<SideBar />
-				</LeftBar>
-				<Body className="col-12 col-md-9">
-					<UserDropdown
-						handleLoginModal={state => handleModal(state)}
-						token={token}
-					/>
-					<LoginModal
-						isOpen={modalOpen}
-						handleLoginModal={state => handleModal(state)}
-						handleToken={handleToken}
-					/>
-					<div>{props.children}</div>
-				</Body>
-			</LayoutNoBar>
-		</div>
-	);
+    const [loginOpen, handleLoginModal] = useState(false);
+    const [signUpOpen, handleSignUpModal] = useState(false);
+    const [chagePasswordOpen, handleChangePassowordModal] = useState(false);
+    const [login, handleLogin] = useState(false); //localStorage를 기반으로 re-render을 하기 위해
+    return (
+        <LayoutNoBar>
+            <SideBar />
+            <Body className="col-12 col-md-10">
+                <LoginModal
+                    isOpen={loginOpen}
+                    handleLoginModal={state => handleLoginModal(state)}
+                    handleSignUpModal={handleSignUpModal}
+                    handleChangePassowordModal={handleChangePassowordModal}
+                    handleLogin={handleLogin}
+                />
+                <SignupModal
+                    isOpen={signUpOpen}
+                    handleSignUpModal={state => handleSignUpModal(state)}
+                    handleLogin={handleLogin}
+                />
+                <ChangePasswordModal
+                    isOpen={chagePasswordOpen}
+                    handleChangePassowordModal={state =>
+                        handleChangePassowordModal(state)
+                    }
+                    handleLoginModal={state => handleLoginModal(state)}
+                />
+                <UserDropdown
+                    handleLoginModal={state => handleLoginModal(state)}
+                    handleSignUpModal={state => handleSignUpModal(state)}
+                    handleLogin={handleLogin}
+                    login={login}
+                />
+                <div>{props.children}</div>
+            </Body>
+        </LayoutNoBar>
+    );
 };
 
 export default Layout;
