@@ -34,3 +34,28 @@ export const ME = gql`
         }
     }
 `;
+
+export const CREATE_AUTH_ACCESS_CODE = gql`
+    mutation createAuthAccessCode($email: String!) {
+        createAuthAccessCode(email: $email)
+    }
+`;
+
+export const CHANGE_USER_PASSWORD = gql`
+    mutation changeUserPassword(
+        $email: String!
+        $accessCode: String!
+        $password: String!
+    ) {
+        changeUserPassword(
+            data: {
+                accessCode: $accessCode
+                email: $email
+                password: $password
+            }
+        ) {
+            name
+            email
+        }
+    }
+`;
