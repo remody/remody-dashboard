@@ -3,7 +3,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { setContext } from "apollo-link-context";
 
-const uploadLink = createUploadLink({ uri: "http://localhost:4000" });
+const uploadLink = createUploadLink({ uri: process.env["REMODY_SERVER_URL"] });
 
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("token");
