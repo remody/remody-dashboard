@@ -26,7 +26,6 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
     color: ${props => props.theme.dangerColor};
 `;
 
@@ -81,11 +80,6 @@ const SignupModal = props => {
                                 }}
                             >
                                 <div style={{ textAlign: "left" }}>
-                                    {error ? (
-                                        <ErrorHeader>error</ErrorHeader>
-                                    ) : (
-                                        <div />
-                                    )}
                                     <label>
                                         <FontAwesomeIcon
                                             icon={faMailBulk}
@@ -158,6 +152,30 @@ const SignupModal = props => {
                                     />
                                 </div>
                                 <br />
+                                {error ? (
+                                    <>
+                                        <ErrorHeader>
+                                            {error.graphQLErrors[0].message}
+                                            {"! "}
+                                            please try again!
+                                        </ErrorHeader>
+                                        <br />
+                                    </>
+                                ) : (
+                                    <div />
+                                )}
+                                {confirmPassword !== "" &&
+                                password !== confirmPassword ? (
+                                    <>
+                                        <ErrorHeader>
+                                            Password is not match. Please
+                                            confirm password
+                                        </ErrorHeader>
+                                        <br />
+                                    </>
+                                ) : (
+                                    <div />
+                                )}
                                 <Button
                                     onClick={() => {
                                         if (password === confirmPassword) {
