@@ -48,7 +48,7 @@ const SignupModal = props => {
             {(signup, { loading, error, data }) => {
                 if (data && data.createUser && data.createUser.token) {
                     localStorage.setItem("token", data.createUser.token);
-                    props.handleLogin(true);
+                    window.location.reload();
                 }
                 return (
                     <Modal
