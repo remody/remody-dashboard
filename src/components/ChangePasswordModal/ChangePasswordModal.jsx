@@ -26,7 +26,6 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
     color: ${props => props.theme.dangerColor};
 `;
 
@@ -76,11 +75,6 @@ const ChangePasswordModal = props => {
                             }}
                         >
                             <div style={{ textAlign: "left" }}>
-                                {error ? (
-                                    <ErrorHeader>error</ErrorHeader>
-                                ) : (
-                                    <div />
-                                )}
                                 <label>
                                     <FontAwesomeIcon
                                         icon={faMailBulk}
@@ -161,6 +155,18 @@ const ChangePasswordModal = props => {
                                 </>
                             ) : null}
                             <br />
+                            {error ? (
+                                <>
+                                    <ErrorHeader>
+                                        {error.graphQLErrors[0].message}
+                                        {"! "}
+                                        please try again!
+                                    </ErrorHeader>
+                                    <br />
+                                </>
+                            ) : (
+                                <div />
+                            )}
                             {!data ? (
                                 <Button
                                     onClick={() => {
@@ -175,43 +181,58 @@ const ChangePasswordModal = props => {
                                 </Button>
                             ) : (
                                 <Mutation mutation={CHANGE_USER_PASSWORD}>
-                                    {(
-                                        changeUserPassword,
-                                        {
-                                            secondLoading,
-                                            secondError,
-                                            secondData
-                                        }
-                                    ) => {
-                                        if (secondData) {
-                                            return "Done!";
-                                        }
-                                        if (secondError) {
-                                            return "Error!";
-                                        }
-                                        if (secondLoading) {
-                                            return "Loading!";
-                                        }
+                                    {(changeUserPassword, { secondError }) => {
                                         return (
-                                            <Button
-                                                onClick={() => {
-                                                    changeUserPassword({
-                                                        variables: {
-                                                            email,
-                                                            password,
-                                                            accessCode
-                                                        }
-                                                    });
-                                                    props.handleChangePassowordModal(
-                                                        false
-                                                    );
-                                                    props.handleLoginModal(
-                                                        true
-                                                    );
-                                                }}
-                                            >
-                                                Change Password
-                                            </Button>
+                                            <>
+                                                {secondError ? (
+                                                    <>
+                                                        <ErrorHeader>
+                                                            {
+                                                                secondError
+                                                                    .graphQLErrors[0]
+                                                                    .message
+                                                            }
+                                                            {"! "}
+                                                            please try again!
+                                                        </ErrorHeader>
+                                                        <br />
+                                                    </>
+                                                ) : (
+                                                    <div />
+                                                )}
+                                                {confirmPassword !== "" &&
+                                                password !== confirmPassword ? (
+                                                    <>
+                                                        <ErrorHeader>
+                                                            Password is not
+                                                            match. Please
+                                                            confirm password
+                                                        </ErrorHeader>
+                                                        <br />
+                                                    </>
+                                                ) : (
+                                                    <div />
+                                                )}
+                                                <Button
+                                                    onClick={() => {
+                                                        changeUserPassword({
+                                                            variables: {
+                                                                email,
+                                                                password,
+                                                                accessCode
+                                                            }
+                                                        });
+                                                        props.handleChangePassowordModal(
+                                                            false
+                                                        );
+                                                        props.handleLoginModal(
+                                                            true
+                                                        );
+                                                    }}
+                                                >
+                                                    Change Password
+                                                </Button>
+                                            </>
                                         );
                                     }}
                                 </Mutation>
