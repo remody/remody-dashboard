@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CardBody = styled.div`
@@ -20,17 +21,28 @@ const CardRight = styled.div`
     padding-top: 20px;
 `;
 
-const DataCard = ({ name, rowCount, user: { name: userName } }) => {
+const MyLink = styled(Link)`
+    color: #000000;
+    :active,
+    :hover {
+        text-decoration: none !important;
+        color: #000000;
+    }
+`;
+
+const DataCard = ({ name, rowCount, user: { name: userName }, id }) => {
     return (
-        <CardBody>
-            <CardLeft>
-                <h3>{name}</h3>
-            </CardLeft>
-            <CardRight>
-                <div>데이터 수: {rowCount}</div>
-                <div>소유자: {userName}</div>
-            </CardRight>
-        </CardBody>
+        <MyLink to={`/data/info/${id}`}>
+            <CardBody>
+                <CardLeft>
+                    <h3>{name}</h3>
+                </CardLeft>
+                <CardRight>
+                    <div>데이터 수: {rowCount}</div>
+                    <div>소유자: {userName}</div>
+                </CardRight>
+            </CardBody>
+        </MyLink>
     );
 };
 export default DataCard;
