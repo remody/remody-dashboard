@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 
 import { USER_SCHEMAS } from "../../graphql";
+import DataCard from "../../components/DataCard/DataCard";
 
 const DataCardContainer = () => {
     return (
@@ -14,10 +15,7 @@ const DataCardContainer = () => {
                     return "error";
                 }
                 return data.userSchemas.map(item => (
-                    <div key={item.id}>
-                        {item.name}
-                        {item.rowCount}
-                    </div>
+                    <DataCard key={item.id} {...item} />
                 ));
             }}
         </Query>
