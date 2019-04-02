@@ -1,11 +1,11 @@
 import React from "react";
 import Topbar from "../../components/Topbar";
-import DropZone from "../../components/DropZone";
+import DropZonepage from "../../components/DropZonepage";
 
 const Interprete = ({ match: { path } }) => (
     <div>
         <Topbar name={path} />
-        <DropZone />
+        <DropZonepage />
     </div>
 );
 export default Interprete;
