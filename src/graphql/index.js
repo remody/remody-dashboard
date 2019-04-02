@@ -66,6 +66,9 @@ export const USER_SCHEMAS = gql`
             id
             name
             rowCount
+            user {
+                name
+            }
         }
     }
 `;
