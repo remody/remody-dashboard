@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 //import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import Dropzone from 'react-dropzone';
+import Dropzone from "react-dropzone";
 
 //import DropZoneModal from "../DropZoneModal";
 /*const DropFile = styled.div`
@@ -21,13 +21,24 @@ const DropZonepage = () => {
     return (
         <Mutation mutation={UPLOAD_FILE}>
             {uploadFile => (
-                <Dropzone onDrop = {([file]) => uploadFile({variable: {file} })}>
-                    <p>File DropZone</p>      
+                <Dropzone
+                    onDrop={([file]) => uploadFile({ variables: { file } })}
+                >
+                    {({ getRootProps, getInputProps }) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <p>
+                                    Drag 'n' drop some files here, or click to
+                                    select files
+                                </p>
+                            </div>
+                        </section>
+                    )}
                 </Dropzone>
             )}
-        </Mutation> 
+        </Mutation>
     );
-}
-
+};
 
 export default DropZonepage;
