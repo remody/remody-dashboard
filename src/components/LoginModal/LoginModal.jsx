@@ -22,8 +22,7 @@ const ModalFooter = styled.div`
 `;
 
 const ErrorHeader = styled.div`
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    background-color: red;
+    color: red;
 `;
 
 const LoadingCenterDiv = styled.div`
@@ -48,7 +47,7 @@ const LoginModal = props => {
             {(login, { loading, error, data }) => {
                 if (data && data.login && data.login.token) {
                     localStorage.setItem("token", data.login.token);
-                    props.handleLogin(true);
+                    window.location.reload();
                 }
                 return (
                     <Modal
@@ -80,11 +79,6 @@ const LoginModal = props => {
                                 }}
                             >
                                 <div style={{ textAlign: "left" }}>
-                                    {error ? (
-                                        <ErrorHeader>error</ErrorHeader>
-                                    ) : (
-                                        <div />
-                                    )}
                                     <label>
                                         <FontAwesomeIcon
                                             icon={faMailBulk}
@@ -120,6 +114,18 @@ const LoginModal = props => {
                                     />
                                 </div>
                                 <br />
+                                {error ? (
+                                    <>
+                                        <ErrorHeader>
+                                            {error.graphQLErrors[0].message}
+                                            {"! "}
+                                            please try again!
+                                        </ErrorHeader>
+                                        <br />
+                                    </>
+                                ) : (
+                                    <div />
+                                )}
                                 <Button
                                     onClick={() => {
                                         login({
