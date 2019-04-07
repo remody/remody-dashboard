@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import Theme from "../../Theme";
 
 const SideBarWrapper = styled.div`
+    z-index: 10;
     background-color: ${props => props.theme.secondaryBackgroundColor};
     height: 100vh;
     padding: 0 !important;
