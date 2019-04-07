@@ -1,6 +1,47 @@
-import React from "react";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import "/Users/ijeonghun/Documents/Workspace/remody-dashboard/node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
+import React, { useState } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import cellEditFactory from "react-bootstrap-table2-editor";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+
+const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
+    <li key={text} role="presentation" className="dropdown-item">
+        <div
+            tabIndex="-1"
+            role="menuitem"
+            data-page={page}
+            onMouseDown={e => {
+                e.preventDefault();
+                onSizePerPageChange(page);
+            }}
+            style={{}}
+        >
+            {text}
+        </div>
+    </li>
+);
+
+const options = {
+    sizePerPageOptionRenderer
+};
+
+const columns = [
+    {
+        dataField: "id",
+        text: "Product ID",
+        sort: true
+    },
+    {
+        dataField: "name",
+        text: "Product Name",
+        sort: true
+    },
+    {
+        dataField: "price",
+        text: "Product Price",
+        sort: true
+    }
+];
 
 const products = [
     {
@@ -75,21 +116,52 @@ const products = [
     }
 ];
 
+const defaultSorted = [
+    {
+        dataField: "id",
+        order: "desc"
+    }
+];
+
 const UserTable = props => {
-    const renderColumn = () => {
-        return props.meta.map(({ dataField, columnName }) => (
-            <TableHeaderColumn dataField={dataField}>
-                {columnName}
-            </TableHeaderColumn>
-        ));
-    };
+    const [row, handleRow] = useState(products);
     return (
-        <BootstrapTable data={products} version="4" pagination>
-            <TableHeaderColumn isKey dataField="id">
-                Product ID
-            </TableHeaderColumn>
-            {renderColumn()}
-        </BootstrapTable>
+        <>
+            <button
+                onClick={() => {
+                    const newRow = {};
+                    columns.map(({ dataField }) => {
+                        newRow[`${dataField}`] = "";
+                        return null;
+                    });
+                    handleRow([
+                        ...row,
+                        {
+                            ...newRow,
+                            id: row.length + 1
+                        }
+                    ]);
+                }}
+            >
+                추가
+            </button>
+            <BootstrapTable
+                keyField="id"
+                data={row}
+                columns={columns}
+                cellEdit={cellEditFactory({
+                    mode: "click",
+                    blurToSave: true,
+                    afterSaveCell: (oldValue, newValue, row, column) => {
+                        console.log(row);
+                        //TODO: old value와 newvalue의 차이를 확인하여 차이가 없으면 엔드
+                        //아니면 이때 뮤테이션을 보냄
+                    }
+                })}
+                pagination={paginationFactory(options)}
+                defaultSorted={defaultSorted}
+            />
+        </>
     );
 };
 
