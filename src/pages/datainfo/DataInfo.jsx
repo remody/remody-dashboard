@@ -12,17 +12,24 @@ const DataInfoDiv = styled(Container)`
     min-height: calc(100vh - 90px);
 `;
 
-const DataInfo = ({ match: { path } }) => {
+const PageDiv = styled.div`
+    background-color: ${props => props.theme.secondaryBackgroundColor};
+`;
+
+const DataInfo = ({ location: { pathname }, match: { path } }) => {
     return (
         <>
-            <Topbar name={path} />
+            <Topbar name={pathname} />
             <DataInfoDiv className="container">
-                <UserTable
-                    meta={[
-                        { dataField: "name", columnName: "User Name" },
-                        { dataField: "price", columnName: "Product Price" }
-                    ]}
-                />
+                <PageDiv className="p-2 p-md-4">
+                    <h4>Schema Name: {pathname.substr(path.length + 1)}</h4>
+                    <UserTable
+                        meta={[
+                            { dataField: "name", columnName: "User Name" },
+                            { dataField: "price", columnName: "Product Price" }
+                        ]}
+                    />
+                </PageDiv>
             </DataInfoDiv>
         </>
     );
