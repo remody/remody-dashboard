@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
+import UserTable from "../../components/UserTable";
 import Topbar from "../../components/Topbar";
 
 const DataInfoDiv = styled(Container)`
@@ -16,7 +17,12 @@ const DataInfo = ({ match: { path } }) => {
         <>
             <Topbar name={path} />
             <DataInfoDiv className="container">
-                <div />
+                <UserTable
+                    meta={[
+                        { dataField: "name", columnName: "User Name" },
+                        { dataField: "price", columnName: "Product Price" }
+                    ]}
+                />
             </DataInfoDiv>
         </>
     );
