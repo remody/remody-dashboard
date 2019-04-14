@@ -1,42 +1,25 @@
 import React from "react";
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
-import Topbar from "../../components/Topbar";
+import styled from "styled-components";
+import { Container } from "reactstrap";
 
-const UPLOAD_FILE = gql`
-    mutation singleUpload($file: Upload!) {
-        singleUpload(file: $file) {
-            filename
-        }
-    }
+import Topbar from "../../components/Topbar";
+import DataCardContainer from "../../containers/DataCardContainer";
+
+const DataDiv = styled(Container)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 90px);
 `;
 
-const uploadOneFile = ({ match: { path } }) => {
+const Data = ({ match: { path } }) => {
     return (
         <>
             <Topbar name={path} />
-            <Mutation mutation={UPLOAD_FILE}>
-                {uploadFile => (
-                    <input
-                        type="file"
-                        required
-                        onChange={({
-                            target: {
-                                validity,
-                                files: [file]
-                            }
-                        }) => {
-                            validity.valid &&
-                                uploadFile({
-                                    variables: {
-                                        file
-                                    }
-                                });
-                        }}
-                    />
-                )}
-            </Mutation>
+            <DataDiv className="container">
+                <DataCardContainer />
+            </DataDiv>
         </>
     );
 };
-export default uploadOneFile;
+export default Data;

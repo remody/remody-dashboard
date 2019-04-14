@@ -59,3 +59,16 @@ export const CHANGE_USER_PASSWORD = gql`
         }
     }
 `;
+
+export const USER_SCHEMAS = gql`
+    query {
+        userSchemas {
+            id
+            name
+            rowCount
+            user {
+                name
+            }
+        }
+    }
+`;

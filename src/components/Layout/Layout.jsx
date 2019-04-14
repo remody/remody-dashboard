@@ -21,7 +21,6 @@ const Layout = props => {
     const [loginOpen, handleLoginModal] = useState(false);
     const [signUpOpen, handleSignUpModal] = useState(false);
     const [chagePasswordOpen, handleChangePassowordModal] = useState(false);
-    const [login, handleLogin] = useState(false); //localStorage를 기반으로 re-render을 하기 위해
     return (
         <LayoutNoBar>
             <SideBar />
@@ -31,12 +30,10 @@ const Layout = props => {
                     handleLoginModal={state => handleLoginModal(state)}
                     handleSignUpModal={handleSignUpModal}
                     handleChangePassowordModal={handleChangePassowordModal}
-                    handleLogin={handleLogin}
                 />
                 <SignupModal
                     isOpen={signUpOpen}
                     handleSignUpModal={state => handleSignUpModal(state)}
-                    handleLogin={handleLogin}
                 />
                 <ChangePasswordModal
                     isOpen={chagePasswordOpen}
@@ -48,8 +45,6 @@ const Layout = props => {
                 <UserDropdown
                     handleLoginModal={state => handleLoginModal(state)}
                     handleSignUpModal={state => handleSignUpModal(state)}
-                    handleLogin={handleLogin}
-                    login={login}
                 />
                 <div>{props.children}</div>
             </Body>

@@ -47,7 +47,7 @@ const LoginModal = props => {
             {(login, { loading, error, data }) => {
                 if (data && data.login && data.login.token) {
                     localStorage.setItem("token", data.login.token);
-                    props.handleLogin(true);
+                    window.location.reload();
                 }
                 return (
                     <Modal

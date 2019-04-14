@@ -1,51 +1,49 @@
 import React from "react";
-//import { useDropzone } from "react-dropzone";
-import { Modal, Button } from "reactstrap";
-//import styled from "styled-components";
-
-
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import DropZonepage from "../DropZonepage";
 
 class DropZoneModal extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
+    constructor(props) {
+        super(props);
         this.state = {
-            show: false
+            modal: false
         };
 
-        this.handleShow = () => {
-            this.setState({ show: true });
-        };
+        this.toggle = this.toggle.bind(this);
+    }
 
-        this.handleHide = () => {
-            this.setState({ show: false });
-        };
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
 
     render() {
         return (
-            <>
-                <Button variant="primary" onClick={this.handleShow}>
-                    Custom Width Modal
+            <div>
+                <Button color="danger" onClick={this.toggle}>
+                    button
                 </Button>
                 <Modal
-                    show={this.state.show}
-                    onHide={this.handleHide}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
+                    isOpen={this.state.modal}
+                    modalTransition={{ timeout: 700 }}
+                    backdropTransition={{ timeout: 1300 }}
+                    toggle={this.toggle}
+                    className={this.props.className}
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            Custom Modal Styling
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>
-                            hi
-                        </p>
-                    </Modal.Body>
+                    <ModalHeader toggle={this.toggle}>
+                        변경할 파일을 올려주세요.
+                    </ModalHeader>
+                    <ModalBody>
+                        <DropZonepage />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.toggle}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
                 </Modal>
-            </>
+            </div>
         );
     }
 }
