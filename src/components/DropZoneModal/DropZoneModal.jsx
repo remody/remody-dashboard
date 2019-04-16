@@ -1,49 +1,37 @@
-import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import DropZonepage from "../DropZonepage";
+import React, { Component } from "react";
+//import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import DropZoneSet from "../DropZoneSet";
+import styled from "styled-components";
 
-class DropZoneModal extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modal: false
-        };
+const ProvideDrop = styled.div`
+    text-align: center;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+`;
 
-        this.toggle = this.toggle.bind(this);
-    }
+const ProvideDrop2 = styled.div`
+    background-color: white;
+    padding: 8% 15%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11),
+        0 5px 15px 0 rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+`;
 
-    toggle() {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
-    }
-
+class DropZoneModal extends Component {
     render() {
         return (
-            <div>
-                <Button color="danger" onClick={this.toggle}>
-                    button
-                </Button>
-                <Modal
-                    isOpen={this.state.modal}
-                    modalTransition={{ timeout: 700 }}
-                    backdropTransition={{ timeout: 1300 }}
-                    toggle={this.toggle}
-                    className={this.props.className}
-                >
-                    <ModalHeader toggle={this.toggle}>
-                        변경할 파일을 올려주세요.
-                    </ModalHeader>
-                    <ModalBody>
-                        <DropZonepage />
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>
-                            Cancel
-                        </Button>
-                    </ModalFooter>
-                </Modal>
-            </div>
+            <ProvideDrop>
+                <ProvideDrop2>
+                    <DropZoneSet />
+                </ProvideDrop2>
+            </ProvideDrop>
         );
     }
 }

@@ -1,13 +1,25 @@
 import React from "react";
-//import styled from "styled-components";
+import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import Dropzone from "react-dropzone";
+import { faDatabase } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //import DropZoneModal from "../DropZoneModal";
-/*const DropFile = styled.div`
-    color: blue;
-`;*/
+
+const DropTag = styled.p`
+    height: 200px;
+    width: 100%;
+    background-color: #fff;
+    border: 2px dashed rgb(187, 186, 186);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
+`;
 
 const UPLOAD_FILE = gql`
     mutation singleUpload($file: Upload!) {
@@ -17,7 +29,7 @@ const UPLOAD_FILE = gql`
     }
 `;
 
-const DropZonepage = () => {
+const DropZoneSet = () => {
     return (
         <Mutation mutation={UPLOAD_FILE}>
             {uploadFile => (
@@ -28,10 +40,11 @@ const DropZonepage = () => {
                         <section>
                             <div {...getRootProps()}>
                                 <input {...getInputProps()} />
-                                <p>
+                                <DropTag>
+                                    <FontAwesomeIcon icon={faDatabase} />
                                     Drag 'n' drop some files here, or click to
                                     select files
-                                </p>
+                                </DropTag>
                             </div>
                         </section>
                     )}
@@ -41,4 +54,4 @@ const DropZonepage = () => {
     );
 };
 
-export default DropZonepage;
+export default DropZoneSet;
