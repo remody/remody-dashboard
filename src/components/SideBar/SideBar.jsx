@@ -16,6 +16,10 @@ const SideBarWrapper = styled.div`
     background-color: ${props => props.theme.secondaryBackgroundColor};
     height: 100vh;
     padding: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16.666667%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
@@ -73,17 +77,25 @@ const SideBar = () => {
         }
     ];
     return (
-        <SideBarWrapper className="col-2 d-none d-md-block">
-            <SideBarHead>
-                <h5>Remody : </h5>
-                <div>Remodify your pages!</div>
-            </SideBarHead>
-            <div>
-                {sideItemArray.map(({ url, name, icon }) => (
-                    <SideBarItem key={name} name={name} url={url} icon={icon} />
-                ))}
-            </div>
-        </SideBarWrapper>
+        <>
+            <SideBarWrapper className="d-none d-md-block">
+                <SideBarHead>
+                    <h5>Remody : </h5>
+                    <div>Remodify your pages!</div>
+                </SideBarHead>
+                <div>
+                    {sideItemArray.map(({ url, name, icon }) => (
+                        <SideBarItem
+                            key={name}
+                            name={name}
+                            url={url}
+                            icon={icon}
+                        />
+                    ))}
+                </div>
+            </SideBarWrapper>
+            <div className="col-2 d-none d-md-block" />
+        </>
     );
 };
 
