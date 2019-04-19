@@ -20,7 +20,7 @@ const DataInfo = ({ location: { pathname }, match: { path } }) => {
     return (
         <>
             <Topbar name={pathname} />
-            <DataInfoDiv className="container">
+            <DataInfoDiv className="container p-4">
                 <PageDiv className="p-2 p-md-4">
                     <h4>Schema Name: {pathname.substr(path.length + 1)}</h4>
                     <UserTable
