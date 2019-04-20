@@ -1,39 +1,67 @@
-import React, { Component } from "react";
-//import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import DropZoneSet from "../DropZoneSet";
-import styled from "styled-components";
+import React, { useState } from "react";
+import {
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Input
+} from "reactstrap";
+import { Mutation } from "react-apollo";
+//import ReactLoading from "react-loading";
+import Theme from "../../Theme";
+import { UPLOAD_FILE } from "../../graphql";
 
-const ProvideDrop = styled.div`
-    text-align: center;
-    min-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-`;
+const DropZoneModal = props => {
+    const [Attribute, handleAttribute] = useState("");
 
-const ProvideDrop2 = styled.div`
-    background-color: white;
-    padding: 8% 15%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11),
-        0 5px 15px 0 rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-`;
-
-class DropZoneModal extends Component {
-    render() {
-        return (
-            <ProvideDrop>
-                <ProvideDrop2>
-                    <DropZoneSet />
-                </ProvideDrop2>
-            </ProvideDrop>
-        );
-    }
-}
+    return (
+        <Mutation mutation={UPLOAD_FILE}>
+            {({ loading, error, data }) => {
+                return (
+                    <div>
+                        <Modal
+                            isOpen={data ? false : props.isOpen}
+                            style={{ position: "relative", top: "10%" }}
+                        >
+                            <ModalHeader
+                                style={{
+                                    backgroundColor: Theme.primaryColor,
+                                    color: Theme.primaryFontColor
+                                }}
+                            >
+                                Attribute Input
+                            </ModalHeader>
+                            <ModalBody
+                                style={{
+                                    padding: "20px 35px",
+                                    textAlign: "center"
+                                }}
+                            >
+                                <div style={{ textAlign: "left" }}>
+                                    <label>E-mail</label>
+                                    <br />
+                                    <Input
+                                        type="Attribute"
+                                        onChange={e =>
+                                            handleAttribute(e.target.value)
+                                        }
+                                        value={Attribute}
+                                    />
+                                </div>
+                                <b>
+                                    Look at the top right of the page/viewport!
+                                </b>
+                                <br />
+                                Example
+                            </ModalBody>
+                            <ModalFooter />
+                        </Modal>
+                    </div>
+                );
+            }}
+        </Mutation>
+    );
+};
 
 export default DropZoneModal;

@@ -72,3 +72,11 @@ export const USER_SCHEMAS = gql`
         }
     }
 `;
+
+export const UPLOAD_FILE = gql`
+    mutation singleUpload($file: Upload!) {
+        singleUpload(file: $file) {
+            filename
+        }
+    }
+`;

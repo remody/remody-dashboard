@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import Dropzone from "react-dropzone";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DropZoneModal from "../DropZoneModal";
 
-//import DropZoneModal from "../DropZoneModal";
+//import DropZoneCard from "../DropZoneCard";
 
 const DropTag = styled.p`
     height: 200px;
@@ -30,11 +31,15 @@ const UPLOAD_FILE = gql`
 `;
 
 const DropZoneSet = () => {
+    const [isOpen, HandleOpen] = useState(false);
     return (
         <Mutation mutation={UPLOAD_FILE}>
             {uploadFile => (
                 <Dropzone
-                    onDrop={([file]) => uploadFile({ variables: { file } })}
+                    onDrop={([file]) => {
+                        uploadFile({ variables: { file } });
+                        HandleOpen(true);
+                    }}
                 >
                     {({ getRootProps, getInputProps }) => (
                         <section>
@@ -42,9 +47,12 @@ const DropZoneSet = () => {
                                 <input {...getInputProps()} />
                                 <DropTag>
                                     <FontAwesomeIcon icon={faDatabase} />
-                                    Drag 'n' drop some files here, or click to
-                                    select files
+                                    <br />
+                                    Drag 'n' drop some files here,
+                                    <br />
+                                    or click to select files
                                 </DropTag>
+                                <DropZoneModal isOpen={isOpen} />
                             </div>
                         </section>
                     )}

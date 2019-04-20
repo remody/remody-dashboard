@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import ReactLoading from "react-loading";
 
 import { USER_SCHEMAS } from "../../graphql";
-import DropZoneModal from "../../components/DropZoneModal/DropZoneModal";
+import DropZoneCard from "../../components/DropZoneCard/DropZoneCard";
 import Theme from "../../Theme";
 
 const DropZoneContainerDiv = styled.div`
@@ -13,14 +13,12 @@ const DropZoneContainerDiv = styled.div`
 `;
 
 const LoadingDiv = styled.div`
+    position: relative;
+    top: calc(100vh - 450px);
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-`;
-
-const DataCardContainerInfo = styled.div`
-    text-align: center;
 `;
 
 const DataCardContainer = () => {
@@ -50,7 +48,7 @@ const DataCardContainer = () => {
                 }
                 return (
                     <DropZoneContainerDiv>
-                        <DropZoneModal />
+                        <DropZoneCard />
                     </DropZoneContainerDiv>
                 );
             }}
