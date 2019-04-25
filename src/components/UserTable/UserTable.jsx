@@ -25,97 +25,6 @@ const options = {
     sizePerPageOptionRenderer
 };
 
-// const columns = [
-//     {
-//         dataField: "id",
-//         text: "Product ID",
-//         sort: true
-//     },
-//     {
-//         dataField: "name",
-//         text: "Product Name",
-//         sort: true
-//     },
-//     {
-//         dataField: "price",
-//         text: "Product Price",
-//         sort: true
-//     }
-// ];
-
-// const products = [
-//     {
-//         id: 1,
-//         name: "Product1",
-//         price: 120
-//     },
-//     {
-//         id: 3,
-//         name: "Product3",
-//         price: 123
-//     },
-//     {
-//         id: 4,
-//         name: "Product4",
-//         price: 124
-//     },
-//     {
-//         id: 5,
-//         name: "Product5",
-//         price: 125
-//     },
-//     {
-//         id: 6,
-//         name: "Product6",
-//         price: 126
-//     },
-//     {
-//         id: 7,
-//         name: "Product7",
-//         price: 127
-//     },
-//     {
-//         id: 8,
-//         name: "Product8",
-//         price: 128
-//     },
-//     {
-//         id: 9,
-//         name: "Product9",
-//         price: 129
-//     },
-//     {
-//         id: 10,
-//         name: "Product10",
-//         price: 130
-//     },
-//     {
-//         id: 11,
-//         name: "Product11",
-//         price: 131
-//     },
-//     {
-//         id: 12,
-//         name: "Product12",
-//         price: 132
-//     },
-//     {
-//         id: 13,
-//         name: "Product13",
-//         price: 133
-//     },
-//     {
-//         id: 14,
-//         name: "Product14",
-//         price: 144
-//     },
-//     {
-//         id: 2,
-//         name: "Product2",
-//         price: 80
-//     }
-// ];
-
 const defaultSorted = [
     {
         dataField: "id",
@@ -130,11 +39,11 @@ class UserTable extends React.Component {
         console.log(props);
 
         this.state = {
-            products: props.rows
+            rows: props.rows
         };
     }
     render() {
-        const { products } = this.state;
+        const { rows } = this.state;
         const { columns } = this.props;
         return (
             <>
@@ -145,12 +54,12 @@ class UserTable extends React.Component {
                             newRow[`${dataField}`] = "";
                             return null;
                         });
-                        this.setState(({ products }) => ({
-                            products: [
-                                ...products,
+                        this.setState(({ rows }) => ({
+                            rows: [
+                                ...rows,
                                 {
                                     ...newRow,
-                                    id: products.length + 1
+                                    id: rows.length + 1
                                     //TODO: 가장 큰 값을 주고 이를 Props로 관리
                                 }
                             ]
@@ -164,8 +73,8 @@ class UserTable extends React.Component {
                         const sortArray = [
                             ...this.node.selectionContext.selected
                         ];
-                        this.setState(({ products }) => ({
-                            products: products.filter(
+                        this.setState(({ rows }) => ({
+                            rows: rows.filter(
                                 ({ id }) => sortArray.indexOf(id) < 0
                             )
                         }));
@@ -176,7 +85,7 @@ class UserTable extends React.Component {
                 <BootstrapTable
                     keyField="id"
                     ref={n => (this.node = n)}
-                    data={products}
+                    data={rows}
                     columns={columns}
                     cellEdit={cellEditFactory({
                         mode: "click",
