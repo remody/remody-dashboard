@@ -187,7 +187,7 @@ class UserTable extends React.Component {
                             //아니면 이때 뮤테이션을 보냄
                         }
                     })}
-                    selectRow={{ mode: "checkbox", clickToSelect: true }}
+                    selectRow={{ mode: "checkbox", clickToSelect: false }}
                     pagination={paginationFactory(options)}
                     defaultSorted={defaultSorted}
                 />
