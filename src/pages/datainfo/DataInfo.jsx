@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
-import UserTable from "../../components/UserTable";
 import TableContainer from "../../containers/TableContainer";
 import Topbar from "../../components/Topbar";
 
