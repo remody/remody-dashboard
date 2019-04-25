@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -123,46 +123,74 @@ const defaultSorted = [
     }
 ];
 
-const UserTable = props => {
-    const [row, handleRow] = useState(products);
-    return (
-        <>
-            <button
-                onClick={() => {
-                    const newRow = {};
-                    columns.map(({ dataField }) => {
-                        newRow[`${dataField}`] = "";
-                        return null;
-                    });
-                    handleRow([
-                        ...row,
-                        {
-                            ...newRow,
-                            id: row.length + 1
+class UserTable extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products
+        };
+    }
+    render() {
+        const { products } = this.state;
+        return (
+            <>
+                <button
+                    onClick={() => {
+                        const newRow = {};
+                        columns.map(({ dataField }) => {
+                            newRow[`${dataField}`] = "";
+                            return null;
+                        });
+                        this.setState(({ products }) => ({
+                            products: [
+                                ...products,
+                                {
+                                    ...newRow,
+                                    id: products.length + 1
+                                    //TODO: 가장 큰 값을 주고 이를 Props로 관리
+                                }
+                            ]
+                        }));
+                    }}
+                >
+                    추가
+                </button>
+                <button
+                    onClick={() => {
+                        const sortArray = [
+                            ...this.node.selectionContext.selected
+                        ];
+                        this.setState(({ products }) => ({
+                            products: products.filter(
+                                ({ id }) => sortArray.indexOf(id) < 0
+                            )
+                        }));
+                    }}
+                >
+                    선택항목 삭제
+                </button>
+                <BootstrapTable
+                    keyField="id"
+                    ref={n => (this.node = n)}
+                    data={products}
+                    columns={columns}
+                    cellEdit={cellEditFactory({
+                        mode: "click",
+                        blurToSave: true,
+                        afterSaveCell: (oldValue, newValue, row, column) => {
+                            console.log(row);
+                            //TODO: old value와 newvalue의 차이를 확인하여 차이가 없으면 엔드
+                            //아니면 이때 뮤테이션을 보냄
                         }
-                    ]);
-                }}
-            >
-                추가
-            </button>
-            <BootstrapTable
-                keyField="id"
-                data={row}
-                columns={columns}
-                cellEdit={cellEditFactory({
-                    mode: "click",
-                    blurToSave: true,
-                    afterSaveCell: (oldValue, newValue, row, column) => {
-                        console.log(row);
-                        //TODO: old value와 newvalue의 차이를 확인하여 차이가 없으면 엔드
-                        //아니면 이때 뮤테이션을 보냄
-                    }
-                })}
-                pagination={paginationFactory(options)}
-                defaultSorted={defaultSorted}
-            />
-        </>
-    );
-};
+                    })}
+                    selectRow={{ mode: "checkbox", clickToSelect: true }}
+                    pagination={paginationFactory(options)}
+                    defaultSorted={defaultSorted}
+                />
+            </>
+        );
+    }
+}
 
 export default UserTable;
