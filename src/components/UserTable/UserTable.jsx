@@ -25,96 +25,96 @@ const options = {
     sizePerPageOptionRenderer
 };
 
-const columns = [
-    {
-        dataField: "id",
-        text: "Product ID",
-        sort: true
-    },
-    {
-        dataField: "name",
-        text: "Product Name",
-        sort: true
-    },
-    {
-        dataField: "price",
-        text: "Product Price",
-        sort: true
-    }
-];
+// const columns = [
+//     {
+//         dataField: "id",
+//         text: "Product ID",
+//         sort: true
+//     },
+//     {
+//         dataField: "name",
+//         text: "Product Name",
+//         sort: true
+//     },
+//     {
+//         dataField: "price",
+//         text: "Product Price",
+//         sort: true
+//     }
+// ];
 
-const products = [
-    {
-        id: 1,
-        name: "Product1",
-        price: 120
-    },
-    {
-        id: 3,
-        name: "Product3",
-        price: 123
-    },
-    {
-        id: 4,
-        name: "Product4",
-        price: 124
-    },
-    {
-        id: 5,
-        name: "Product5",
-        price: 125
-    },
-    {
-        id: 6,
-        name: "Product6",
-        price: 126
-    },
-    {
-        id: 7,
-        name: "Product7",
-        price: 127
-    },
-    {
-        id: 8,
-        name: "Product8",
-        price: 128
-    },
-    {
-        id: 9,
-        name: "Product9",
-        price: 129
-    },
-    {
-        id: 10,
-        name: "Product10",
-        price: 130
-    },
-    {
-        id: 11,
-        name: "Product11",
-        price: 131
-    },
-    {
-        id: 12,
-        name: "Product12",
-        price: 132
-    },
-    {
-        id: 13,
-        name: "Product13",
-        price: 133
-    },
-    {
-        id: 14,
-        name: "Product14",
-        price: 144
-    },
-    {
-        id: 2,
-        name: "Product2",
-        price: 80
-    }
-];
+// const products = [
+//     {
+//         id: 1,
+//         name: "Product1",
+//         price: 120
+//     },
+//     {
+//         id: 3,
+//         name: "Product3",
+//         price: 123
+//     },
+//     {
+//         id: 4,
+//         name: "Product4",
+//         price: 124
+//     },
+//     {
+//         id: 5,
+//         name: "Product5",
+//         price: 125
+//     },
+//     {
+//         id: 6,
+//         name: "Product6",
+//         price: 126
+//     },
+//     {
+//         id: 7,
+//         name: "Product7",
+//         price: 127
+//     },
+//     {
+//         id: 8,
+//         name: "Product8",
+//         price: 128
+//     },
+//     {
+//         id: 9,
+//         name: "Product9",
+//         price: 129
+//     },
+//     {
+//         id: 10,
+//         name: "Product10",
+//         price: 130
+//     },
+//     {
+//         id: 11,
+//         name: "Product11",
+//         price: 131
+//     },
+//     {
+//         id: 12,
+//         name: "Product12",
+//         price: 132
+//     },
+//     {
+//         id: 13,
+//         name: "Product13",
+//         price: 133
+//     },
+//     {
+//         id: 14,
+//         name: "Product14",
+//         price: 144
+//     },
+//     {
+//         id: 2,
+//         name: "Product2",
+//         price: 80
+//     }
+// ];
 
 const defaultSorted = [
     {
@@ -127,12 +127,15 @@ class UserTable extends React.Component {
     constructor(props) {
         super(props);
 
+        console.log(props);
+
         this.state = {
-            products
+            products: props.rows
         };
     }
     render() {
         const { products } = this.state;
+        const { columns } = this.props;
         return (
             <>
                 <button
