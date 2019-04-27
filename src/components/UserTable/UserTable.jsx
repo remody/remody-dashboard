@@ -7,6 +7,7 @@ import ToolkitProvider, {
     Search
 } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import styled from "styled-components";
 
 const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
     <li key={text} role="presentation" className="dropdown-item">
@@ -26,7 +27,7 @@ const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
 );
 
 const { ExportCSVButton } = CSVExport;
-const { SearchBar } = Search;
+const { SearchBar: OriginSearchBar } = Search;
 
 const options = {
     sizePerPageOptionRenderer
@@ -38,6 +39,11 @@ const defaultSorted = [
         order: "desc"
     }
 ];
+
+const SearchBar = styled(OriginSearchBar)`
+    position: relative;
+    top: 2px;
+`;
 
 class UserTable extends React.Component {
     constructor(props) {
@@ -59,48 +65,64 @@ class UserTable extends React.Component {
             >
                 {props => (
                     <div>
-                        <ExportCSVButton {...props.csvProps}>
-                            Export CSV!!
-                        </ExportCSVButton>
-                        <button
-                            onClick={() => {
-                                const newRow = {};
-                                columns.map(({ dataField }) => {
-                                    newRow[`${dataField}`] = "";
-                                    return null;
-                                });
-                                this.setState(({ rows }) => ({
-                                    rows: [
-                                        ...rows,
-                                        {
-                                            ...newRow,
-                                            id: rows.length + 1
-                                            //TODO: 가장 큰 값을 주고 이를 Props로 관리
-                                        }
-                                    ]
-                                }));
-                            }}
-                        >
-                            항목 추가
-                        </button>
-                        <button
-                            onClick={() => {
-                                const sortArray = [
-                                    ...this.node.selectionContext.selected
-                                ];
-                                this.setState(({ rows }) => ({
-                                    rows: rows.filter(
-                                        ({ id }) => sortArray.indexOf(id) < 0
-                                    )
-                                }));
-                            }}
-                        >
-                            선택항목 삭제
-                        </button>
-                        <button onClick={() => {}}>저장</button>
-                        <br />
-                        <SearchBar {...props.searchProps} />
-                        <br />
+                        <div className="d-block d-md-flex justify-content-md-between">
+                            <div>
+                                <button
+                                    className="btn btn-secondary mr-1"
+                                    onClick={() => {
+                                        const newRow = {};
+                                        columns.map(({ dataField }) => {
+                                            newRow[`${dataField}`] = "";
+                                            return null;
+                                        });
+                                        this.setState(({ rows }) => ({
+                                            rows: [
+                                                ...rows,
+                                                {
+                                                    ...newRow,
+                                                    id: rows.length + 1
+                                                    //TODO: 가장 큰 값을 주고 이를 Props로 관리
+                                                }
+                                            ]
+                                        }));
+                                    }}
+                                >
+                                    항목 추가
+                                </button>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => {
+                                        const sortArray = [
+                                            ...this.node.selectionContext
+                                                .selected
+                                        ];
+                                        this.setState(({ rows }) => ({
+                                            rows: rows.filter(
+                                                ({ id }) =>
+                                                    sortArray.indexOf(id) < 0
+                                            )
+                                        }));
+                                    }}
+                                >
+                                    선택항목 삭제
+                                </button>
+                            </div>
+                            <div>
+                                <SearchBar {...props.searchProps} />
+                                <ExportCSVButton
+                                    {...props.csvProps}
+                                    className="btn btn-secondary ml-1"
+                                >
+                                    Export CSV!!
+                                </ExportCSVButton>
+                                <button
+                                    onClick={() => {}}
+                                    className="btn btn-primary ml-2"
+                                >
+                                    저장
+                                </button>
+                            </div>
+                        </div>
                         <BootstrapTable
                             {...props.baseProps}
                             keyField="id"
