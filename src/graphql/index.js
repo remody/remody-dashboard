@@ -72,3 +72,12 @@ export const USER_SCHEMAS = gql`
         }
     }
 `;
+
+export const USER_SCHEMA_INFO = gql`
+    query UserSchemaInfo($schemaId: String!) {
+        UserSchemaInfo(schemaId: $schemaId) {
+            fields
+            rows
+        }
+    }
+`;
