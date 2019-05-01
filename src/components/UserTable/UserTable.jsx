@@ -48,6 +48,7 @@ const SearchBar = styled(OriginSearchBar)`
 class UserTable extends React.Component {
     constructor(props) {
         super(props);
+        this.modify = {};
         this.state = {
             rows: props.rows
         };
@@ -116,7 +117,9 @@ class UserTable extends React.Component {
                                     Export CSV!!
                                 </ExportCSVButton>
                                 <button
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        console.log(this.modify);
+                                    }}
                                     className="btn btn-primary ml-2"
                                 >
                                     저장
@@ -138,9 +141,7 @@ class UserTable extends React.Component {
                                     row,
                                     column
                                 ) => {
-                                    console.log(row);
-                                    //TODO: old value와 newvalue의 차이를 확인하여 차이가 없으면 엔드
-                                    //아니면 이때 뮤테이션을 보냄
+                                    this.modify[`${row.id}`] = row;
                                 }
                             })}
                             selectRow={{
