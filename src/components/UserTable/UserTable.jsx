@@ -49,6 +49,7 @@ class UserTable extends React.Component {
     constructor(props) {
         super(props);
         this.modify = {};
+        this.delete = {};
         this.state = {
             rows: props.rows
         };
@@ -97,6 +98,10 @@ class UserTable extends React.Component {
                                             ...this.node.selectionContext
                                                 .selected
                                         ];
+                                        sortArray.map(item => {
+                                            this.delete[`${item}`] = item;
+                                            return null;
+                                        });
                                         this.setState(({ rows }) => ({
                                             rows: rows.filter(
                                                 ({ id }) =>
@@ -118,7 +123,8 @@ class UserTable extends React.Component {
                                 </ExportCSVButton>
                                 <button
                                     onClick={() => {
-                                        console.log(this.modify);
+                                        console.log(Object.values(this.modify));
+                                        console.log(Object.values(this.delete));
                                     }}
                                     className="btn btn-primary ml-2"
                                 >
