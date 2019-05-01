@@ -133,7 +133,9 @@ class UserTable extends React.Component {
                                 <Mutation
                                     mutation={UPDATE_USER_SCHEMA_INFO}
                                     onCompleted={data => {
-                                        console.log(data);
+                                        this.setState({
+                                            rows: data.UpdateUserSchemaInfo.rows
+                                        });
                                     }}
                                 >
                                     {(
