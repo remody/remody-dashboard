@@ -8,6 +8,9 @@ import ToolkitProvider, {
 } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import styled from "styled-components";
+import { Mutation } from "react-apollo";
+
+import { UPDATE_USER_SCHEMA_INFO } from "../../graphql";
 
 const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
     <li key={text} role="presentation" className="dropdown-item">
@@ -51,7 +54,7 @@ class UserTable extends React.Component {
         this.modify = {};
         this.delete = {};
         this.create = {};
-        console.log(props.nextId);
+        console.log(props.schemaId);
         this.nextId = props.nextId;
         this.state = {
             rows: props.rows
@@ -127,16 +130,47 @@ class UserTable extends React.Component {
                                 >
                                     Export CSV!!
                                 </ExportCSVButton>
-                                <button
-                                    onClick={() => {
-                                        console.log(Object.values(this.create));
-                                        console.log(Object.values(this.modify));
-                                        console.log(Object.values(this.delete));
+                                <Mutation
+                                    mutation={UPDATE_USER_SCHEMA_INFO}
+                                    onCompleted={data => {
+                                        console.log(data);
                                     }}
-                                    className="btn btn-primary ml-2"
                                 >
-                                    저장
-                                </button>
+                                    {(
+                                        updateUserSchemaInfo,
+                                        { loading, error }
+                                    ) => {
+                                        if (loading) return "loading";
+                                        if (error) return "plz reload";
+                                        return (
+                                            <button
+                                                onClick={() => {
+                                                    updateUserSchemaInfo({
+                                                        variables: {
+                                                            schemaId: this.props
+                                                                .schemaId,
+                                                            updateRows: Object.values(
+                                                                this.modify
+                                                            ),
+                                                            deleteRows: Object.values(
+                                                                this.delete
+                                                            ),
+                                                            createRows: Object.values(
+                                                                this.create
+                                                            )
+                                                        }
+                                                    });
+                                                    this.modify = {};
+                                                    this.delete = {};
+                                                    this.create = {};
+                                                }}
+                                                className="btn btn-primary ml-2"
+                                            >
+                                                저장
+                                            </button>
+                                        );
+                                    }}
+                                </Mutation>
                             </div>
                         </div>
                         <BootstrapTable

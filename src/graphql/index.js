@@ -82,3 +82,25 @@ export const USER_SCHEMA_INFO = gql`
         }
     }
 `;
+
+export const UPDATE_USER_SCHEMA_INFO = gql`
+    mutation UpdateUserSchemaInfo(
+        $schemaId: String!
+        $updateRows: [Object!]!
+        $deleteRows: [Int!]!
+        $createRows: [Int!]!
+    ) {
+        UpdateUserSchemaInfo(
+            data: {
+                schemaId: $schemaId
+                updateRows: $updateRows
+                deleteRows: $deleteRows
+                createRows: $createRows
+            }
+        ) {
+            fields
+            rows
+            nextId
+        }
+    }
+`;

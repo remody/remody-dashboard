@@ -55,6 +55,7 @@ const TableContainer = props => {
                         rows={data.UserSchemaInfo.rows}
                         columns={columns}
                         nextId={data.UserSchemaInfo.nextId}
+                        schemaId={props.schemaName}
                     />
                 );
             }}
