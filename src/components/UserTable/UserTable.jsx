@@ -50,6 +50,9 @@ class UserTable extends React.Component {
         super(props);
         this.modify = {};
         this.delete = {};
+        this.create = {};
+        console.log(props.nextId);
+        this.nextId = props.nextId;
         this.state = {
             rows: props.rows
         };
@@ -77,16 +80,19 @@ class UserTable extends React.Component {
                                             newRow[`${dataField}`] = "";
                                             return null;
                                         });
+                                        this.nextId += 1;
                                         this.setState(({ rows }) => ({
                                             rows: [
                                                 ...rows,
                                                 {
                                                     ...newRow,
-                                                    id: rows.length + 1
-                                                    //TODO: 가장 큰 값을 주고 이를 Props로 관리
+                                                    id: this.nextId
                                                 }
                                             ]
                                         }));
+                                        const newId = this.nextId;
+                                        //Props로 관리
+                                        this.create[`${newId}`] = newId;
                                     }}
                                 >
                                     항목 추가
@@ -123,6 +129,7 @@ class UserTable extends React.Component {
                                 </ExportCSVButton>
                                 <button
                                     onClick={() => {
+                                        console.log(Object.values(this.create));
                                         console.log(Object.values(this.modify));
                                         console.log(Object.values(this.delete));
                                     }}

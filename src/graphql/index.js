@@ -78,6 +78,7 @@ export const USER_SCHEMA_INFO = gql`
         UserSchemaInfo(schemaId: $schemaId) {
             fields
             rows
+            nextId
         }
     }
 `;

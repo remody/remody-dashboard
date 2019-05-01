@@ -54,6 +54,7 @@ const TableContainer = props => {
                     <UserTable
                         rows={data.UserSchemaInfo.rows}
                         columns={columns}
+                        nextId={data.UserSchemaInfo.nextId}
                     />
                 );
             }}
