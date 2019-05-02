@@ -8,6 +8,9 @@ import ToolkitProvider, {
 } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import styled from "styled-components";
+import { Mutation } from "react-apollo";
+
+import { UPDATE_USER_SCHEMA_INFO } from "../../graphql";
 
 const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
     <li key={text} role="presentation" className="dropdown-item">
@@ -48,6 +51,11 @@ const SearchBar = styled(OriginSearchBar)`
 class UserTable extends React.Component {
     constructor(props) {
         super(props);
+        this.modify = {};
+        this.delete = {};
+        this.create = {};
+        console.log(props.schemaId);
+        this.nextId = props.nextId;
         this.state = {
             rows: props.rows
         };
@@ -75,16 +83,19 @@ class UserTable extends React.Component {
                                             newRow[`${dataField}`] = "";
                                             return null;
                                         });
+                                        this.nextId += 1;
                                         this.setState(({ rows }) => ({
                                             rows: [
                                                 ...rows,
                                                 {
                                                     ...newRow,
-                                                    id: rows.length + 1
-                                                    //TODO: 가장 큰 값을 주고 이를 Props로 관리
+                                                    id: this.nextId
                                                 }
                                             ]
                                         }));
+                                        const newId = this.nextId;
+                                        //Props로 관리
+                                        this.create[`${newId}`] = newId;
                                     }}
                                 >
                                     항목 추가
@@ -96,6 +107,10 @@ class UserTable extends React.Component {
                                             ...this.node.selectionContext
                                                 .selected
                                         ];
+                                        sortArray.map(item => {
+                                            this.delete[`${item}`] = item;
+                                            return null;
+                                        });
                                         this.setState(({ rows }) => ({
                                             rows: rows.filter(
                                                 ({ id }) =>
@@ -115,12 +130,49 @@ class UserTable extends React.Component {
                                 >
                                     Export CSV!!
                                 </ExportCSVButton>
-                                <button
-                                    onClick={() => {}}
-                                    className="btn btn-primary ml-2"
+                                <Mutation
+                                    mutation={UPDATE_USER_SCHEMA_INFO}
+                                    onCompleted={data => {
+                                        this.setState({
+                                            rows: data.UpdateUserSchemaInfo.rows
+                                        });
+                                    }}
                                 >
-                                    저장
-                                </button>
+                                    {(
+                                        updateUserSchemaInfo,
+                                        { loading, error }
+                                    ) => {
+                                        if (loading) return "loading";
+                                        if (error) return "plz reload";
+                                        return (
+                                            <button
+                                                onClick={() => {
+                                                    updateUserSchemaInfo({
+                                                        variables: {
+                                                            schemaId: this.props
+                                                                .schemaId,
+                                                            updateRows: Object.values(
+                                                                this.modify
+                                                            ),
+                                                            deleteRows: Object.values(
+                                                                this.delete
+                                                            ),
+                                                            createRows: Object.values(
+                                                                this.create
+                                                            )
+                                                        }
+                                                    });
+                                                    this.modify = {};
+                                                    this.delete = {};
+                                                    this.create = {};
+                                                }}
+                                                className="btn btn-primary ml-2"
+                                            >
+                                                저장
+                                            </button>
+                                        );
+                                    }}
+                                </Mutation>
                             </div>
                         </div>
                         <BootstrapTable
@@ -138,9 +190,7 @@ class UserTable extends React.Component {
                                     row,
                                     column
                                 ) => {
-                                    console.log(row);
-                                    //TODO: old value와 newvalue의 차이를 확인하여 차이가 없으면 엔드
-                                    //아니면 이때 뮤테이션을 보냄
+                                    this.modify[`${row.id}`] = row;
                                 }
                             })}
                             selectRow={{
