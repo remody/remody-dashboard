@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import client from "./Apollo";
@@ -15,6 +15,12 @@ import Analyze from "./pages/analyze";
 
 import Layout from "./components/Layout";
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${props => props.theme.backgroundColor} !important;
+  }
+`;
+
 class App extends Component {
     render() {
         return (
@@ -22,6 +28,7 @@ class App extends Component {
                 <ThemeProvider theme={theme}>
                     <Router>
                         <Layout>
+                            <GlobalStyle />
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/data" component={Data} />

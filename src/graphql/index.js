@@ -73,10 +73,34 @@ export const USER_SCHEMAS = gql`
     }
 `;
 
-export const UPLOAD_FILE = gql`
-    mutation singleUpload($file: Upload!) {
-        singleUpload(file: $file) {
-            filename
+export const USER_SCHEMA_INFO = gql`
+    query UserSchemaInfo($schemaId: String!) {
+        UserSchemaInfo(schemaId: $schemaId) {
+            fields
+            rows
+            nextId
+        }
+    }
+`;
+
+export const UPDATE_USER_SCHEMA_INFO = gql`
+    mutation UpdateUserSchemaInfo(
+        $schemaId: String!
+        $updateRows: [Object!]!
+        $deleteRows: [Int!]!
+        $createRows: [Int!]!
+    ) {
+        UpdateUserSchemaInfo(
+            data: {
+                schemaId: $schemaId
+                updateRows: $updateRows
+                deleteRows: $deleteRows
+                createRows: $createRows
+            }
+        ) {
+            fields
+            rows
+            nextId
         }
     }
 `;
