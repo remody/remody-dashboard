@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
-import UserTable from "../../components/UserTable";
+import TableContainer from "../../containers/TableContainer";
 import Topbar from "../../components/Topbar";
 
 const DataInfoDiv = styled(Container)`
@@ -17,18 +17,14 @@ const PageDiv = styled.div`
 `;
 
 const DataInfo = ({ location: { pathname }, match: { path } }) => {
+    const SchemaID = pathname.substr(path.length + 1);
     return (
         <>
             <Topbar name={pathname} />
             <DataInfoDiv className="container p-4">
                 <PageDiv className="p-2 p-md-4">
-                    <h4>Schema Name: {pathname.substr(path.length + 1)}</h4>
-                    <UserTable
-                        meta={[
-                            { dataField: "name", columnName: "User Name" },
-                            { dataField: "price", columnName: "Product Price" }
-                        ]}
-                    />
+                    <h4>Schema ID: {SchemaID}</h4>
+                    <TableContainer schemaName={SchemaID} />
                 </PageDiv>
             </DataInfoDiv>
         </>
