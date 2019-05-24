@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { ALL_USER } from "graphqls";
 import Topbar from "components/Topbar";
-const Analyze = ({ match: { path } }) => (
+const Search = ({ match: { path } }) => (
     <>
         <Topbar name={path} />
         <Query query={ALL_USER}>
@@ -12,7 +12,7 @@ const Analyze = ({ match: { path } }) => (
 
                 return (
                     <div className="container">
-                        Analyze
+                        Search
                         {data.users.map(({ name, email, id }) => (
                             <div key={id}>
                                 <p>
@@ -26,4 +26,4 @@ const Analyze = ({ match: { path } }) => (
         </Query>
     </>
 );
-export default Analyze;
+export default Search;

@@ -66,8 +66,8 @@ const SideBar = () => {
             icon: faDatabase
         },
         {
-            url: "/analyze",
-            name: "Analyze",
+            url: "/search",
+            name: "Search",
             icon: faAtlas
         },
         {
