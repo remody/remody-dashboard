@@ -104,3 +104,10 @@ export const UPDATE_USER_SCHEMA_INFO = gql`
         }
     }
 `;
+export const UPLOAD_FILE = gql`
+    mutation singleUpload($file: Upload!) {
+        singleUpload(file: $file) {
+            filename
+        }
+    }
+`;

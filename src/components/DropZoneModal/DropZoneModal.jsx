@@ -22,6 +22,7 @@ const DropZoneModal = props => {
                     <div>
                         <Modal
                             isOpen={data ? false : props.isOpen}
+                            toggle={() => props.handleDropZoneModal(false)}
                             style={{ position: "relative", top: "10%" }}
                         >
                             <ModalHeader
@@ -32,6 +33,7 @@ const DropZoneModal = props => {
                             >
                                 Attribute Input
                             </ModalHeader>
+
                             <ModalBody
                                 style={{
                                     padding: "20px 35px",
@@ -39,7 +41,7 @@ const DropZoneModal = props => {
                                 }}
                             >
                                 <div style={{ textAlign: "left" }}>
-                                    <label>E-mail</label>
+                                    <label>Attribute</label>
                                     <br />
                                     <Input
                                         type="Attribute"
@@ -49,13 +51,23 @@ const DropZoneModal = props => {
                                         value={Attribute}
                                     />
                                 </div>
-                                <b>
-                                    Look at the top right of the page/viewport!
-                                </b>
+                                <b>필요한 Attribute 입력값을 넣으시오.</b>
                                 <br />
-                                Example
                             </ModalBody>
-                            <ModalFooter />
+
+                            <ModalFooter>
+                                <Button color="primary" onClick={() => {}}>
+                                    Do Something
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    onClick={() =>
+                                        props.handleDropZoneModal(false)
+                                    }
+                                >
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
                         </Modal>
                     </div>
                 );
