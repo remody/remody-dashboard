@@ -10,7 +10,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
 
-import { UPDATE_USER_SCHEMA_INFO } from "../../graphql";
+import { UPDATE_USER_SCHEMA_INFO } from "graphqls";
 
 const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
     <li key={text} role="presentation" className="dropdown-item">

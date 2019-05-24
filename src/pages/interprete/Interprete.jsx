@@ -1,6 +1,6 @@
 import React from "react";
-import Topbar from "../../components/Topbar";
-import DropZoneModal from "../../components/DropZoneModal";
+import Topbar from "components/Topbar";
+import DropZoneModal from "components/DropZoneModal";
 
 const Interprete = ({ match: { path } }) => (
     <div>
