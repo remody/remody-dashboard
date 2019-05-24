@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorLink from "../../components/ErrorLink"
+import ErrorLink from "components/ErrorLink";
 
 const NoMatch = () => {
     return (

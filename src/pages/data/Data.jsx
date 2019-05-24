@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
-import Topbar from "../../components/Topbar";
+import Topbar from "components/Topbar";
 import DataCardContainer from "../../containers/DataCardContainer";
 
 const DataDiv = styled(Container)`

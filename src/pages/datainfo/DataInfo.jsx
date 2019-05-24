@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container } from "reactstrap";
 
 import TableContainer from "../../containers/TableContainer";
-import Topbar from "../../components/Topbar";
+import Topbar from "components/Topbar";
 
 const DataInfoDiv = styled(Container)`
     display: flex;

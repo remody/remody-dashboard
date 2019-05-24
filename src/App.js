@@ -13,7 +13,7 @@ import Interprete from "./pages/interprete";
 import NoMatch from "./pages/nomatch";
 import Analyze from "./pages/analyze";
 
-import Layout from "./components/Layout";
+import Layout from "components/Layout";
 
 const GlobalStyle = createGlobalStyle`
   body {

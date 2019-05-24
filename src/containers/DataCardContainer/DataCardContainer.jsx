@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
 import { USER_SCHEMAS } from "../../graphql";
-import DataCard from "../../components/DataCard/DataCard";
+import DataCard from "components/DataCard/DataCard";
 import Theme from "../../Theme";
 
 const DataCardContainerDiv = styled.div`

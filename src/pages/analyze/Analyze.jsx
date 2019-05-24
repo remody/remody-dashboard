@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from "react-apollo";
 import { ALL_USER } from "../../graphql";
-import Topbar from "../../components/Topbar";
+import Topbar from "components/Topbar";
 const Analyze = ({ match: { path } }) => (
     <>
         <Topbar name={path} />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import UserTable from "../../components/UserTable";
+import UserTable from "components/UserTable";
 
 import { USER_SCHEMA_INFO } from "../../graphql";
 import Theme from "../../Theme";
