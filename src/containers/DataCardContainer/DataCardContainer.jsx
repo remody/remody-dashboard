@@ -4,9 +4,9 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-import { USER_SCHEMAS } from "../../graphql";
+import { USER_SCHEMAS } from "graphqls";
 import DataCard from "components/DataCard/DataCard";
-import Theme from "../../Theme";
+import Theme from "Theme";
 
 const DataCardContainerDiv = styled.div`
     width: 100%;

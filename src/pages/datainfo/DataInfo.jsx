@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
-import TableContainer from "../../containers/TableContainer";
+import TableContainer from "containers/TableContainer";
 import Topbar from "components/Topbar";
 
 const DataInfoDiv = styled(Container)`

@@ -5,8 +5,8 @@ import ReactLoading from "react-loading";
 
 import UserTable from "components/UserTable";
 
-import { USER_SCHEMA_INFO } from "../../graphql";
-import Theme from "../../Theme";
+import { USER_SCHEMA_INFO } from "graphqls";
+import Theme from "Theme";
 
 const LoadingDiv = styled.div`
     width: 100%;

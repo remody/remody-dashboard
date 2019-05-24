@@ -5,7 +5,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-import { ME } from "../../graphql";
+import { ME } from "graphqls";
 
 const UserDropdownLeftAlign = styled.div`
     justify-content: flex-end;
