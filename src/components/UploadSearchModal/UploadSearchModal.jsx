@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 import Dropzone from "react-dropzone";
 
-import { LOGIN } from "graphqls";
+import { UPLOAD_FOR_SEARCH } from "graphqls";
 import Theme from "Theme";
 
 const ModalFooter = styled.div`
@@ -48,8 +48,8 @@ const UploadSearchModal = props => {
     const [file, handleFile] = useState({});
 
     return (
-        <Mutation mutation={LOGIN}>
-            {(login, { loading, error, data }) => {
+        <Mutation mutation={UPLOAD_FOR_SEARCH}>
+            {(uploadForSearch, { loading, error, data }) => {
                 return (
                     <Modal
                         isOpen={data ? false : props.isOpen}
@@ -126,24 +126,18 @@ const UploadSearchModal = props => {
                                 </div>
                                 <br />
                                 <Dropzone onDrop={([file]) => handleFile(file)}>
-                                    {({ getRootProps, getInputProps }) => {
-                                        return (
-                                            <section>
-                                                <div {...getRootProps()}>
-                                                    <input
-                                                        {...getInputProps()}
-                                                    />
-                                                    <DropzoneDiv>
-                                                        {file.name
-                                                            ? `파일명: ${
-                                                                  file.name
-                                                              }`
-                                                            : "여기에 파일을 올려주세요!"}
-                                                    </DropzoneDiv>
-                                                </div>
-                                            </section>
-                                        );
-                                    }}
+                                    {({ getRootProps, getInputProps }) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                <DropzoneDiv>
+                                                    {file.name
+                                                        ? `파일명: ${file.name}`
+                                                        : "여기에 파일을 올려주세요!"}
+                                                </DropzoneDiv>
+                                            </div>
+                                        </section>
+                                    )}
                                 </Dropzone>
                                 <br />
                                 {error ? (
@@ -160,12 +154,14 @@ const UploadSearchModal = props => {
                                 )}
                                 <Button
                                     onClick={() => {
-                                        login({
+                                        const numberYear = publishedyear * 1;
+                                        console.log(file);
+                                        uploadForSearch({
                                             variables: {
                                                 title,
                                                 author,
                                                 belong,
-                                                publishedyear,
+                                                publishedyear: numberYear,
                                                 file
                                             }
                                         });

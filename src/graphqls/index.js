@@ -119,3 +119,23 @@ export const PAPERS = gql`
         }
     }
 `;
+
+export const UPLOAD_FOR_SEARCH = gql`
+    mutation uploadForSearch(
+        $title: String!
+        $author: String!
+        $belong: String!
+        $publishedyear: Int!
+        $file: Upload!
+    ) {
+        uploadForSearch(
+            data: {
+                title: $title
+                author: $author
+                belong: $belong
+                publishedyear: $publishedyear
+                file: $file
+            }
+        )
+    }
+`;
