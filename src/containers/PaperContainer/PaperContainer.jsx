@@ -13,7 +13,8 @@ const GET_COUNT = 6;
 
 const PaperContainerDiv = styled.div`
     padding: 30px;
-    width: calc(100%-30px);
+    width: calc(100% - 30px);
+    text-align: center;
 `;
 
 const LoadingDiv = styled.div`
@@ -46,16 +47,16 @@ const Icon = styled(FontAwesomeIcon)`
     right: 80px;
 `;
 
+const FetchMoreButton = styled.button`
+    margin: auto;
+`;
+
 const PaperContainer = () => {
-    const [lastId, setLastId] = useState("");
     const [input, changeInput] = useState("");
-    const variables = { first: GET_COUNT };
-    if (lastId) {
-        variables.after = lastId;
-    }
+    const [canGetMore, changeGetMore] = useState(true);
     return (
-        <Query query={PAPERS} variables={variables}>
-            {({ loading, error, data }) => {
+        <Query query={PAPERS} variables={{ first: GET_COUNT }}>
+            {({ loading, error, data, fetchMore }) => {
                 if (loading) {
                     return (
                         <LoadingDiv>
@@ -117,13 +118,40 @@ const PaperContainer = () => {
                                 )
                             )}
                         </Row>
-                        <div
-                            onClick={() => {
-                                setLastId(data.papers[GET_COUNT - 1].id);
-                            }}
+                        <FetchMoreButton
+                            className="btn btn-primary"
+                            disabled={canGetMore ? "" : "disabled"}
+                            onClick={() =>
+                                fetchMore({
+                                    variables: {
+                                        after:
+                                            data.papers[data.papers.length - 1]
+                                                .id
+                                    },
+                                    updateQuery: (
+                                        prev,
+                                        { fetchMoreResult }
+                                    ) => {
+                                        console.log("x");
+                                        if (!fetchMoreResult) return prev;
+                                        if (
+                                            fetchMoreResult.papers.length === 0
+                                        ) {
+                                            changeGetMore(false);
+                                        }
+                                        return {
+                                            ...fetchMoreResult,
+                                            papers: [
+                                                ...prev.papers,
+                                                ...fetchMoreResult.papers
+                                            ]
+                                        };
+                                    }
+                                })
+                            }
                         >
-                            시발
-                        </div>
+                            더 보기
+                        </FetchMoreButton>
                     </PaperContainerDiv>
                 );
             }}

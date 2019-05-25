@@ -5,6 +5,7 @@ import { Col } from "reactstrap";
 import pdfImage from "image/pdf.png";
 
 const CardBody = styled.div`
+    text-align: left;
     background-color: ${props => props.theme.secondaryBackgroundColor};
     width: 100%;
     padding: 25px;
