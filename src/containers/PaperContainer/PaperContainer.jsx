@@ -126,13 +126,13 @@ const PaperContainer = () => {
                                     variables: {
                                         after:
                                             data.papers[data.papers.length - 1]
-                                                .id
+                                                .id,
+                                        first: GET_COUNT
                                     },
                                     updateQuery: (
                                         prev,
                                         { fetchMoreResult }
                                     ) => {
-                                        console.log("x");
                                         if (!fetchMoreResult) return prev;
                                         if (
                                             fetchMoreResult.papers.length === 0

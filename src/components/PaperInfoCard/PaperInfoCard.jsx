@@ -16,7 +16,7 @@ const CardBody = styled.div`
 const PDFimage = styled.img`
     position: absolute;
     top: -20px;
-    right: 50px;
+    right: 35px;
     width: 45px;
     height: 40px;
 `;
