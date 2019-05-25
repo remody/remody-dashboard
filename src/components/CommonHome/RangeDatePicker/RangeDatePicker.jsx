@@ -65,7 +65,7 @@ class RangeDatePicker extends React.Component {
                 />
                 <InputGroupAddon type="append">
                     <InputGroupText>
-                        <i className="material-icons" />
+                        <i className="material-icons">&#xE916;</i>
                     </InputGroupText>
                 </InputGroupAddon>
             </InputGroup>

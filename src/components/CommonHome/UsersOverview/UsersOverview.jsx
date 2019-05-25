@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
+import { Row, Col, Card, CardHeader, CardBody } from "shards-react";
+import { Button } from "reactstrap";
 
 import RangeDatePicker from "../RangeDatePicker";
 import Chart from "../Chart/chart";
@@ -21,7 +22,6 @@ class UsersOverview extends React.Component {
                 },
                 elements: {
                     line: {
-                        // A higher value makes the line look skewed at this ratio.
                         tension: 0.3
                     },
                     point: {
@@ -34,7 +34,6 @@ class UsersOverview extends React.Component {
                             gridLines: false,
                             ticks: {
                                 callback(tick, index) {
-                                    // Jump every 7 values on the X axis labels to avoid clutter.
                                     return index % 7 !== 0 ? "" : tick;
                                 }
                             }
@@ -48,7 +47,7 @@ class UsersOverview extends React.Component {
                                     if (tick === 0) {
                                         return tick;
                                     }
-                                    // Format the amounts using Ks for thousands.
+
                                     return tick > 999
                                         ? `${(tick / 1000).toFixed(1)}K`
                                         : tick;
@@ -76,14 +75,12 @@ class UsersOverview extends React.Component {
             options: chartOptions
         });
 
-        // They can still be triggered on hover.
         const buoMeta = BlogUsersOverview.getDatasetMeta(0);
         buoMeta.data[0]._model.radius = 0;
         buoMeta.data[
             this.props.chartData.datasets[0].data.length - 1
         ]._model.radius = 0;
 
-        // Render the chart.
         BlogUsersOverview.render();
     }
 
@@ -102,7 +99,9 @@ class UsersOverview extends React.Component {
                         <Col>
                             <Button
                                 size="sm"
-                                className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
+                                className="d-flex ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0 "
+                                outline
+                                color="secondary"
                             >
                                 View Full Report &rarr;
                             </Button>

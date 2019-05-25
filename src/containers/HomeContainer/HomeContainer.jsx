@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
 import PageTitle from "../../components/CommonHome/PageTitle";
 import UsersOverview from "../../components/CommonHome/UsersOverview";
 import UsersByDevice from "../../components/CommonHome/UsersByDevice";
+import HomePosts from "./HomePosts";
 
 const HomeContainer = () => (
     <Container fluid className="main-content-container px-4">
@@ -25,6 +25,9 @@ const HomeContainer = () => (
                 <UsersByDevice />
             </Col>
         </Row>
+
+        <HomePosts />
     </Container>
 );
+
 export default HomeContainer;
