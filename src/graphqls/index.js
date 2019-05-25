@@ -106,8 +106,8 @@ export const UPDATE_USER_SCHEMA_INFO = gql`
 `;
 
 export const PAPERS = gql`
-    query papers($first: Int, $after: String) {
-        papers(first: $first, after: $after) {
+    query papers($first: Int, $after: String, $queryString: String) {
+        papers(first: $first, after: $after, queryString: $queryString) {
             id
             owner {
                 name

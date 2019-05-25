@@ -52,6 +52,7 @@ const FetchMoreButton = styled.button`
 `;
 
 const PaperContainer = () => {
+    let keyword;
     const [input, changeInput] = useState("");
     const [canGetMore, changeGetMore] = useState(true);
     return (
@@ -91,7 +92,38 @@ const PaperContainer = () => {
                                     value={input}
                                     onChange={e => changeInput(e.target.value)}
                                 />
-                                <SearchButton className="btn btn-primary">
+                                <SearchButton
+                                    className="btn btn-primary"
+                                    onClick={() => {
+                                        keyword = input;
+                                        fetchMore({
+                                            variables: {
+                                                first: GET_COUNT,
+                                                queryString: keyword
+                                            },
+                                            updateQuery: (
+                                                prev,
+                                                { fetchMoreResult }
+                                            ) => {
+                                                changeGetMore(true);
+                                                if (!fetchMoreResult)
+                                                    return prev;
+                                                if (
+                                                    fetchMoreResult.papers
+                                                        .length === 0
+                                                ) {
+                                                    changeGetMore(false);
+                                                }
+                                                return {
+                                                    ...fetchMoreResult,
+                                                    papers: [
+                                                        ...fetchMoreResult.papers
+                                                    ]
+                                                };
+                                            }
+                                        });
+                                    }}
+                                >
                                     검색
                                 </SearchButton>
                                 <Icon icon={faSearch} />
@@ -121,14 +153,24 @@ const PaperContainer = () => {
                         <FetchMoreButton
                             className="btn btn-primary"
                             disabled={canGetMore ? "" : "disabled"}
-                            onClick={() =>
+                            onClick={() => {
                                 fetchMore({
-                                    variables: {
-                                        after:
-                                            data.papers[data.papers.length - 1]
-                                                .id,
-                                        first: GET_COUNT
-                                    },
+                                    variables: keyword
+                                        ? {
+                                              after:
+                                                  data.papers[
+                                                      data.papers.length - 1
+                                                  ].id,
+                                              first: GET_COUNT,
+                                              queryString: keyword
+                                          }
+                                        : {
+                                              after:
+                                                  data.papers[
+                                                      data.papers.length - 1
+                                                  ].id,
+                                              first: GET_COUNT
+                                          },
                                     updateQuery: (
                                         prev,
                                         { fetchMoreResult }
@@ -147,8 +189,8 @@ const PaperContainer = () => {
                                             ]
                                         };
                                     }
-                                })
-                            }
+                                });
+                            }}
                         >
                             더 보기
                         </FetchMoreButton>
