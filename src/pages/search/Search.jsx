@@ -14,10 +14,14 @@ const SearchDiv = styled(Container)`
 `;
 
 const Search = ({ match: { path } }) => {
-    const [isOpen, handleUploadSearchModal] = useState(true);
+    const [isOpen, handleUploadSearchModal] = useState(false);
     return (
         <>
-            <Topbar name={path} />
+            <Topbar
+                name={path}
+                clickFunction={handleUploadSearchModal}
+                state={isOpen}
+            />
             <SearchDiv>
                 <PaperContainer />
                 <UploadSearchModal

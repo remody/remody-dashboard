@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 const TopbarDiv = styled.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     background-color: ${props => props.theme.secondaryBackgroundColor};
@@ -10,5 +10,17 @@ const TopbarDiv = styled.div`
     padding: 0 20px;
 `;
 
-const Topbar = props => <TopbarDiv>{props.name}</TopbarDiv>;
+const Topbar = ({ name, clickFunction, state }) => (
+    <TopbarDiv>
+        <div>{name}</div>
+        {clickFunction ? (
+            <button
+                className="btn btn-primary"
+                onClick={() => clickFunction(!state)}
+            >
+                파일 등록
+            </button>
+        ) : null}
+    </TopbarDiv>
+);
 export default Topbar;

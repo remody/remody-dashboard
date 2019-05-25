@@ -46,7 +46,13 @@ const UploadSearchModal = props => {
     const [belong, handleBelong] = useState("");
     const [publishedyear, handlePublishedyear] = useState("");
     const [file, handleFile] = useState({});
-
+    const clearInput = () => {
+        handleTitle("");
+        handleAuthor("");
+        handleBelong("");
+        handlePublishedyear("");
+        handleFile({});
+    };
     return (
         <Mutation mutation={UPLOAD_FOR_SEARCH}>
             {(uploadForSearch, { loading, error, data }) => {
@@ -155,7 +161,6 @@ const UploadSearchModal = props => {
                                 <Button
                                     onClick={() => {
                                         const numberYear = publishedyear * 1;
-                                        console.log(file);
                                         uploadForSearch({
                                             variables: {
                                                 title,
@@ -165,6 +170,7 @@ const UploadSearchModal = props => {
                                                 file
                                             }
                                         });
+                                        clearInput();
                                     }}
                                 >
                                     등록
