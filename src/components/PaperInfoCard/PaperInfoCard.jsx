@@ -25,15 +25,14 @@ const PaperInfoCard = ({ author, owner, title, belong, publishedyear }) => {
     return (
         <Col xs="12" sm="6" md="4">
             <CardBody>
-                {title}
+                <h5>{title}</h5>
+                저자: {author}
                 <br />
-                {author}
+                소속: {belong}
                 <br />
-                {belong}
+                발행년도: {publishedyear}
                 <br />
-                {publishedyear}
-                <br />
-                {owner}
+                올린이: {owner}
             </CardBody>
             <PDFimage src={pdfImage} alt="img" />
         </Col>
