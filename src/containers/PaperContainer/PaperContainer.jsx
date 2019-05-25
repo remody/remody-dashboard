@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
 import ReactLoading from "react-loading";
+import { Row, Input, Col } from "reactstrap";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { PAPERS } from "graphqls";
+import PaperInfoCard from "components/PaperInfoCard";
 import Theme from "Theme";
+const GET_COUNT = 6;
 
 const PaperContainerDiv = styled.div`
-    width: 100%;
+    padding: 30px;
+    width: calc(100%-30px);
 `;
 
 const LoadingDiv = styled.div`
@@ -17,14 +23,38 @@ const LoadingDiv = styled.div`
     align-items: center;
 `;
 
+const SearchBarDiv = styled(Row)`
+    padding: 10px;
+`;
+
+const SearchBarCol = styled(Col)`
+    display: flex;
+`;
+
+const SearchBar = styled(Input)`
+    margin-bottom: 30px;
+`;
+
+const SearchButton = styled.button`
+    width: 65px;
+    height: calc(1.5em + 0.75rem + 2px);
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+    position: absolute;
+    top: 10px;
+    right: 80px;
+`;
+
 const PaperContainer = () => {
     const [lastId, setLastId] = useState("");
-    const variables = { first: 3 };
+    const [input, changeInput] = useState("");
+    const variables = { first: GET_COUNT };
     if (lastId) {
         variables.after = lastId;
     }
     return (
-        <Query query={PAPERS} variables={{ first: 3 }}>
+        <Query query={PAPERS} variables={variables}>
             {({ loading, error, data }) => {
                 if (loading) {
                     return (
@@ -39,7 +69,6 @@ const PaperContainer = () => {
                     );
                 }
                 if (error) {
-                    console.log(error);
                     return (
                         <LoadingDiv>
                             <h3>
@@ -52,9 +81,49 @@ const PaperContainer = () => {
                 }
                 return (
                     <PaperContainerDiv>
-                        {data.papers.map(item => (
-                            <div>{item.title}</div>
-                        ))}
+                        <SearchBarDiv>
+                            <Col xs="0" sm="3" md="6" lg="9">
+                                {" "}
+                            </Col>
+                            <SearchBarCol xs="12" sm="9" md="6" lg="3">
+                                <SearchBar
+                                    value={input}
+                                    onChange={e => changeInput(e.target.value)}
+                                />
+                                <SearchButton className="btn btn-primary">
+                                    검색
+                                </SearchButton>
+                                <Icon icon={faSearch} />
+                            </SearchBarCol>
+                        </SearchBarDiv>
+                        <Row>
+                            {data.papers.map(
+                                ({
+                                    author,
+                                    id,
+                                    title,
+                                    publishedyear,
+                                    belong,
+                                    owner: { name: owner }
+                                }) => (
+                                    <PaperInfoCard
+                                        key={id}
+                                        author={author}
+                                        title={title}
+                                        publishedyear={publishedyear}
+                                        belong={belong}
+                                        owner={owner}
+                                    />
+                                )
+                            )}
+                        </Row>
+                        <div
+                            onClick={() => {
+                                setLastId(data.papers[GET_COUNT - 1].id);
+                            }}
+                        >
+                            시발
+                        </div>
                     </PaperContainerDiv>
                 );
             }}

@@ -12,12 +12,14 @@ const SearchDiv = styled(Container)`
     min-height: calc(100vh - 90px);
 `;
 
-const Search = ({ match: { path } }) => (
-    <>
-        <Topbar name={path} />
-        <SearchDiv>
-            <PaperContainer />
-        </SearchDiv>
-    </>
-);
+const Search = ({ match: { path } }) => {
+    return (
+        <>
+            <Topbar name={path} />
+            <SearchDiv>
+                <PaperContainer />
+            </SearchDiv>
+        </>
+    );
+};
 export default Search;
