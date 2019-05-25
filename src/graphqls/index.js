@@ -104,3 +104,18 @@ export const UPDATE_USER_SCHEMA_INFO = gql`
         }
     }
 `;
+
+export const PAPERS = gql`
+    query papers($first: Int, $after: String) {
+        papers(first: $first, after: $after) {
+            id
+            owner {
+                name
+            }
+            title
+            author
+            belong
+            publishedyear
+        }
+    }
+`;
