@@ -88,7 +88,12 @@ class UsersOverview extends React.Component {
         const { title } = this.props;
         return (
             <Card small className="h-100">
-                <CardHeader className="border-bottom">
+                <CardHeader
+                    className="border-bottom"
+                    style={{
+                        backgroundColor: "white"
+                    }}
+                >
                     <h6 className="m-0">{title}</h6>
                 </CardHeader>
                 <CardBody className="pt-0">

@@ -10,44 +10,44 @@ class HomePosts extends React.Component {
             PostsListOne: [
                 {
                     backgroundImage: require("../../images/content-management/1.jpeg"),
-                    category: "Business",
+                    category: "Search",
                     categoryTheme: "dark",
                     author: "Anna Kunis",
                     authorAvatar: require("../../images/avatars/1.jpg"),
-                    title: "정훈 씨",
+                    title: "PDF 검색",
                     body:
-                        "However venture pursuit he am mr cordial. Forming musical am.",
+                        "필요한 PDF가 없을 때 홈페이지 내에서 검색을 통해 PDF 분석이 가능",
                     date: "28 February 2019"
                 },
                 {
                     backgroundImage: require("../../images/content-management/2.jpeg"),
-                    category: "Travel",
+                    category: "Interprete",
                     categoryTheme: "info",
                     author: "James Jamerson",
                     authorAvatar: require("../../images/avatars/2.jpg"),
-                    title: "이 정도면",
+                    title: "데이터 입력, 추출",
                     body:
-                        "Is at purse tried jokes china ready decay an. Small its shy way ...",
+                        "다운로드 된 PDF를 넣어서 필요한 속성값을 입력 후 데이터 추출",
                     date: "29 February 2019"
                 },
                 {
                     backgroundImage: require("../../images/content-management/3.jpeg"),
-                    category: "Technology",
+                    category: "Data",
                     categoryTheme: "royal-blue",
                     author: "Jimmy Jackson",
                     authorAvatar: require("../../images/avatars/2.jpg"),
-                    title: "만족",
+                    title: "데이터 확인",
                     body:
-                        "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power.",
+                        "DATA 메뉴에서 관련 로그인 계정의 추출된 데이터가 저장되어 있음",
                     date: "29 February 2019"
                 },
                 {
                     backgroundImage: require("../../images/content-management/4.jpeg"),
-                    category: "Business",
+                    category: "Module",
                     categoryTheme: "warning",
                     author: "John James",
                     authorAvatar: require("../../images/avatars/3.jpg"),
-                    title: "하시나요?",
+                    title: "모듈",
                     body:
                         "How but sons mrs lady when. Her especially are unpleasant out alteration ",
                     date: "29 February 2019"
@@ -58,7 +58,7 @@ class HomePosts extends React.Component {
             PostsListTwo: [
                 {
                     backgroundImage: require("../../images/content-management/5.jpeg"),
-                    category: "Travel",
+                    category: "검색자 관련",
                     categoryTheme: "info",
                     author: "Anna Ken",
                     authorAvatar: require("../../images/avatars/0.jpg"),
@@ -70,7 +70,7 @@ class HomePosts extends React.Component {
                 },
                 {
                     backgroundImage: require("../../images/content-management/6.jpeg"),
-                    category: "Business",
+                    category: "추출자 관련",
                     categoryTheme: "dark",
                     author: "John James",
                     authorAvatar: require("../../images/avatars/1.jpg"),
@@ -92,7 +92,7 @@ class HomePosts extends React.Component {
                 <Row noGutters className="page-header py-4">
                     <PageTitle
                         sm="4"
-                        title="Jeong Hoons Category"
+                        title="Develop Category"
                         subtitle="Components"
                         className="text-sm-left"
                     />

@@ -8,7 +8,7 @@ import HomePosts from "./HomePosts";
 
 const HomeContainer = () => (
     <Container fluid className="main-content-container px-4">
-        <Row noGutters className="page-header py-4">
+        <Row noGutters className="page-header">
             <PageTitle
                 sm="4"
                 title="Remody Introduce"
@@ -16,7 +16,7 @@ const HomeContainer = () => (
                 className="text-sm-left"
             />
         </Row>
-        <Row>
+        <Row noGutters className="page-header py-4">
             <HomeIntro />
         </Row>
 

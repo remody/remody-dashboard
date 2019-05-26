@@ -50,7 +50,12 @@ class UsersByDevice extends React.Component {
         const { title } = this.props;
         return (
             <Card small className="h-100">
-                <CardHeader className="border-bottom">
+                <CardHeader
+                    className="border-bottom"
+                    style={{
+                        backgroundColor: "white"
+                    }}
+                >
                     <h6 className="m-0">{title}</h6>
                 </CardHeader>
                 <CardBody className="d-flex py-0">
@@ -60,7 +65,12 @@ class UsersByDevice extends React.Component {
                         className="blog-users-by-device m-auto"
                     />
                 </CardBody>
-                <CardFooter className="border-top">
+                <CardFooter
+                    className="border-top"
+                    style={{
+                        backgroundColor: "white"
+                    }}
+                >
                     <Row>
                         <Col>
                             <FormSelect

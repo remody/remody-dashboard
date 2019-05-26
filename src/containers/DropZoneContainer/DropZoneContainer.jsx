@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 //import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-import { USER_SCHEMAS } from "../../graphql";
+import { USER_SCHEMAS } from "../../graphqls";
 import DropZoneCard from "../../components/DropZoneCard/DropZoneCard";
 import Theme from "../../Theme";
 
