@@ -1,51 +1,79 @@
-import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import DropZonepage from "../DropZonepage";
+import React, { useState } from "react";
+import {
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Input
+} from "reactstrap";
+import { Mutation } from "react-apollo";
+//import ReactLoading from "react-loading";
+import Theme from "../../Theme";
+import { UPLOAD_FILE } from "../../graphql";
 
-class DropZoneModal extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modal: false
-        };
+const DropZoneModal = props => {
+    const [Attribute, handleAttribute] = useState("");
 
-        this.toggle = this.toggle.bind(this);
-    }
+    return (
+        <Mutation mutation={UPLOAD_FILE}>
+            {({ loading, error, data }) => {
+                return (
+                    <div>
+                        <Modal
+                            isOpen={data ? false : props.isOpen}
+                            toggle={() => props.handleDropZoneModal(false)}
+                            style={{ position: "relative", top: "10%" }}
+                        >
+                            <ModalHeader
+                                style={{
+                                    backgroundColor: Theme.primaryColor,
+                                    color: Theme.primaryFontColor
+                                }}
+                            >
+                                Attribute Input
+                            </ModalHeader>
 
-    toggle() {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
-    }
+                            <ModalBody
+                                style={{
+                                    padding: "20px 35px",
+                                    textAlign: "center"
+                                }}
+                            >
+                                <div style={{ textAlign: "left" }}>
+                                    <label>Attribute</label>
+                                    <br />
+                                    <Input
+                                        type="Attribute"
+                                        onChange={e =>
+                                            handleAttribute(e.target.value)
+                                        }
+                                        value={Attribute}
+                                    />
+                                </div>
+                                <b>필요한 Attribute 입력값을 넣으시오.</b>
+                                <br />
+                            </ModalBody>
 
-    render() {
-        return (
-            <div>
-                <Button color="danger" onClick={this.toggle}>
-                    button
-                </Button>
-                <Modal
-                    isOpen={this.state.modal}
-                    modalTransition={{ timeout: 700 }}
-                    backdropTransition={{ timeout: 1300 }}
-                    toggle={this.toggle}
-                    className={this.props.className}
-                >
-                    <ModalHeader toggle={this.toggle}>
-                        변경할 파일을 올려주세요.
-                    </ModalHeader>
-                    <ModalBody>
-                        <DropZonepage />
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>
-                            Cancel
-                        </Button>
-                    </ModalFooter>
-                </Modal>
-            </div>
-        );
-    }
-}
+                            <ModalFooter>
+                                <Button color="primary" onClick={() => {}}>
+                                    Do Something
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    onClick={() =>
+                                        props.handleDropZoneModal(false)
+                                    }
+                                >
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </Modal>
+                    </div>
+                );
+            }}
+        </Mutation>
+    );
+};
 
 export default DropZoneModal;
