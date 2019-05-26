@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
-//import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-import { USER_SCHEMAS } from "../../graphql";
-import DropZoneCard from "../../components/DropZoneCard/DropZoneCard";
-import Theme from "../../Theme";
+import { USER_SCHEMAS } from "graphqls";
+import DropZoneCard from "components/DropZoneCard/DropZoneCard";
+import Theme from "Theme";
 
 const DropZoneContainerDiv = styled.div`
     width: 100%;

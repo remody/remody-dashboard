@@ -8,9 +8,9 @@ import {
     Input
 } from "reactstrap";
 import { Mutation } from "react-apollo";
-//import ReactLoading from "react-loading";
-import Theme from "../../Theme";
-import { UPLOAD_FILE } from "../../graphql";
+
+import Theme from "Theme";
+import { UPLOAD_FILE } from "graphqls";
 
 const DropZoneModal = props => {
     const [Attribute, handleAttribute] = useState("");
@@ -59,12 +59,7 @@ const DropZoneModal = props => {
                                 <Button color="primary" onClick={() => {}}>
                                     Do Something
                                 </Button>
-                                <Button
-                                    color="secondary"
-                                    onClick={() =>
-                                        props.handleDropZoneModal(false)
-                                    }
-                                >
+                                <Button color="secondary" onClick={() => {}}>
                                     Cancel
                                 </Button>
                             </ModalFooter>
