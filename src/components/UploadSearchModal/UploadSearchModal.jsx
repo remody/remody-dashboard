@@ -56,9 +56,12 @@ const UploadSearchModal = props => {
     return (
         <Mutation mutation={UPLOAD_FOR_SEARCH}>
             {(uploadForSearch, { loading, error, data }) => {
+                if (data) {
+                    window.location.reload();
+                }
                 return (
                     <Modal
-                        isOpen={data ? false : props.isOpen}
+                        isOpen={props.isOpen}
                         toggle={() => props.handleUploadSearchModal(false)}
                         style={{ position: "relative", top: "10%" }}
                     >

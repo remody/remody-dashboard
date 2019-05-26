@@ -137,7 +137,8 @@ const PaperContainer = () => {
                                     title,
                                     publishedyear,
                                     belong,
-                                    owner: { name: owner }
+                                    owner: { name: owner },
+                                    url
                                 }) => (
                                     <PaperInfoCard
                                         key={id}
@@ -146,6 +147,7 @@ const PaperContainer = () => {
                                         publishedyear={publishedyear}
                                         belong={belong}
                                         owner={owner}
+                                        url={url}
                                     />
                                 )
                             )}

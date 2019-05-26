@@ -116,6 +116,7 @@ export const PAPERS = gql`
             author
             belong
             publishedyear
+            url
         }
     }
 `;

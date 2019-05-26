@@ -21,7 +21,14 @@ const PDFimage = styled.img`
     height: 40px;
 `;
 
-const PaperInfoCard = ({ author, owner, title, belong, publishedyear }) => {
+const PaperInfoCard = ({
+    author,
+    owner,
+    title,
+    belong,
+    publishedyear,
+    url
+}) => {
     return (
         <Col xs="12" sm="6" md="4">
             <CardBody>
@@ -34,7 +41,11 @@ const PaperInfoCard = ({ author, owner, title, belong, publishedyear }) => {
                 <br />
                 올린이: {owner}
             </CardBody>
-            <PDFimage src={pdfImage} alt="img" />
+            <a
+                href={`http://ec2-13-125-75-243.ap-northeast-2.compute.amazonaws.com/${url}`}
+            >
+                <PDFimage src={pdfImage} alt="img" />
+            </a>
         </Col>
     );
 };
