@@ -3,14 +3,27 @@ import { Container, Row, Col } from "shards-react";
 import PageTitle from "../../components/CommonHome/PageTitle";
 import UsersOverview from "../../components/CommonHome/UsersOverview";
 import UsersByDevice from "../../components/CommonHome/UsersByDevice";
+import HomeIntro from "./HomeIntro";
 import HomePosts from "./HomePosts";
 
 const HomeContainer = () => (
     <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
             <PageTitle
-                title="Unstructured document conversion"
-                subtitle="Dashboard"
+                sm="4"
+                title="Remody Introduce"
+                subtitle="Convert"
+                className="text-sm-left"
+            />
+        </Row>
+        <Row>
+            <HomeIntro />
+        </Row>
+
+        <Row noGutters className="page-header py-4">
+            <PageTitle
+                title="Data Chart"
+                subtitle="Analysis"
                 className="text-sm-left mb-3"
             />
         </Row>

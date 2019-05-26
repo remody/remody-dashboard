@@ -101,7 +101,13 @@ class HomePosts extends React.Component {
                 <Row>
                     {PostsListOne.map((post, idx) => (
                         <Col lg="3" md="6" sm="12" className="mb-4" key={idx}>
-                            <Card small className="card-post card-post--1">
+                            <Card
+                                small
+                                className="card-post card-post--1"
+                                style={{
+                                    borderRadius: "0.625rem"
+                                }}
+                            >
                                 <div
                                     className="card-post__image"
                                     style={{
@@ -160,6 +166,11 @@ class HomePosts extends React.Component {
                             <Card
                                 small
                                 className="card-post card-post--aside card-post--1"
+                                style={{
+                                    borderRadius: "0.625rem",
+                                    display: "flex",
+                                    flexFlow: "row"
+                                }}
                             >
                                 <div
                                     className="card-post__image"
