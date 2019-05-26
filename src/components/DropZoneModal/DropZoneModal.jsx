@@ -8,9 +8,9 @@ import {
     Input
 } from "reactstrap";
 import { Mutation } from "react-apollo";
-//import ReactLoading from "react-loading";
-import Theme from "../../Theme";
-import { UPLOAD_FILE } from "../../graphqls";
+
+import Theme from "Theme";
+import { UPLOAD_FILE } from "graphqls";
 
 const DropZoneModal = props => {
     const [Attribute, handleAttribute] = useState("");

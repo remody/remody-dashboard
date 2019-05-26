@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "shards-react";
-import PageTitle from "../../components/CommonHome/PageTitle";
-import UsersOverview from "../../components/CommonHome/UsersOverview";
-import UsersByDevice from "../../components/CommonHome/UsersByDevice";
+import PageTitle from "components/CommonHome/PageTitle";
+import UsersOverview from "components/CommonHome/UsersOverview";
+import UsersByDevice from "components/CommonHome/UsersByDevice";
 import HomeIntro from "./HomeIntro";
 import HomePosts from "./HomePosts";
 
@@ -22,6 +22,16 @@ const HomeContainer = () => (
 
         <Row noGutters className="page-header py-4">
             <PageTitle
+                sm="4"
+                title="Feature Category"
+                subtitle="Components"
+                className="text-sm-left"
+            />
+        </Row>
+        <HomePosts />
+
+        <Row noGutters className="page-header py-4">
+            <PageTitle
                 title="Data Chart"
                 subtitle="Analysis"
                 className="text-sm-left mb-3"
@@ -38,8 +48,6 @@ const HomeContainer = () => (
                 <UsersByDevice />
             </Col>
         </Row>
-
-        <HomePosts />
     </Container>
 );
 

@@ -1,6 +1,6 @@
 import React from "react";
-import Topbar from "../../components/Topbar";
-import HomeContainer from "../../containers/HomeContainer";
+import Topbar from "components/Topbar";
+import HomeContainer from "containers/HomeContainer";
 
 const Home = ({ match: { path } }) => (
     <div>

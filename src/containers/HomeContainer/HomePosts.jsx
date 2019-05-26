@@ -1,105 +1,96 @@
 import React from "react";
 import { Container, Row, Col, Card, CardBody, Badge } from "shards-react";
-import PageTitle from "../../components/CommonHome/PageTitle";
+import PageTitle from "components/CommonHome/PageTitle";
+import { Link } from "react-router-dom";
+
 class HomePosts extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            // First list of posts.
-            PostsListOne: [
-                {
-                    backgroundImage: require("../../images/content-management/1.jpeg"),
-                    category: "Search",
-                    categoryTheme: "dark",
-                    author: "Anna Kunis",
-                    authorAvatar: require("../../images/avatars/1.jpg"),
-                    title: "PDF 검색",
-                    body:
-                        "필요한 PDF가 없을 때 홈페이지 내에서 검색을 통해 PDF 분석이 가능",
-                    date: "28 February 2019"
-                },
-                {
-                    backgroundImage: require("../../images/content-management/2.jpeg"),
-                    category: "Interprete",
-                    categoryTheme: "info",
-                    author: "James Jamerson",
-                    authorAvatar: require("../../images/avatars/2.jpg"),
-                    title: "데이터 입력, 추출",
-                    body:
-                        "다운로드 된 PDF를 넣어서 필요한 속성값을 입력 후 데이터 추출",
-                    date: "29 February 2019"
-                },
-                {
-                    backgroundImage: require("../../images/content-management/3.jpeg"),
-                    category: "Data",
-                    categoryTheme: "royal-blue",
-                    author: "Jimmy Jackson",
-                    authorAvatar: require("../../images/avatars/2.jpg"),
-                    title: "데이터 확인",
-                    body:
-                        "DATA 메뉴에서 관련 로그인 계정의 추출된 데이터가 저장되어 있음",
-                    date: "29 February 2019"
-                },
-                {
-                    backgroundImage: require("../../images/content-management/4.jpeg"),
-                    category: "Module",
-                    categoryTheme: "warning",
-                    author: "John James",
-                    authorAvatar: require("../../images/avatars/3.jpg"),
-                    title: "모듈",
-                    body:
-                        "How but sons mrs lady when. Her especially are unpleasant out alteration ",
-                    date: "29 February 2019"
-                }
-            ],
+        // First list of posts.
+        this.PostsListOne = [
+            {
+                backgroundImage: require("../../images/content-management/1.jpeg"),
+                category: "Search",
+                categoryTheme: "dark",
+                author: "Anna Kunis",
+                authorAvatar: require("../../images/avatars/1.jpg"),
+                title: "PDF 검색",
+                body:
+                    "필요한 PDF가 없을 때 홈페이지 내에서 검색을 통해 PDF 분석이 가능",
+                date: "/Search"
+            },
+            {
+                backgroundImage: require("../../images/content-management/2.jpeg"),
+                category: "Interprete",
+                categoryTheme: "info",
+                author: "James Jamerson",
+                authorAvatar: require("../../images/avatars/2.jpg"),
+                title: "데이터 입력, 추출",
+                body:
+                    "다운로드 된 PDF를 넣어서 필요한 속성값을 입력 후 데이터 추출",
+                date: "/Interprete"
+            },
+            {
+                backgroundImage: require("../../images/content-management/3.jpeg"),
+                category: "Data",
+                categoryTheme: "royal-blue",
+                author: "Jimmy Jackson",
+                authorAvatar: require("../../images/avatars/2.jpg"),
+                title: "데이터 확인",
+                body:
+                    "DATA 메뉴에서 관련 로그인 계정의 추출된 데이터가 저장되어 있음",
+                date: "/Data"
+            },
+            {
+                backgroundImage: require("../../images/content-management/4.jpeg"),
+                category: "DataBase",
+                categoryTheme: "warning",
+                author: "John James",
+                authorAvatar: require("../../images/avatars/3.jpg"),
+                title: "DataBase 저장",
+                body:
+                    "How but sons mrs lady when. Her especially are unpleasant out alteration ",
+                date: "/"
+            }
+        ];
 
-            // Second list of posts.
-            PostsListTwo: [
-                {
-                    backgroundImage: require("../../images/content-management/5.jpeg"),
-                    category: "검색자 관련",
-                    categoryTheme: "info",
-                    author: "Anna Ken",
-                    authorAvatar: require("../../images/avatars/0.jpg"),
-                    title:
-                        "Attention he extremity unwilling on otherwise cars backwards yet",
-                    body:
-                        "Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...",
-                    date: "29 February 2019"
-                },
-                {
-                    backgroundImage: require("../../images/content-management/6.jpeg"),
-                    category: "추출자 관련",
-                    categoryTheme: "dark",
-                    author: "John James",
-                    authorAvatar: require("../../images/avatars/1.jpg"),
-                    title:
-                        "Totally words widow one downs few age every seven if miss part by fact",
-                    body:
-                        "Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education to admitted speaking...",
-                    date: "29 February 2019"
-                }
-            ]
-        };
+        // Second list of posts.
+        this.PostsListTwo = [
+            {
+                backgroundImage: require("../../images/content-management/5.jpeg"),
+                category: "검색자 관련",
+                categoryTheme: "info",
+                author: "Anna Ken",
+                authorAvatar: require("../../images/avatars/0.jpg"),
+                title:
+                    "Attention he extremity unwilling on otherwise cars backwards yet",
+                body:
+                    "Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...",
+                date: "29 February 2019"
+            },
+            {
+                backgroundImage: require("../../images/content-management/6.jpeg"),
+                category: "추출자 관련",
+                categoryTheme: "dark",
+                author: "John James",
+                authorAvatar: require("../../images/avatars/1.jpg"),
+                title:
+                    "Totally words widow one downs few age every seven if miss part by fact",
+                body:
+                    "Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education to admitted speaking...",
+                date: "29 February 2019"
+            }
+        ];
+        this.state = {};
     }
 
     render() {
-        const { PostsListOne, PostsListTwo } = this.state;
-
         return (
             <Container fluid className="main-content-container px-4">
-                <Row noGutters className="page-header py-4">
-                    <PageTitle
-                        sm="4"
-                        title="Develop Category"
-                        subtitle="Components"
-                        className="text-sm-left"
-                    />
-                </Row>
                 {/* First Row of Posts */}
                 <Row>
-                    {PostsListOne.map((post, idx) => (
+                    {this.PostsListOne.map((post, idx) => (
                         <Col lg="3" md="6" sm="12" className="mb-4" key={idx}>
                             <Card
                                 small
@@ -148,7 +139,9 @@ class HomePosts extends React.Component {
                                         {post.body}
                                     </p>
                                     <span className="text-muted">
-                                        {post.date}
+                                        <Link to={`${post.date}`}>
+                                            {post.category}
+                                        </Link>
                                     </span>
                                 </CardBody>
                             </Card>
@@ -158,7 +151,7 @@ class HomePosts extends React.Component {
 
                 {/* Second Row of Posts */}
                 <Row>
-                    {PostsListTwo.map((post, idx) => (
+                    {this.PostsListTwo.map((post, idx) => (
                         <Col lg="6" sm="12" className="mb-4" key={idx}>
                             <Card
                                 small
