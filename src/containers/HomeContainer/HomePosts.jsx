@@ -126,7 +126,7 @@ class HomePosts extends React.Component {
                                     </Badge>
                                     <div className="card-post__author d-flex">
                                         <a
-                                            href="https://www.naver.com"
+                                            href="/"
                                             className="card-post__author-avatar card-post__author-avatar--small"
                                             style={{
                                                 backgroundImage: `url('${
@@ -140,10 +140,7 @@ class HomePosts extends React.Component {
                                 </div>
                                 <CardBody>
                                     <h5 className="card-title">
-                                        <a
-                                            href="https://www.naver.com"
-                                            className="text-fiord-blue"
-                                        >
+                                        <a href="/" className="text-fiord-blue">
                                             {post.title}
                                         </a>
                                     </h5>
@@ -190,7 +187,7 @@ class HomePosts extends React.Component {
                                     </Badge>
                                     <div className="card-post__author d-flex">
                                         <a
-                                            href="https://www.naver.com"
+                                            href="/"
                                             className="card-post__author-avatar card-post__author-avatar--small"
                                             style={{
                                                 backgroundImage: `url('${
@@ -204,10 +201,7 @@ class HomePosts extends React.Component {
                                 </div>
                                 <CardBody>
                                     <h5 className="card-title">
-                                        <a
-                                            href="https://www.naver.com"
-                                            className="text-fiord-blue"
-                                        >
+                                        <a href="/" className="text-fiord-blue">
                                             {post.title}
                                         </a>
                                     </h5>
