@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
-import Theme from "../../Theme";
+import Theme from "Theme";
 
 const SideBarWrapper = styled.div`
     z-index: 10;
