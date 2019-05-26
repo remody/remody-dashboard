@@ -54,7 +54,6 @@ class UserTable extends React.Component {
         this.modify = {};
         this.delete = {};
         this.create = {};
-        console.log(props.schemaId);
         this.nextId = props.nextId;
         this.state = {
             rows: props.rows

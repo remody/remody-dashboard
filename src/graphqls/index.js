@@ -104,6 +104,42 @@ export const UPDATE_USER_SCHEMA_INFO = gql`
         }
     }
 `;
+
+export const PAPERS = gql`
+    query papers($first: Int, $after: String, $queryString: String) {
+        papers(first: $first, after: $after, queryString: $queryString) {
+            id
+            owner {
+                name
+            }
+            title
+            author
+            belong
+            publishedyear
+            url
+        }
+    }
+`;
+
+export const UPLOAD_FOR_SEARCH = gql`
+    mutation uploadForSearch(
+        $title: String!
+        $author: String!
+        $belong: String!
+        $publishedyear: Int!
+        $file: Upload!
+    ) {
+        uploadForSearch(
+            data: {
+                title: $title
+                author: $author
+                belong: $belong
+                publishedyear: $publishedyear
+                file: $file
+            }
+        )
+    }
+`;
 export const UPLOAD_FILE = gql`
     mutation singleUpload($file: Upload!) {
         singleUpload(file: $file) {

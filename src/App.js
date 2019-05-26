@@ -11,7 +11,7 @@ import Data from "pages/data";
 import DataInfo from "pages/datainfo";
 import Interprete from "pages/interprete";
 import NoMatch from "pages/nomatch";
-import Analyze from "pages/analyze";
+import Search from "pages/search";
 
 import Layout from "components/Layout";
 
@@ -37,7 +37,7 @@ class App extends Component {
                                     path="/interprete"
                                     component={Interprete}
                                 />
-                                <Route path="/analyze" component={Analyze} />
+                                <Route path="/search" component={Search} />
                                 <Route path="*" component={NoMatch} />
                             </Switch>
                         </Layout>
