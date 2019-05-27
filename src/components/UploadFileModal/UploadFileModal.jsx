@@ -140,14 +140,13 @@ const UploadFileModal = props => {
                                 )}
                                 <Button
                                     onClick={() => {
-                                        clearInput();
                                         uploadForFile({
                                             variables: {
                                                 file,
                                                 schemaId: props.userSchema.id
                                             }
                                         });
-                                        window.location.reload();
+                                        clearInput();
                                     }}
                                 >
                                     추출 시작

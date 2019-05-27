@@ -145,7 +145,7 @@ export const UPLOAD_FOR_SEARCH = gql`
     }
 `;
 export const UPLOAD_FILE = gql`
-    mutation singleUpload($file: Upload!, $schemaId: String!) {
+    mutation singleUpload($file: Upload!, $schemaId: ID!) {
         singleUpload(file: $file, schemaId: $schemaId)
     }
 `;
