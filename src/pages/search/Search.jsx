@@ -21,6 +21,7 @@ const Search = ({ match: { path } }) => {
                 name={path}
                 clickFunction={handleUploadSearchModal}
                 state={isOpen}
+                buttonName="파일 추가"
             />
             <SearchDiv>
                 <PaperContainer />

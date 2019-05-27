@@ -25,9 +25,8 @@ const DataCardContainerInfo = styled.div`
 
 const DataCardContainer = () => {
     return (
-        <Query query={USER_SCHEMAS} pollInterval={500}>
-            {({ loading, error, data, refetch }) => {
-                refetch();
+        <Query query={USER_SCHEMAS}>
+            {({ loading, error, data }) => {
                 if (loading) {
                     return (
                         <LoadingDiv>
