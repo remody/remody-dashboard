@@ -147,3 +147,19 @@ export const UPLOAD_FILE = gql`
         }
     }
 `;
+
+export const CREATE_TABLE = gql`
+    mutation createTable($name: String!, $rows: [Row!]!) {
+        createTable(data: { name: $name, rows: $rows }) {
+            id
+            name
+            rowCount
+            columns {
+                name
+                type
+                length
+                id
+            }
+        }
+    }
+`;
