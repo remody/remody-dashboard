@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 import Dropzone from "react-dropzone";
 
-import { UPLOAD_FOR_SEARCH } from "graphqls";
+import { UPLOAD_FILE } from "graphqls";
 import Theme from "Theme";
 import pdfImage from "image/pdf.png";
 
@@ -54,7 +54,7 @@ const UploadFileModal = props => {
         handleFile({});
     };
     return (
-        <Mutation mutation={UPLOAD_FOR_SEARCH}>
+        <Mutation mutation={UPLOAD_FILE}>
             {(uploadForFile, { loading, error, data }) => {
                 if (data) {
                     window.location.reload();
@@ -138,7 +138,18 @@ const UploadFileModal = props => {
                                 ) : (
                                     <div />
                                 )}
-                                <Button onClick={() => clearInput()}>
+                                <Button
+                                    onClick={() => {
+                                        clearInput();
+                                        uploadForFile({
+                                            variables: {
+                                                file,
+                                                schemaId: props.userSchema.id
+                                            }
+                                        });
+                                        window.location.reload();
+                                    }}
+                                >
                                     추출 시작
                                 </Button>
                             </ModalBody>
