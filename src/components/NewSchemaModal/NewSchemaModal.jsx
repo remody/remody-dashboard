@@ -6,7 +6,7 @@ import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import ReactLoading from "react-loading";
 
-import { UPLOAD_FOR_SEARCH } from "graphqls";
+import { CREATE_TABLE } from "graphqls";
 import Theme from "Theme";
 
 const ModalFooter = styled.div`
@@ -48,8 +48,8 @@ const NewSchemaModal = props => {
         changeInputs([""]);
     };
     return (
-        <Mutation mutation={UPLOAD_FOR_SEARCH}>
-            {(uploadForSearch, { loading, error, data }) => {
+        <Mutation mutation={CREATE_TABLE}>
+            {(createTable, { loading, error, data }) => {
                 if (data) {
                     window.location.reload();
                 }
@@ -60,10 +60,10 @@ const NewSchemaModal = props => {
                         style={{ position: "relative", top: "10%" }}
                     >
                         <ModalHeader
-                            toggle={() =>
-                                clearInputs() &&
-                                props.handleNewSchemaModal(false)
-                            }
+                            toggle={() => {
+                                clearInputs();
+                                props.handleNewSchemaModal(false);
+                            }}
                             style={{
                                 backgroundColor: Theme.primaryColor,
                                 color: Theme.primaryFontColor
@@ -111,7 +111,7 @@ const NewSchemaModal = props => {
                                 </div>
                                 <br />
                                 {inputs.map((item, index) => (
-                                    <>
+                                    <div key={index}>
                                         <div className="d-flex">
                                             <Attribute>
                                                 Attribute {index + 1}
@@ -129,13 +129,13 @@ const NewSchemaModal = props => {
                                             />
                                         </div>
                                         <br />
-                                    </>
+                                    </div>
                                 ))}
                                 <br />
                                 {error ? (
                                     <>
                                         <ErrorHeader>
-                                            {error.graphQLErrors[0].message}
+                                            {error}
                                             {"! "}
                                             please try again!
                                         </ErrorHeader>
@@ -146,6 +146,17 @@ const NewSchemaModal = props => {
                                 )}
                                 <Button
                                     onClick={() => {
+                                        const rows = inputs.map(input => ({
+                                            name: input,
+                                            type: "VARCHAR",
+                                            length: 200
+                                        }));
+                                        createTable({
+                                            variables: {
+                                                name,
+                                                rows
+                                            }
+                                        });
                                         clearInputs();
                                         props.handleNewSchemaModal(false);
                                     }}
