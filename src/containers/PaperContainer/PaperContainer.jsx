@@ -37,14 +37,14 @@ const SearchBar = styled(Input)`
 `;
 
 const SearchButton = styled.button`
-    width: 65px;
+    width: 5em;
     height: calc(1.5em + 0.75rem + 2px);
 `;
 
 const Icon = styled(FontAwesomeIcon)`
     position: absolute;
     top: 10px;
-    right: 80px;
+    right: 6em;
 `;
 
 const FetchMoreButton = styled.button`
@@ -84,10 +84,10 @@ const PaperContainer = () => {
                 return (
                     <PaperContainerDiv>
                         <SearchBarDiv>
-                            <Col xs="0" sm="3" md="6" lg="9">
+                            <Col xs="0" sm="3" md="6" lg="8">
                                 {" "}
                             </Col>
-                            <SearchBarCol xs="12" sm="9" md="6" lg="3">
+                            <SearchBarCol xs="12" sm="9" md="6" lg="4">
                                 <SearchBar
                                     value={input}
                                     onChange={e => changeInput(e.target.value)}
