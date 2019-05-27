@@ -69,6 +69,10 @@ export const USER_SCHEMAS = gql`
             user {
                 name
             }
+            created
+            columns {
+                name
+            }
         }
     }
 `;

@@ -17,7 +17,11 @@ const DataDiv = styled(Container)`
 
 const Data = ({ match: { path } }) => {
     const [isNewOpen, handleNewSchemaModal] = useState(false);
-    const [isUploadOpen, handleUploadFileModal] = useState(true);
+    const [selectedUserSchema, handleSelected] = useState({
+        name: "",
+        id: "",
+        open: false
+    });
     return (
         <>
             <Topbar
@@ -27,14 +31,15 @@ const Data = ({ match: { path } }) => {
                 buttonName="유저 스키마 추가"
             />
             <DataDiv className="container">
-                <DataCardContainer />
+                <DataCardContainer handleSelected={handleSelected} />
                 <NewSchemaModal
                     isOpen={isNewOpen}
                     handleNewSchemaModal={handleNewSchemaModal}
                 />
                 <UploadFileModal
-                    isOpen={isUploadOpen}
-                    handleUploadFileModal={handleUploadFileModal}
+                    isOpen={selectedUserSchema.open}
+                    handleUploadFileModal={handleSelected}
+                    userSchema={selectedUserSchema}
                 />
             </DataDiv>
         </>

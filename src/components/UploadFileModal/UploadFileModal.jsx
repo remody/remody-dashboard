@@ -62,11 +62,23 @@ const UploadFileModal = props => {
                 return (
                     <Modal
                         isOpen={props.isOpen}
-                        toggle={() => props.handleUploadFileModal(false)}
+                        toggle={() =>
+                            props.handleUploadFileModal({
+                                id: "",
+                                name: "",
+                                open: false
+                            })
+                        }
                         style={{ position: "relative", top: "10%" }}
                     >
                         <ModalHeader
-                            toggle={() => props.handleUploadFileModal(false)}
+                            toggle={() =>
+                                props.handleUploadFileModal({
+                                    id: "",
+                                    name: "",
+                                    open: false
+                                })
+                            }
                             style={{
                                 backgroundColor: Theme.primaryColor,
                                 color: Theme.primaryFontColor
@@ -89,7 +101,7 @@ const UploadFileModal = props => {
                                 }}
                             >
                                 <h7>저장될 스키마</h7>
-                                <h3>props.name</h3>
+                                <h3>{props.userSchema.name}</h3>
                                 <br />
                                 <Dropzone onDrop={([file]) => handleFile(file)}>
                                     {({ getRootProps, getInputProps }) => (

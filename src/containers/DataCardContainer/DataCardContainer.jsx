@@ -23,7 +23,7 @@ const DataCardContainerInfo = styled.div`
     text-align: center;
 `;
 
-const DataCardContainer = () => {
+const DataCardContainer = ({ handleSelected }) => {
     return (
         <Query query={USER_SCHEMAS}>
             {({ loading, error, data }) => {
@@ -51,7 +51,11 @@ const DataCardContainer = () => {
                 return (
                     <DataCardContainerDiv>
                         {data.userSchemas.map(item => (
-                            <DataCard key={item.id} {...item} />
+                            <DataCard
+                                key={item.id}
+                                {...item}
+                                handleSelected={handleSelected}
+                            />
                         ))}
                         <DataCardContainerInfo>
                             <h5>
