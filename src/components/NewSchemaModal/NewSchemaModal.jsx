@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPlusSquare, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, ModalBody, Button, ModalHeader, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
@@ -38,6 +38,13 @@ const Attribute = styled.label`
     top: 6px;
     width: 100px;
     text-align: left;
+`;
+
+const MinusIcon = styled(FontAwesomeIcon)`
+    color: red;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
 `;
 
 const NewSchemaModal = props => {
@@ -125,6 +132,29 @@ const NewSchemaModal = props => {
                                                     newState[index] =
                                                         e.target.value;
                                                     changeInputs(newState);
+                                                }}
+                                            />
+                                            <MinusIcon
+                                                icon={faMinusSquare}
+                                                className="ml-1"
+                                                onClick={() => {
+                                                    if (inputs.length === 1) {
+                                                        console.log("x");
+                                                    } else {
+                                                        const head = inputs.slice(
+                                                            0,
+                                                            index
+                                                        );
+                                                        const tail = inputs.slice(
+                                                            index + 1,
+                                                            inputs.length
+                                                        );
+                                                        const newState = [
+                                                            ...head,
+                                                            ...tail
+                                                        ];
+                                                        changeInputs(newState);
+                                                    }
                                                 }}
                                             />
                                         </div>
