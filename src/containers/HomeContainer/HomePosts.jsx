@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Card, CardBody, Badge } from "shards-react";
-import PageTitle from "components/CommonHome/PageTitle";
 import { Link } from "react-router-dom";
 
 class HomePosts extends React.Component {
@@ -22,14 +21,14 @@ class HomePosts extends React.Component {
             },
             {
                 backgroundImage: require("../../images/content-management/2.jpeg"),
-                category: "Interprete",
+                category: "Extract",
                 categoryTheme: "info",
                 author: "James Jamerson",
                 authorAvatar: require("../../images/avatars/2.jpg"),
                 title: "데이터 입력, 추출",
                 body:
                     "다운로드 된 PDF를 넣어서 필요한 속성값을 입력 후 데이터 추출",
-                date: "/Interprete"
+                date: "/Extract"
             },
             {
                 backgroundImage: require("../../images/content-management/3.jpeg"),

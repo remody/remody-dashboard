@@ -71,8 +71,8 @@ const SideBar = () => {
             icon: faAtlas
         },
         {
-            url: "/interprete",
-            name: "Interprete",
+            url: "/Extract",
+            name: "Extract",
             icon: faArchive
         }
     ];

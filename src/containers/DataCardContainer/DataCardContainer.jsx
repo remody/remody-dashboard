@@ -57,7 +57,7 @@ const DataCardContainer = () => {
                         <DataCardContainerInfo>
                             <h5>
                                 새로운 데이터를 만들려면{" "}
-                                <Link to="/Interprete">Extract</Link>로 먼저
+                                <Link to="/Extract">Extract</Link>로 먼저
                                 추출해주세요!
                             </h5>
                         </DataCardContainerInfo>

@@ -52,7 +52,10 @@ const DropZoneSet = () => {
                                     <br />
                                     or click to select files
                                 </DropTag>
-                                <DropZoneModal isOpen={isOpen} />
+                                <DropZoneModal
+                                    isOpen={isOpen}
+                                    handleOpen={HandleOpen}
+                                />
                             </div>
                         </section>
                     )}

@@ -77,8 +77,8 @@ class ErrorLink extends React.Component {
             name: "SEARCH"
         },
         {
-            url: "/interprete",
-            name: "INTERPRETE"
+            url: "/Extract",
+            name: "Extract"
         }
     ];
 

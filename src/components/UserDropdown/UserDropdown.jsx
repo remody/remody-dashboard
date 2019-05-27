@@ -82,8 +82,8 @@ const sideItemArray = [
         name: "Search"
     },
     {
-        url: "/interprete",
-        name: "Interprete"
+        url: "/Extract",
+        name: "Extract"
     }
 ];
 

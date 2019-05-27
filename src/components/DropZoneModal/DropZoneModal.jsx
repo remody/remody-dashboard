@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
     Button,
     Modal,
@@ -8,12 +11,11 @@ import {
     Input
 } from "reactstrap";
 import { Mutation } from "react-apollo";
-
 import Theme from "Theme";
 import { UPLOAD_FILE } from "graphqls";
 
 const DropZoneModal = props => {
-    const [Attribute, handleAttribute] = useState("");
+    const [inputs, handleInputs] = useState([""]);
 
     return (
         <Mutation mutation={UPLOAD_FILE}>
@@ -22,7 +24,6 @@ const DropZoneModal = props => {
                     <div>
                         <Modal
                             isOpen={data ? false : props.isOpen}
-                            toggle={() => props.handleDropZoneModal(false)}
                             style={{ position: "relative", top: "10%" }}
                         >
                             <ModalHeader
@@ -40,26 +41,54 @@ const DropZoneModal = props => {
                                     textAlign: "center"
                                 }}
                             >
-                                <div style={{ textAlign: "left" }}>
-                                    <label>Attribute</label>
-                                    <br />
-                                    <Input
-                                        type="Attribute"
-                                        onChange={e =>
-                                            handleAttribute(e.target.value)
+                                <div>
+                                    <Button
+                                        color="primary"
+                                        onClick={() =>
+                                            handleInputs([...inputs, ""])
                                         }
-                                        value={Attribute}
-                                    />
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={faPlusSquare}
+                                            className="mr-3"
+                                        />
+                                        추가하기
+                                    </Button>{" "}
                                 </div>
-                                <b>필요한 Attribute 입력값을 넣으시오.</b>
-                                <br />
+                                {inputs.map((item, index) => (
+                                    <>
+                                        <div style={{ textAlign: "left" }}>
+                                            <b>Attribute</b>
+                                            <br />
+                                            <Input
+                                                type="Attribute"
+                                                onChange={e => {
+                                                    const newState = [
+                                                        ...inputs
+                                                    ];
+                                                    newState[index] =
+                                                        e.target.value;
+                                                    handleInputs(newState);
+                                                }}
+                                                value={item}
+                                            />
+                                        </div>
+                                        <br />
+                                    </>
+                                ))}
                             </ModalBody>
 
                             <ModalFooter>
                                 <Button color="primary" onClick={() => {}}>
-                                    Do Something
+                                    Save
                                 </Button>
-                                <Button color="secondary" onClick={() => {}}>
+                                <Button
+                                    color="secondary"
+                                    onClick={() => {
+                                        handleInputs([""]);
+                                        props.handleOpen(false);
+                                    }}
+                                >
                                     Cancel
                                 </Button>
                             </ModalFooter>
