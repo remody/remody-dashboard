@@ -13,7 +13,7 @@ const TopbarDiv = styled.div`
 const Topbar = ({ name, clickFunction, state }) => (
     <TopbarDiv>
         <div>{name}</div>
-        {clickFunction ? (
+        {clickFunction && window.localStorage.getItem("token") ? (
             <button
                 className="btn btn-primary"
                 onClick={() => clickFunction(!state)}
