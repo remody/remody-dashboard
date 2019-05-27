@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
-import Topbar from "components/Topbar";
 import DataCardContainer from "containers/DataCardContainer";
+
+import Topbar from "components/Topbar";
 import NewSchemaModal from "components/NewSchemaModal";
+import UploadFileModal from "components/UploadFileModal";
 
 const DataDiv = styled(Container)`
     display: flex;
@@ -14,7 +16,8 @@ const DataDiv = styled(Container)`
 `;
 
 const Data = ({ match: { path } }) => {
-    const [isNewOpen, handleNewSchemaModal] = useState();
+    const [isNewOpen, handleNewSchemaModal] = useState(false);
+    const [isUploadOpen, handleUploadFileModal] = useState(true);
     return (
         <>
             <Topbar
@@ -28,6 +31,10 @@ const Data = ({ match: { path } }) => {
                 <NewSchemaModal
                     isOpen={isNewOpen}
                     handleNewSchemaModal={handleNewSchemaModal}
+                />
+                <UploadFileModal
+                    isOpen={isUploadOpen}
+                    handleUploadFileModal={handleUploadFileModal}
                 />
             </DataDiv>
         </>

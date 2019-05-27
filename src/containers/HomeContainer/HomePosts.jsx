@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card, CardBody, Badge } from "shards-react";
-import PageTitle from "components/CommonHome/PageTitle";
+
 import { Link } from "react-router-dom";
 
 class HomePosts extends React.Component {
