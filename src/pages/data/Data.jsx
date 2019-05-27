@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
@@ -13,9 +13,14 @@ const DataDiv = styled(Container)`
 `;
 
 const Data = ({ match: { path } }) => {
+    const [isNewOpen, handleNewSchemaModal] = useState();
     return (
         <>
-            <Topbar name={path} />
+            <Topbar
+                name={path}
+                clickFunction={handleNewSchemaModal}
+                state={isNewOpen}
+            />
             <DataDiv className="container">
                 <DataCardContainer />
             </DataDiv>
