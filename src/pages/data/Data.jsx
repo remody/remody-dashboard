@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 
 import Topbar from "components/Topbar";
 import DataCardContainer from "containers/DataCardContainer";
+import NewSchemaModal from "components/NewSchemaModal";
 
 const DataDiv = styled(Container)`
     display: flex;
@@ -20,9 +21,14 @@ const Data = ({ match: { path } }) => {
                 name={path}
                 clickFunction={handleNewSchemaModal}
                 state={isNewOpen}
+                buttonName="유저 스키마 추가"
             />
             <DataDiv className="container">
                 <DataCardContainer />
+                <NewSchemaModal
+                    isOpen={isNewOpen}
+                    handleNewSchemaModal={handleNewSchemaModal}
+                />
             </DataDiv>
         </>
     );

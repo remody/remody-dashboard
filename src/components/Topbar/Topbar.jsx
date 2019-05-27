@@ -10,7 +10,7 @@ const TopbarDiv = styled.div`
     padding: 0 20px;
 `;
 
-const Topbar = ({ name, clickFunction, state }) => (
+const Topbar = ({ name, clickFunction, state, buttonName }) => (
     <TopbarDiv>
         <div>{name}</div>
         {clickFunction && window.localStorage.getItem("token") ? (
@@ -18,7 +18,7 @@ const Topbar = ({ name, clickFunction, state }) => (
                 className="btn btn-primary"
                 onClick={() => clickFunction(!state)}
             >
-                파일 등록
+                {buttonName}
             </button>
         ) : null}
     </TopbarDiv>
