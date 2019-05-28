@@ -1,5 +1,9 @@
 import React from "react";
 import { Container, Row, Col, Card, CardBody, Badge } from "shards-react";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0d88c13654403e310f4a20cfc44bcc9eb7cb8ae1
 import { Link } from "react-router-dom";
 
 class HomePosts extends React.Component {

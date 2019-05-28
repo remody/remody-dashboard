@@ -69,6 +69,10 @@ export const USER_SCHEMAS = gql`
             user {
                 name
             }
+            created
+            columns {
+                name
+            }
         }
     }
 `;
@@ -141,10 +145,8 @@ export const UPLOAD_FOR_SEARCH = gql`
     }
 `;
 export const UPLOAD_FILE = gql`
-    mutation singleUpload($file: Upload!) {
-        singleUpload(file: $file) {
-            filename
-        }
+    mutation singleUpload($file: Upload!, $schemaId: ID!) {
+        singleUpload(file: $file, schemaId: $schemaId)
     }
 `;
 
