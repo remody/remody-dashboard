@@ -9,7 +9,6 @@ import theme from "Theme";
 import Home from "pages/home";
 import Data from "pages/data";
 import DataInfo from "pages/datainfo";
-import Interprete from "pages/interprete";
 import NoMatch from "pages/nomatch";
 import Search from "pages/search";
 
@@ -33,10 +32,6 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/data" component={Data} />
                                 <Route path="/data/info" component={DataInfo} />
-                                <Route
-                                    path="/interprete"
-                                    component={Interprete}
-                                />
                                 <Route path="/search" component={Search} />
                                 <Route path="*" component={NoMatch} />
                             </Switch>
