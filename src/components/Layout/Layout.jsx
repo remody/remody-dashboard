@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import SideBar from "../SideBar";
-import UserDropdown from "../UserDropdown";
-import LoginModal from "../LoginModal";
-import SignupModal from "../SignupModal";
-import ChangePasswordModal from "../ChangePasswordModal";
+import SideBar from "components/SideBar";
+import UserDropdown from "components/UserDropdown";
+import LoginModal from "components/LoginModal";
+import SignupModal from "components/SignupModal";
+import ChangePasswordModal from "components/ChangePasswordModal";
 
 const LayoutNoBar = styled.div`
     display: flex;
