@@ -9,6 +9,7 @@ import Theme from "Theme";
 
 const DataCardContainerDiv = styled.div`
     width: 100%;
+    padding: 30px 0;
 `;
 
 const LoadingDiv = styled.div`
