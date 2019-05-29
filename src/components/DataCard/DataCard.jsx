@@ -47,8 +47,15 @@ const DataCard = ({
     return (
         <CardBody className="d-block d-md-flex">
             <CardLeft>
-                <h3>스키마명: {name}</h3>
-                <h5>추출 키워드: {columns.map(item => item.name + " ")}</h5>
+                <h3>{name}</h3>
+                <h5>
+                    키워드:{" "}
+                    {columns.map(item => (
+                        <div className="badge badge-success mx-1">
+                            {item.name}
+                        </div>
+                    ))}
+                </h5>
             </CardLeft>
             <CardRight className="d-flex flex-column-reverse flex-md-column align-items-start align-items-md-end">
                 <div>
