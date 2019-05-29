@@ -43,6 +43,8 @@ const PaperInfoCard = ({
             </CardBody>
             <a
                 href={`http://ec2-13-125-75-243.ap-northeast-2.compute.amazonaws.com/${url}`}
+                target="_blank"
+                rel="noreferrer noopener"
             >
                 <PDFimage src={pdfImage} alt="img" />
             </a>
