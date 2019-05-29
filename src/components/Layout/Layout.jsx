@@ -17,6 +17,13 @@ const Body = styled.div`
     padding: 0 !important;
 `;
 
+const Footer = styled.div`
+    background-color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryFontColor};
+    padding: 20px;
+    text-align: center;
+`;
+
 const Layout = props => {
     const [loginOpen, handleLoginModal] = useState(false);
     const [signUpOpen, handleSignUpModal] = useState(false);
@@ -47,6 +54,7 @@ const Layout = props => {
                     handleSignUpModal={state => handleSignUpModal(state)}
                 />
                 <div>{props.children}</div>
+                <Footer>@2019 Remody Corp.</Footer>
             </Body>
         </LayoutNoBar>
     );
