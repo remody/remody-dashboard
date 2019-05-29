@@ -42,7 +42,8 @@ const DataCard = ({
     id,
     handleSelected,
     created,
-    columns
+    columns,
+    handleDeleted
 }) => {
     return (
         <CardBody className="d-block d-md-flex">
@@ -51,7 +52,10 @@ const DataCard = ({
                 <h5>
                     키워드:{" "}
                     {columns.map(item => (
-                        <div className="badge badge-success mx-1">
+                        <div
+                            key={item.name}
+                            className="badge badge-success mx-1"
+                        >
                             {item.name}
                         </div>
                     ))}
@@ -78,7 +82,12 @@ const DataCard = ({
                             {created ? "작업중" : "데이터로 이동"}
                         </button>
                     </MyLink>
-                    <button className="btn btn-danger" onClick={() => {}}>
+                    <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                            handleDeleted({ open: true, id, name });
+                        }}
+                    >
                         삭제
                     </button>
                 </div>

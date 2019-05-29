@@ -165,3 +165,9 @@ export const CREATE_TABLE = gql`
         }
     }
 `;
+
+export const DELETE_USER_SCHEMA = gql`
+    mutation deleteUserSchema($id: ID!) {
+        deleteUserSchema(id: $id)
+    }
+`;
