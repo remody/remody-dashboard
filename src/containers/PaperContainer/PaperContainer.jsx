@@ -12,7 +12,7 @@ import Theme from "Theme";
 const GET_COUNT = 6;
 
 const PaperContainerDiv = styled.div`
-    padding: 30px;
+    padding: 30px 0px;
     width: calc(100% - 30px);
     text-align: center;
 `;
