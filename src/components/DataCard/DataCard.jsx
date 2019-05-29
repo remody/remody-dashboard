@@ -7,7 +7,6 @@ const CardBody = styled.div`
     width: 100%;
     padding: 25px;
     margin-bottom: 25px;
-    display: flex;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
@@ -15,11 +14,16 @@ const CardLeft = styled.div`
     position: relative;
     top: 5px;
     width: 60%;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 const CardRight = styled.div`
     width: 40%;
-    text-align: right;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 const MyLink = styled(Link)`
@@ -41,20 +45,23 @@ const DataCard = ({
     columns
 }) => {
     return (
-        <CardBody>
+        <CardBody className="d-block d-md-flex">
             <CardLeft>
                 <h3>스키마명: {name}</h3>
                 <h5>추출 키워드: {columns.map(item => item.name + " ")}</h5>
             </CardLeft>
-            <CardRight>
-                <div className="d-flex justify-content-end">
+            <CardRight className="d-flex flex-column-reverse flex-md-column align-items-start align-items-md-end">
+                <div>
                     <button
                         className="btn btn-info mr-1"
                         onClick={() => handleSelected({ id, name, open: true })}
                     >
                         pdf추가
                     </button>
-                    <MyLink to={created ? "/data" : `/data/info/${id}`}>
+                    <MyLink
+                        to={created ? "/data" : `/data/info/${id}`}
+                        className="mr-1"
+                    >
                         <button
                             className={
                                 created ? "btn btn-danger" : "btn btn-primary"
@@ -64,6 +71,9 @@ const DataCard = ({
                             {created ? "작업중" : "데이터로 이동"}
                         </button>
                     </MyLink>
+                    <button className="btn btn-danger" onClick={() => {}}>
+                        삭제
+                    </button>
                 </div>
                 <div>데이터 수: {rowCount}</div>
                 <div>소유자: {userName}</div>
