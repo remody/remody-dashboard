@@ -75,10 +75,6 @@ class ErrorLink extends React.Component {
         {
             url: "/search",
             name: "SEARCH"
-        },
-        {
-            url: "/Extract",
-            name: "Extract"
         }
     ];
 

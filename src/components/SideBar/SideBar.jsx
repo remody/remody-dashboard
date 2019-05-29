@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    faDatabase,
-    faHome,
-    faArchive,
-    faAtlas
-} from "@fortawesome/free-solid-svg-icons";
+import { faDatabase, faHome, faAtlas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
@@ -69,11 +64,6 @@ const SideBar = () => {
             url: "/search",
             name: "Search",
             icon: faAtlas
-        },
-        {
-            url: "/Extract",
-            name: "Extract",
-            icon: faArchive
         }
     ];
     return (
