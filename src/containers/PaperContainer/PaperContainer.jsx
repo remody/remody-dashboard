@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import ReactLoading from "react-loading";
 import { Row, Input, Col } from "reactstrap";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { PAPERS } from "graphqls";
@@ -30,6 +30,7 @@ const SearchBarDiv = styled(Row)`
 
 const SearchBarCol = styled(Col)`
     display: flex;
+    padding: 0 !important;
 `;
 
 const SearchBar = styled(Input)`
@@ -47,12 +48,17 @@ const Icon = styled(FontAwesomeIcon)`
     right: 6em;
 `;
 
+const XIcon = styled(FontAwesomeIcon)`
+    position: relative;
+    top: 5px;
+`;
+
 const FetchMoreButton = styled.button`
     margin: auto;
 `;
 
 const PaperContainer = () => {
-    let keyword;
+    const [keyword, changeKeyword] = useState("");
     const [input, changeInput] = useState("");
     const [canGetMore, changeGetMore] = useState(true);
     return (
@@ -72,7 +78,7 @@ const PaperContainer = () => {
                 }
                 if (error) {
                     return (
-                        <LoadingDiv>
+                        <LoadingDiv className="text-center">
                             <h3>
                                 홈페이지 접속이 원활하지 않습니다.
                                 <br />
@@ -84,8 +90,55 @@ const PaperContainer = () => {
                 return (
                     <PaperContainerDiv>
                         <SearchBarDiv>
-                            <Col xs="0" sm="3" md="6" lg="8">
-                                {" "}
+                            <Col
+                                xs="0"
+                                sm="3"
+                                md="6"
+                                lg="8"
+                                className="text-left"
+                            >
+                                {keyword ? (
+                                    <div className="alert alert-primary d-flex justify-content-between">
+                                        <div>현재 검색어: {keyword}</div>
+                                        <XIcon
+                                            icon={faTimes}
+                                            onClick={() => {
+                                                fetchMore({
+                                                    variables: {
+                                                        first: GET_COUNT,
+                                                        queryString: ""
+                                                    },
+                                                    updateQuery: (
+                                                        prev,
+                                                        { fetchMoreResult }
+                                                    ) => {
+                                                        changeGetMore(true);
+                                                        if (!fetchMoreResult)
+                                                            return prev;
+                                                        if (
+                                                            fetchMoreResult
+                                                                .papers.length <
+                                                            6
+                                                        ) {
+                                                            changeGetMore(
+                                                                false
+                                                            );
+                                                        }
+                                                        changeKeyword("");
+                                                        return {
+                                                            ...fetchMoreResult,
+                                                            papers: [
+                                                                ...fetchMoreResult.papers
+                                                            ]
+                                                        };
+                                                    }
+                                                });
+                                            }}
+                                        />
+                                    </div>
+                                ) : (
+                                    " "
+                                )}
                             </Col>
                             <SearchBarCol xs="12" sm="9" md="6" lg="4">
                                 <SearchBar
@@ -95,11 +148,10 @@ const PaperContainer = () => {
                                 <SearchButton
                                     className="btn btn-primary"
                                     onClick={() => {
-                                        keyword = input;
                                         fetchMore({
                                             variables: {
                                                 first: GET_COUNT,
-                                                queryString: keyword
+                                                queryString: input
                                             },
                                             updateQuery: (
                                                 prev,
@@ -110,10 +162,11 @@ const PaperContainer = () => {
                                                     return prev;
                                                 if (
                                                     fetchMoreResult.papers
-                                                        .length === 0
+                                                        .length < 6
                                                 ) {
                                                     changeGetMore(false);
                                                 }
+                                                changeKeyword(input);
                                                 return {
                                                     ...fetchMoreResult,
                                                     papers: [
