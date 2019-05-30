@@ -9,6 +9,7 @@ import Theme from "Theme";
 
 const DataCardContainerDiv = styled.div`
     width: 100%;
+    padding: 30px 0;
 `;
 
 const LoadingDiv = styled.div`
@@ -22,7 +23,7 @@ const DataCardContainerInfo = styled.div`
     text-align: center;
 `;
 
-const DataCardContainer = ({ handleSelected }) => {
+const DataCardContainer = ({ handleSelected, handleDeleted }) => {
     return (
         <Query query={USER_SCHEMAS}>
             {({ loading, error, data }) => {
@@ -54,6 +55,7 @@ const DataCardContainer = ({ handleSelected }) => {
                                 key={item.id}
                                 {...item}
                                 handleSelected={handleSelected}
+                                handleDeleted={handleDeleted}
                             />
                         ))}
                         <DataCardContainerInfo>

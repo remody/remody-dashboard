@@ -43,7 +43,7 @@ const Attribute = styled.label`
 const MinusIcon = styled(FontAwesomeIcon)`
     color: red;
     position: relative;
-    top: 10px;
+    top: 2px;
     cursor: pointer;
 `;
 
@@ -92,17 +92,22 @@ const NewSchemaModal = props => {
                                     textAlign: "center"
                                 }}
                             >
-                                <div className="d-flex">
+                                <div className="d-flex mb-2">
                                     <Attribute>이름</Attribute>
                                     <Input
                                         value={name}
-                                        onChange={e =>
-                                            changeName(e.target.value)
-                                        }
+                                        onChange={e => {
+                                            const inputValue = e.target.value;
+                                            if (
+                                                inputValue[
+                                                    inputValue.length - 1
+                                                ] !== " "
+                                            )
+                                                changeName(inputValue);
+                                        }}
                                     />
                                 </div>
-                                <br />
-                                <div style={{ textAlign: "right" }}>
+                                <div className="text-right mb-2">
                                     <button
                                         className="btn btn-primary"
                                         onClick={() =>
@@ -116,27 +121,37 @@ const NewSchemaModal = props => {
                                         />
                                     </button>
                                 </div>
-                                <br />
                                 {inputs.map((item, index) => (
                                     <div key={index}>
-                                        <div className="d-flex">
+                                        <div className="d-flex mb-2">
                                             <Attribute>
-                                                Attribute {index + 1}
+                                                속성 {index + 1}
                                             </Attribute>
                                             <Input
                                                 value={item}
                                                 onChange={e => {
-                                                    const newState = [
-                                                        ...inputs
-                                                    ];
-                                                    newState[index] =
+                                                    const inputValue =
                                                         e.target.value;
-                                                    changeInputs(newState);
+                                                    if (
+                                                        inputValue[
+                                                            inputValue.length -
+                                                                1
+                                                        ] !== " "
+                                                    ) {
+                                                        const newState = [
+                                                            ...inputs
+                                                        ];
+                                                        newState[
+                                                            index
+                                                        ] = inputValue;
+                                                        changeInputs(newState);
+                                                    }
                                                 }}
                                             />
                                             <MinusIcon
                                                 icon={faMinusSquare}
                                                 className="ml-1"
+                                                size="2x"
                                                 onClick={() => {
                                                     if (inputs.length === 1) {
                                                         console.log("x");
@@ -158,10 +173,8 @@ const NewSchemaModal = props => {
                                                 }}
                                             />
                                         </div>
-                                        <br />
                                     </div>
                                 ))}
-                                <br />
                                 {error ? (
                                     <>
                                         <ErrorHeader>
@@ -175,6 +188,7 @@ const NewSchemaModal = props => {
                                     <div />
                                 )}
                                 <Button
+                                    className="mb-2"
                                     onClick={() => {
                                         const rows = inputs.map(input => ({
                                             name: input,
@@ -193,6 +207,9 @@ const NewSchemaModal = props => {
                                 >
                                     등록
                                 </Button>
+                                <div className="text-danger">
+                                    공백 문자는 입력 할 수 없습니다
+                                </div>
                             </ModalBody>
                         )}
                         <ModalFooter style={{ textAlign: "center" }}>
