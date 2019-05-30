@@ -16,29 +16,29 @@ class HomePosts extends React.Component {
                 authorAvatar: require("../../images/avatars/1.jpg"),
                 title: "PDF 검색",
                 body:
-                    "필요한 PDF가 없을 때 홈페이지 내에서 검색을 통해 PDF 분석이 가능",
+                    "자신이 원하는 키워드가 있는 PDF를 검색하여 관련 자료를 확인하고 수집",
                 date: "/Search"
             },
             {
                 backgroundImage: require("../../images/content-management/2.jpeg"),
-                category: "Extract",
+                category: "Data",
                 categoryTheme: "info",
                 author: "James Jamerson",
                 authorAvatar: require("../../images/avatars/2.jpg"),
                 title: "데이터 입력, 추출",
                 body:
                     "다운로드 된 PDF를 넣어서 필요한 속성값을 입력 후 데이터 추출",
-                date: "/Extract"
+                date: "/Data"
             },
             {
                 backgroundImage: require("../../images/content-management/3.jpeg"),
                 category: "Data",
                 categoryTheme: "royal-blue",
                 author: "Jimmy Jackson",
-                authorAvatar: require("../../images/avatars/2.jpg"),
+                authorAvatar: require("../../images/avatars/3.jpg"),
                 title: "데이터 확인",
                 body:
-                    "DATA 메뉴에서 관련 로그인 계정의 추출된 데이터가 저장되어 있음",
+                    "DATA 메뉴에서 관련 로그인 계정의 추출된 데이터가 저장되어 있음(입력 키워드 관련)",
                 date: "/Data"
             },
             {
@@ -46,10 +46,10 @@ class HomePosts extends React.Component {
                 category: "DataBase",
                 categoryTheme: "warning",
                 author: "John James",
-                authorAvatar: require("../../images/avatars/3.jpg"),
+                authorAvatar: require("../../images/avatars/4.jpg"),
                 title: "DataBase 저장",
                 body:
-                    "How but sons mrs lady when. Her especially are unpleasant out alteration ",
+                    "전처리, 머신러닝 이후 RDBMS에 저장하여 영구적으로 데이터를 활용 가능",
                 date: "/"
             }
         ];
@@ -62,8 +62,7 @@ class HomePosts extends React.Component {
                 categoryTheme: "info",
                 author: "Anna Ken",
                 authorAvatar: require("../../images/avatars/0.jpg"),
-                title:
-                    "Attention he extremity unwilling on otherwise cars backwards yet",
+                title: "Place for advertisement",
                 body:
                     "Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...",
                 date: "29 February 2019"
@@ -74,8 +73,7 @@ class HomePosts extends React.Component {
                 categoryTheme: "dark",
                 author: "John James",
                 authorAvatar: require("../../images/avatars/1.jpg"),
-                title:
-                    "Totally words widow one downs few age every seven if miss part by fact",
+                title: "Place for advertisement",
                 body:
                     "Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education to admitted speaking...",
                 date: "29 February 2019"
@@ -151,7 +149,12 @@ class HomePosts extends React.Component {
                 {/* Second Row of Posts */}
                 <Row>
                     {this.PostsListTwo.map((post, idx) => (
-                        <Col lg="6" sm="12" className="mb-4" key={idx}>
+                        <Col
+                            lg="6"
+                            sm="12"
+                            className="mb-4 d-none d-md-block"
+                            key={idx}
+                        >
                             <Card
                                 small
                                 className="card-post card-post--aside card-post--1"
