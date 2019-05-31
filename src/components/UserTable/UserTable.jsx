@@ -9,8 +9,10 @@ import ToolkitProvider, {
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
+import ReactLoading from "react-loading";
+import Theme from "Theme";
 
-import { UPDATE_USER_SCHEMA_INFO } from "../../graphql";
+import { UPDATE_USER_SCHEMA_INFO } from "graphqls";
 
 const sizePerPageOptionRenderer = ({ text, page, onSizePerPageChange }) => (
     <li key={text} role="presentation" className="dropdown-item">
@@ -54,7 +56,6 @@ class UserTable extends React.Component {
         this.modify = {};
         this.delete = {};
         this.create = {};
-        console.log(props.schemaId);
         this.nextId = props.nextId;
         this.state = {
             rows: props.rows
@@ -74,7 +75,7 @@ class UserTable extends React.Component {
                 {props => (
                     <div>
                         <div className="d-block d-md-flex justify-content-md-between">
-                            <div>
+                            <div className="mb-2 mb-md-0">
                                 <button
                                     className="btn btn-secondary mr-1"
                                     onClick={() => {
@@ -101,7 +102,7 @@ class UserTable extends React.Component {
                                     항목 추가
                                 </button>
                                 <button
-                                    className="btn btn-danger"
+                                    className="btn btn-danger mr-1"
                                     onClick={() => {
                                         const sortArray = [
                                             ...this.node.selectionContext
@@ -121,15 +122,6 @@ class UserTable extends React.Component {
                                 >
                                     선택항목 삭제
                                 </button>
-                            </div>
-                            <div>
-                                <SearchBar {...props.searchProps} />
-                                <ExportCSVButton
-                                    {...props.csvProps}
-                                    className="btn btn-secondary ml-1"
-                                >
-                                    Export CSV!!
-                                </ExportCSVButton>
                                 <Mutation
                                     mutation={UPDATE_USER_SCHEMA_INFO}
                                     onCompleted={data => {
@@ -142,7 +134,6 @@ class UserTable extends React.Component {
                                         updateUserSchemaInfo,
                                         { loading, error }
                                     ) => {
-                                        if (loading) return "loading";
                                         if (error) return "plz reload";
                                         return (
                                             <button
@@ -166,13 +157,35 @@ class UserTable extends React.Component {
                                                     this.delete = {};
                                                     this.create = {};
                                                 }}
-                                                className="btn btn-primary ml-2"
+                                                className="btn btn-primary"
                                             >
-                                                저장
+                                                {loading ? (
+                                                    <ReactLoading
+                                                        height="23px"
+                                                        width="20px"
+                                                        type="spin"
+                                                        color={
+                                                            Theme.primaryFontColor
+                                                        }
+                                                    />
+                                                ) : error ? (
+                                                    "reload"
+                                                ) : (
+                                                    "저장"
+                                                )}
                                             </button>
                                         );
                                     }}
                                 </Mutation>
+                            </div>
+                            <div className="mb-2 mb-md-0">
+                                <SearchBar {...props.searchProps} />
+                                <ExportCSVButton
+                                    {...props.csvProps}
+                                    className="btn btn-secondary ml-1"
+                                >
+                                    Export CSV!!
+                                </ExportCSVButton>
                             </div>
                         </div>
                         <BootstrapTable

@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    faDatabase,
-    faHome,
-    faArchive,
-    faAtlas
-} from "@fortawesome/free-solid-svg-icons";
+import { faDatabase, faHome, faAtlas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
-import Theme from "../../Theme";
+import Theme from "Theme";
 
 const SideBarWrapper = styled.div`
     z-index: 10;
@@ -66,14 +61,9 @@ const SideBar = () => {
             icon: faDatabase
         },
         {
-            url: "/analyze",
-            name: "Analyze",
+            url: "/search",
+            name: "Search",
             icon: faAtlas
-        },
-        {
-            url: "/interprete",
-            name: "Interprete",
-            icon: faArchive
         }
     ];
     return (

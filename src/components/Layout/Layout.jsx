@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import SideBar from "../SideBar";
-import UserDropdown from "../UserDropdown";
-import LoginModal from "../LoginModal";
-import SignupModal from "../SignupModal";
-import ChangePasswordModal from "../ChangePasswordModal";
+import SideBar from "components/SideBar";
+import UserDropdown from "components/UserDropdown";
+import LoginModal from "components/LoginModal";
+import SignupModal from "components/SignupModal";
+import ChangePasswordModal from "components/ChangePasswordModal";
 
 const LayoutNoBar = styled.div`
     display: flex;
@@ -15,6 +15,13 @@ const Body = styled.div`
     height: 100vh;
     background-color: ${props => props.theme.backgroundColor};
     padding: 0 !important;
+`;
+
+const Footer = styled.div`
+    background-color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryFontColor};
+    padding: 20px;
+    text-align: center;
 `;
 
 const Layout = props => {
@@ -47,6 +54,7 @@ const Layout = props => {
                     handleSignUpModal={state => handleSignUpModal(state)}
                 />
                 <div>{props.children}</div>
+                <Footer>@2019 Remody Corp.</Footer>
             </Body>
         </LayoutNoBar>
     );

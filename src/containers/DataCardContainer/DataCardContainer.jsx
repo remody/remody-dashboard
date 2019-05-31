@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
-import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-import { USER_SCHEMAS } from "../../graphql";
-import DataCard from "../../components/DataCard/DataCard";
-import Theme from "../../Theme";
+import { USER_SCHEMAS } from "graphqls";
+import DataCard from "components/DataCard/DataCard";
+import Theme from "Theme";
 
 const DataCardContainerDiv = styled.div`
     width: 100%;
+    padding: 30px 0;
 `;
 
 const LoadingDiv = styled.div`
@@ -23,7 +23,7 @@ const DataCardContainerInfo = styled.div`
     text-align: center;
 `;
 
-const DataCardContainer = () => {
+const DataCardContainer = ({ handleSelected, handleDeleted }) => {
     return (
         <Query query={USER_SCHEMAS}>
             {({ loading, error, data }) => {
@@ -51,13 +51,18 @@ const DataCardContainer = () => {
                 return (
                     <DataCardContainerDiv>
                         {data.userSchemas.map(item => (
-                            <DataCard key={item.id} {...item} />
+                            <DataCard
+                                key={item.id}
+                                {...item}
+                                handleSelected={handleSelected}
+                                handleDeleted={handleDeleted}
+                            />
                         ))}
                         <DataCardContainerInfo>
                             <h5>
-                                새로운 데이터를 만들려면{" "}
-                                <Link to="/Interprete">Extract</Link>로 먼저
-                                추출해주세요!
+                                새로운 스키마를 만드시려면 위의{" "}
+                                <b className="text-primary">버튼</b>을
+                                눌러주세요!
                             </h5>
                         </DataCardContainerInfo>
                     </DataCardContainerDiv>
