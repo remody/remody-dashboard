@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
 
+import UserInfoContainer from "containers/UserInfoContainer";
+
 import Topbar from "components/Topbar";
 
 const MyPageDiv = styled(Container)`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 90px);
+    min-height: calc(100vh - 154px);
 `;
 
 const MyPage = ({ match: { path } }) => {
@@ -16,7 +18,7 @@ const MyPage = ({ match: { path } }) => {
         <>
             <Topbar name={path} />
             <MyPageDiv>
-                <div>에미 시발~</div>
+                <UserInfoContainer />
             </MyPageDiv>
         </>
     );
