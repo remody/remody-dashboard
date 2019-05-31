@@ -11,6 +11,7 @@ import Data from "pages/data";
 import DataInfo from "pages/datainfo";
 import NoMatch from "pages/nomatch";
 import Search from "pages/search";
+import MyPage from "pages/mypage/MyPage";
 
 import Layout from "components/Layout";
 
@@ -33,6 +34,7 @@ class App extends Component {
                                 <Route exact path="/data" component={Data} />
                                 <Route path="/data/info" component={DataInfo} />
                                 <Route path="/search" component={Search} />
+                                <Route path="/mypage" component={MyPage} />
                                 <Route path="*" component={NoMatch} />
                             </Switch>
                         </Layout>
