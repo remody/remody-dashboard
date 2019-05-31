@@ -133,11 +133,7 @@ const UserInfoContainer = () => {
     if (error) {
         return (
             <LoadingDiv className="text-center">
-                <h3>
-                    홈페이지 접속이 원활하지 않습니다.
-                    <br />
-                    다시 한번 시도해 주세요.
-                </h3>
+                <h3>로그인이 안 되어 있으면 이용 할 수 없습니다.</h3>
             </LoadingDiv>
         );
     }

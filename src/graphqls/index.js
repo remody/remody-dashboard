@@ -188,3 +188,32 @@ export const UPDATE_USER = gql`
         }
     }
 `;
+
+export const DELETE_PAPER = gql`
+    mutation deletePaper($id: ID!) {
+        deletePaper(id: $id)
+    }
+`;
+
+export const MY_FILES = gql`
+    query {
+        me {
+            name
+            Papers {
+                id
+                title
+                author
+                belong
+            }
+            UserSchemas {
+                id
+                name
+                rowCount
+                columns {
+                    id
+                    name
+                }
+            }
+        }
+    }
+`;
