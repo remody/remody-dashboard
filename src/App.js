@@ -15,6 +15,7 @@ import Search from "pages/search";
 import MyPage from "pages/mypage/MyPage";
 
 import Layout from "components/Layout";
+import MyFile from "pages/myfile/MyPage";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -44,6 +45,7 @@ class App extends Component {
                                     />
                                     <Route path="/search" component={Search} />
                                     <Route path="/mypage" component={MyPage} />
+                                    <Route path="/myfile" component={MyFile} />
                                     <Route path="*" component={NoMatch} />
                                 </Switch>
                             </Layout>
