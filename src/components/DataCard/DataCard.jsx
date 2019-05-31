@@ -35,6 +35,11 @@ const MyLink = styled(Link)`
     }
 `;
 
+const Badge = styled.div`
+    position: relative;
+    top: -1px;
+`;
+
 const DataCard = ({
     name,
     rowCount,
@@ -52,12 +57,12 @@ const DataCard = ({
                 <h5>
                     키워드:{" "}
                     {columns.map(item => (
-                        <div
+                        <Badge
                             key={item.name}
                             className="badge badge-success mx-1"
                         >
                             {item.name}
-                        </div>
+                        </Badge>
                     ))}
                 </h5>
             </CardLeft>
