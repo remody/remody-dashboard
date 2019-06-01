@@ -31,6 +31,7 @@ export const ME = gql`
         me {
             name
             email
+            belong
         }
     }
 `;
@@ -169,5 +170,50 @@ export const CREATE_TABLE = gql`
 export const DELETE_USER_SCHEMA = gql`
     mutation deleteUserSchema($id: ID!) {
         deleteUserSchema(id: $id)
+    }
+`;
+
+export const DELETE_USER = gql`
+    mutation deleteUser {
+        deleteUser
+    }
+`;
+
+export const UPDATE_USER = gql`
+    mutation updateUser($name: String!, $email: String!, $belong: String) {
+        updateUser(data: { name: $name, email: $email, belong: $belong }) {
+            name
+            email
+            belong
+        }
+    }
+`;
+
+export const DELETE_PAPER = gql`
+    mutation deletePaper($id: ID!) {
+        deletePaper(id: $id)
+    }
+`;
+
+export const MY_FILES = gql`
+    query {
+        me {
+            name
+            Papers {
+                id
+                title
+                author
+                belong
+            }
+            UserSchemas {
+                id
+                name
+                rowCount
+                columns {
+                    id
+                    name
+                }
+            }
+        }
     }
 `;

@@ -88,7 +88,7 @@ const LinkDropDown = props => {
         props.handleDropDown(false);
     };
     return (
-        <Link to={props.url}>
+        <Link to={props.url} style={{ textDecoration: "none" }}>
             <DropdownItem onClick={hrefFunction}>{props.name}</DropdownItem>
         </Link>
     );
@@ -155,12 +155,16 @@ const UserDropdown = props => {
                         </>
                     ) : (
                         <>
-                            <DropdownItem onClick={() => handleDropDown(false)}>
-                                내 정보 수정
-                            </DropdownItem>
-                            <DropdownItem onClick={() => handleDropDown(false)}>
-                                내가 등록한 파일
-                            </DropdownItem>
+                            <LinkDropDown
+                                name="마이페이지"
+                                url="/myPage"
+                                handleDropDown={handleDropDown}
+                            />
+                            <LinkDropDown
+                                name="내가 등록한 파일"
+                                url="/myfile"
+                                handleDropDown={handleDropDown}
+                            />
                             <Devider />
                             <DropdownItem
                                 onClick={() => {
