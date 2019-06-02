@@ -62,10 +62,10 @@ class HomePosts extends React.Component {
                 categoryTheme: "info",
                 author: "Anna Ken",
                 authorAvatar: require("../../images/avatars/0.jpg"),
-                title: "Place for advertisement",
+                title: "원하는 PDF 검색방법",
                 body:
-                    "Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...",
-                date: "29 February 2019"
+                    "Search 메뉴 => 찾고자 하는 KeyWord의 PDF 검색 및 파일을 등록하고 싶으면 우측상단의 파일등록 클릭",
+                date: "SEARCH 메뉴에서 확인"
             },
             {
                 backgroundImage: require("../../images/content-management/6.jpeg"),
@@ -73,10 +73,10 @@ class HomePosts extends React.Component {
                 categoryTheme: "dark",
                 author: "John James",
                 authorAvatar: require("../../images/avatars/1.jpg"),
-                title: "Place for advertisement",
+                title: "PDF에서 원하는 데이터 추출방법",
                 body:
-                    "Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education to admitted speaking...",
-                date: "29 February 2019"
+                    "Data 메뉴 => 유저 스키마를 먼저 등록한 후 스키마에 맞는 PDF를 추가한다. 이후 데이터 이동 클릭 시 추출된 데이터 확인",
+                date: "DATA 메뉴에서 확인"
             }
         ];
         this.state = {};
@@ -99,6 +99,8 @@ class HomePosts extends React.Component {
                                 <div
                                     className="card-post__image"
                                     style={{
+                                        borderBottom: "2px solid #000",
+
                                         backgroundImage: `url(${
                                             post.backgroundImage
                                         })`
