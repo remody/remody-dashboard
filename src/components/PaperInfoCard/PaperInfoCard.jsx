@@ -31,7 +31,7 @@ const PaperInfoCard = ({
 }) => {
     return (
         <Col xs="12" sm="6" md="4">
-            <CardBody>
+            <CardBody style={{ borderRadius: "0.625rem" }}>
                 <h5>{title}</h5>
                 저자: {author}
                 <br />
