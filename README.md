@@ -2,8 +2,9 @@
 
 <p align="center">
   <img src="images/main.png">
-  <h3 align="center">당신의 논문을 더욱 쉽게! Remody</h3>
 </p>
+
+### 당신의 논문을 더욱 쉽게! Remody
 
 ### 사진으로 보는 개요
 
@@ -12,7 +13,7 @@
 ### 개요
 
 본 프로젝트는 2019년 컴퓨터공학과 캡스톤 프로젝트로서 비정형데이터의 정형데이터화에 의의가 있습니다. 여기서 말한 비정형 데이터란 pdf이며 정형데이터는 json등의 데이터를 의미합니다.
-본 레포지토리는 대시보드입니다. 백엔드 레포지토리는 다음과 같습니다 [프론트엔드 레포지토리](https://github.com/remody/remody-server)
+본 레포지토리는 대시보드입니다. 백엔드 레포지토리는 다음과 같습니다 [백엔드 레포지토리](https://github.com/remody/remody-server)
 
 ### [기능보기](feature.md)
 
